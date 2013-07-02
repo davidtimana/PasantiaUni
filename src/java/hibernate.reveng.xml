@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="CasinoSub"/>
+  <table-filter match-name="Detalle_Venta"/>
+  <table-filter match-name="Compra"/>
+  <table-filter match-name="Precio_Compra"/>
+  <table-filter match-name="Ciudad"/>
+  <table-filter match-name="Cargo"/>
+  <table-filter match-name="Detalle_Compra"/>
+  <table-filter match-name="Dias_Pedidos"/>
+  <table-filter match-name="Venta"/>
+  <table-filter match-name="Departamento"/>
+  <table-filter match-name="Inventario"/>
+  <table-filter match-name="Catalogo_Venta"/>
+  <table-filter match-name="Producto"/>
+  <table-filter match-name="Vendedores"/>
+  <table-filter match-name="Forma_De_Pagar"/>
+  <table-filter match-name="Ubicacion"/>
+  <table-filter match-name="Casino"/>
+  <table-filter match-name="Pais"/>
+  <table-filter match-name="Rol"/>
+  <table-filter match-name="Usuario"/>
+  <table-filter match-name="Cliente"/>
+  <table-filter match-name="Dias_Entrega_Pedidos"/>
+  <table-filter match-name="Proveedor"/>
+  <table-filter match-name="Fecha_Compra"/>
+  <table-filter match-name="Fecha_Entrega"/>
+  <table-filter match-name="Categoria"/>
+</hibernate-reverse-engineering>

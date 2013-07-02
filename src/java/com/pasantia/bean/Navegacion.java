@@ -1,0 +1,50 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.pasantia.bean;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
+/**
+ *
+ * @author david
+ */
+
+@ManagedBean
+@RequestScoped
+public class Navegacion {
+
+    /**
+     * Creates a new instance of Navegacion
+     */
+    public Navegacion() {
+    }
+    public String ir_a_Gestion_Articulos(){
+        return "gestionararticulos";
+    }
+    public String ir_a_Listar_Articulos(){
+        return "listararticulos";
+    }
+    public String ir_a_Gestion_Ubicaciones(){
+        return "gestionubicaciones";
+    }
+    public String ir_a_Listar_Ubicaciones(){
+        return "listarubicaciones";
+    }
+    public String ir_a_Gestion_Categorias(){
+        return "gestionarcategorias";
+    }
+    public String ir_a_Listar_Categorias(){
+        return "listarcategorias";
+    }
+    public String ir_a_Gestion_Precios_Compra(){
+        return "gestionarprecioscompra";
+    }
+    public String ir_a_Listar_Variaciones(){
+        return "listarvariaciones";
+    }
+    
+    
+}
