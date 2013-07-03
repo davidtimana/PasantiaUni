@@ -27,7 +27,9 @@
 
         <h:body>
             
-            
+           <p:dialog  widgetVar="dlg" header="..." closable="false" resizable="false" maximizable="false" minimizable="false" showEffect="explode" hideEffect="bounce" position="1720,720">  
+            <h:graphicImage value="../../resources/img/loadinfo.net.gif"/> 
+        </p:dialog>  
 
             <p:layout fullPage="true" >
 
@@ -37,20 +39,20 @@
                     <p:menubar>
                         <p:submenu label="Productos" icon="ui-icon-document">
                             <p:submenu label="Articulos" icon="ui-icon-contact">
-                                <p:menuitem value="Gestion De Articulos" action="#{navegacion.ir_a_Gestion_Articulos()}" />
-                                <p:menuitem value="Listar Articulos" action="#{navegacion.ir_a_Listar_Articulos()}" />
+                                <p:menuitem value="Gestion De Articulos" action="#{navegacion.ir_a_Gestion_Articulos()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                <p:menuitem value="Listar Articulos" action="#{navegacion.ir_a_Listar_Articulos()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
                             </p:submenu>
                                <p:submenu label="Ubicaciones" icon="ui-icon-contact">
-                                   <p:menuitem value="Gestion De Ubicaciones" action="#{navegacion.ir_a_Gestion_Ubicaciones()}" />
-                                   <p:menuitem value="Listar Ubicaciones" action="#{navegacion.ir_a_Listar_Ubicaciones()}" />
+                                   <p:menuitem value="Gestion De Ubicaciones" action="#{navegacion.ir_a_Gestion_Ubicaciones()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                   <p:menuitem value="Listar Ubicaciones" action="#{navegacion.ir_a_Listar_Ubicaciones()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
                                </p:submenu>
                              <p:submenu label="Categorias" icon="ui-icon-contact">
-                                 <p:menuitem value="Gestion De Categorias" action="#{navegacion.ir_a_Gestion_Categorias()}" />
-                                 <p:menuitem value="Listar Categorias" action="#{navegacion.ir_a_Listar_Categorias()}" />
+                                 <p:menuitem value="Gestion De Categorias" action="#{navegacion.ir_a_Gestion_Categorias()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                 <p:menuitem value="Listar Categorias" action="#{navegacion.ir_a_Listar_Categorias()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
                              </p:submenu>
                              <p:submenu label="Precios De Compra" icon="ui-icon-contact">
-                                 <p:menuitem value="Gestion De Precios" action="#{navegacion.ir_a_Gestion_Precios_Compra()}" />
-                                 <p:menuitem value="Listar Variaciones" action="#{navegacion.ir_a_Listar_Variaciones()}" />
+                                 <p:menuitem value="Gestion De Precios" action="#{navegacion.ir_a_Gestion_Precios_Compra()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                 <p:menuitem value="Listar Variaciones" action="#{navegacion.ir_a_Listar_Variaciones()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
                              </p:submenu>
                             
                         </p:submenu>

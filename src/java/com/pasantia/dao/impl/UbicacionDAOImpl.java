@@ -20,8 +20,12 @@ public class UbicacionDAOImpl implements UbicacionDAO{
     @Override
     public void insertarUbicacion(Ubicacion ubicacion) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
+        String descripcion="";
         try{
             session.beginTransaction();
+            descripcion=ubicacion.getDescripcion();
+            descripcion=descripcion.toUpperCase();
+            ubicacion.setDescripcion(descripcion);
             session.save(ubicacion);
             session.beginTransaction().commit();
             }catch(Exception e){
@@ -35,9 +39,13 @@ public class UbicacionDAOImpl implements UbicacionDAO{
     @Override
     public void actualizarUbicacion(Ubicacion ubicacion) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
+        String descripcion="";
         try{
             session.beginTransaction();
-            session.merge(ubicacion);
+            descripcion=ubicacion.getDescripcion();
+            descripcion=descripcion.toUpperCase();
+            ubicacion.setDescripcion(descripcion);
+            session.update(ubicacion);
             session.beginTransaction().commit();            
         }catch(Exception e){
             System.out.println("Error en actualizar "+e.getMessage());
@@ -49,15 +57,17 @@ public class UbicacionDAOImpl implements UbicacionDAO{
     }
 
     @Override
-    public void eliminarUbicacion(Ubicacion ubicacion) {
+    public boolean eliminarUbicacion(Ubicacion ubicacion) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
         try{
             session.beginTransaction();
             session.delete(ubicacion);
             session.beginTransaction().commit();
+            return true;
         }catch(Exception e){
             System.out.println("Error al eliminar "+e.getMessage());
             session.beginTransaction().rollback();
+            return true;
         }
         finally{
             session.close();
@@ -67,7 +77,16 @@ public class UbicacionDAOImpl implements UbicacionDAO{
     @Override
     public Ubicacion buscarUbicacionporId(Integer id) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
-        return (Ubicacion)session.load(Rol.class,id);
+        Ubicacion ubicacion=null;
+        try{
+            ubicacion=(Ubicacion)session.load(Ubicacion.class,id);
+        }catch(Exception e){
+            System.out.println("Error al buscar el id: "+id+" :"+e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+        return ubicacion;
     }
 
     @Override

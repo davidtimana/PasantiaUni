@@ -8,7 +8,7 @@
             <column name="idUbicacion" />
             <generator class="identity" />
         </id>
-        <property name="descripcion" type="string">
+        <property name="descripcion" type="string" lazy="true" >
             <column name="descripcion" length="45" not-null="true" />
         </property>
         <set name="productos" inverse="true">

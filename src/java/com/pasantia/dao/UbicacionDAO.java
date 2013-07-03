@@ -33,7 +33,7 @@ public interface UbicacionDAO {
      * @param ubicacion 
      * @param rol
      */
-    public void eliminarUbicacion(Ubicacion ubicacion);
+    public boolean eliminarUbicacion(Ubicacion ubicacion);
     /**
      *Metodo que se encarga de buscar
      * una ubicacion por su id
@@ -44,7 +44,7 @@ public interface UbicacionDAO {
     /**
      *Metodo que se encarga de
      * listar todas las ubicaciones
-     * @return
+     * @return lista de ubicaciones
      */
     public List<Ubicacion> buscartodasUbicaciones();
     
