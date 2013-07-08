@@ -166,7 +166,7 @@ public class UbicacionBean {
         txtdescripcioneditar.setValue(descripcion);
     }
     public void actualizarUbicacion(){
-        System.out.println("Actualizando ubicacion con ubicacion: "+this.descripcion);
+        System.out.println("Actualizando ubicacion con descripcion: "+this.descripcion);
         ubicacion.setDescripcion(this.descripcion);
         ubicacion.setIdUbicacion(this.id);
         if (ubicacion.getDescripcion().equals("")) {

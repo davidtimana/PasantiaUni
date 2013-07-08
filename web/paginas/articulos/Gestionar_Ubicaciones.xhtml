@@ -35,8 +35,7 @@
                 </h:form><br/>
                 <p:spacer width="10" height="5" />
                         
-                           <!--Form: Tabla Ubicacion -->
-                           
+                <!--Form: Tabla Ubicacion -->                           
                 <h:form id="frmubicacion">        
                     <p:dataTable id="datatable" var="ubicacion" value="#{ubicacionBean.ubicaciones}" sortMode="multiple"  emptyMessage="No hay Ubicaciones disponibles"
                                  paginator="true" rows="15" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
@@ -91,9 +90,9 @@
                                           image="icon-cancel" onstart="dlg.show();" onclick="dlgNuevo.hide();"/>   
                        
                     </p:dialog>
-                </h:form>      
-                    <!--Form: Eliminar Ubicacion -->
-                    
+                </h:form>
+                 
+      <!--Form: Eliminar Ubicacion -->                    
         <h:form id="frmEliminar">  
                       
             <p:growl id="growlEliminar"  sticky="true" />  

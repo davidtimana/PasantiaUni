@@ -37,13 +37,13 @@ public interface CategoriaDAO {
      * @param id
      * @return Categoria
      */
-    public Categoria buscarUbicacionporId(Integer id);
+    public Categoria buscarCategoriaporId(Integer id);
     /**
      *Metodo que se encarga de
      * listar todas las Categorias
      * @return lista de categorias
      */
-    public List<Categoria> buscartodasUbicaciones();
+    public List<Categoria> buscartodasCategorias();
     
     
 }
