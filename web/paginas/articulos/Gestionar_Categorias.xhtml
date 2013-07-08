@@ -35,7 +35,7 @@
                 </h:form><br/>
                 <p:spacer width="10" height="5" />
                 
-                                <!--Form: Tabla Ubicacion -->                           
+                <!--Form: Tabla Categorias -->                           
                 <h:form id="frmcategoria">        
                     <p:dataTable id="datatable" var="categoria" value="#{categoriaBean.categorias}" sortMode="multiple"  emptyMessage="No hay Categorias disponibles"
                                  paginator="true" rows="15" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
@@ -135,7 +135,7 @@
                 <p:commandButton  update=":frmcategoria:datatable" onclick="dlgEliminar.hide();" onstart="dlg.show();" oncomplete="dlg.hide();" value="Cancelar" title="&nbsp;Cancelar" 
                                   image="icon-cancel" />                       
             </p:dialog>  
-            <!-- prueba de commit  -->
+            
         </h:form>      
                 
                 

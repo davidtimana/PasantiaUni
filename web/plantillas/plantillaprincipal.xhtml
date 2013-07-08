@@ -76,8 +76,18 @@
                             <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e"></p:menuitem>
                         </p:submenu>
                         <p:submenu label="Acceso y Seguridad" icon="ui-icon-pencil">
-                            <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w"></p:menuitem>
-                            <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e"></p:menuitem>
+                            <p:submenu label="Usuario" icon="ui-icon-contact">
+                                <p:menuitem value="Gestion De Usuarios" action="#{navegacion.ir_a_Gestionar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                <p:menuitem value="Listar Usuarios" action="#{navegacion.ir_a_Listar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                            </p:submenu>
+                            <p:submenu label="Roles" icon="ui-icon-contact">
+                                <p:menuitem value="Gestion De Roles" action="#{navegacion.ir_a_Gestionar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                <p:menuitem value="Listar Roles" action="#{navegacion.ir_a_Listar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                            </p:submenu>
+                            <p:submenu label="Cargo" icon="ui-icon-contact">
+                                <p:menuitem value="Gestion De Cargos" action="#{navegacion.ir_a_Gestionar_Cargos()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                <p:menuitem value="Listar Cargos" action="#{navegacion.ir_a_Listar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                            </p:submenu>
                         </p:submenu>
                          <p:submenu label="Configuracion Punto De Venta" icon="ui-icon-pencil">
                             <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w"></p:menuitem>

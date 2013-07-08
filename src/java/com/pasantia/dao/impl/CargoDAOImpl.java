@@ -5,29 +5,28 @@
 package com.pasantia.dao.impl;
 
 import com.pasantia.conexion.ConexionHibernate;
-import com.pasantia.dao.UbicacionDAO;
-import com.pasantia.entidades.Rol;
-import com.pasantia.entidades.Ubicacion;
+import com.pasantia.dao.CargoDAO;
+import com.pasantia.entidades.Cargo;
 import java.util.List;
 import org.hibernate.Session;
 
 /**
  *
- * @author david
+ * @author root
  */
-public class UbicacionDAOImpl implements UbicacionDAO{
+public class CargoDAOImpl implements CargoDAO{
 
     @Override
-    public void insertarUbicacion(Ubicacion ubicacion) {
+    public void insertarCargo(Cargo cargo) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
         String descripcion="";
         try{
             session.beginTransaction();
-            descripcion=ubicacion.getDescripcion();
+            descripcion=cargo.getDescripcion();
             descripcion=descripcion.toUpperCase();
             descripcion=descripcion.trim();
-            ubicacion.setDescripcion(descripcion);
-            session.save(ubicacion);
+            cargo.setDescripcion(descripcion);
+            session.save(cargo);
             session.beginTransaction().commit();
             }catch(Exception e){
             System.out.println("Error en insertar "+e.getMessage());
@@ -38,16 +37,16 @@ public class UbicacionDAOImpl implements UbicacionDAO{
     }
 
     @Override
-    public void actualizarUbicacion(Ubicacion ubicacion) {
+    public void actualizarCargo(Cargo cargo) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
         String descripcion="";
         try{
             session.beginTransaction();
-            descripcion=ubicacion.getDescripcion();
+            descripcion=cargo.getDescripcion();
             descripcion=descripcion.toUpperCase();
             descripcion=descripcion.trim();
-            ubicacion.setDescripcion(descripcion);
-            session.update(ubicacion);
+            cargo.setDescripcion(descripcion);
+            session.update(cargo);
             session.beginTransaction().commit();            
         }catch(Exception e){
             System.out.println("Error en actualizar "+e.getMessage());
@@ -59,11 +58,11 @@ public class UbicacionDAOImpl implements UbicacionDAO{
     }
 
     @Override
-    public boolean eliminarUbicacion(Ubicacion ubicacion) {
+    public boolean eliminarCargo(Cargo cargo) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
         try{
             session.beginTransaction();
-            session.delete(ubicacion);
+            session.delete(cargo);
             session.beginTransaction().commit();
             return true;
         }catch(Exception e){
@@ -77,24 +76,24 @@ public class UbicacionDAOImpl implements UbicacionDAO{
     }
 
     @Override
-    public Ubicacion buscarUbicacionporId(Integer id) {
+    public Cargo buscarCargoporId(Integer id) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
-        Ubicacion ubicacion=null;
+        Cargo categoria=null;
         try{
-            ubicacion=(Ubicacion)session.load(Ubicacion.class,id);
+            categoria=(Cargo)session.load(Cargo.class,id);
         }catch(Exception e){
             System.out.println("Error al buscar el id: "+id+" :"+e.getMessage());
         }
         finally{
             session.close();
         }
-        return ubicacion;
+        return categoria;
     }
 
     @Override
-    public List<Ubicacion> buscartodasUbicaciones() {
+    public List<Cargo> buscartodosCargos() {
         Session session = ConexionHibernate.getSessionFactory().openSession();
-        return session.createQuery("from Ubicacion").list();
+        return session.createQuery("from Cargo").list();
     }
     
 }

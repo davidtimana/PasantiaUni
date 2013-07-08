@@ -194,7 +194,7 @@ public class CategoriaBean {
         c.setDescripcion(this.descripcion);
         c.setIdCategoria(this.id);
         if (c.getDescripcion().equals("")) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error En La Actualizacion La Categoria Del Articulo"
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error En La Actualizacion De La Categoria Del Articulo"
                     , "Descripcion De La Categoria Requerida"));
             dlgeditarcategoria.setVisible(Boolean.FALSE);
           }else{
@@ -208,9 +208,7 @@ public class CategoriaBean {
         }
         categoria=new Categoria();
     }
-    public void comfirmarEliminado(Integer Id,String descripcion){
-        
-    }
+    
     public void prepararEliminarCategoria(Integer Id,String descripcion){
         System.out.println("Preparando para eliminar una categoria con id:"+Id);
         dlgeliminarcomfirmar.setVisible(true);
@@ -236,7 +234,7 @@ public class CategoriaBean {
             dlgeliminarcomfirmar.setVisible(Boolean.FALSE);
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al eliminar"
-                    , "Categoria: "+c.getDescripcion()+". no eliminada"));
+                    , "Categoria: "+c.getDescripcion()+". no eliminada."));
             dlgeliminarcomfirmar.setVisible(Boolean.FALSE);
         }
         

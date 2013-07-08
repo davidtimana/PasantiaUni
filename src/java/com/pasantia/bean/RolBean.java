@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.component.dialog.Dialog;
 
 /**
  *
@@ -23,9 +24,12 @@ public class RolBean {
 
     private Rol rol;
     private List<Rol> roles;
+    private Dialog dlgnuevo,dlgeditar;
     
     public RolBean() {
         rol=new Rol();
+        dlgeditar=new Dialog();
+        dlgnuevo=new Dialog();
     }
 
     public Rol getRol() {
@@ -44,6 +48,23 @@ public class RolBean {
     public void prepararGuardadoDelRol(){
         rol=new Rol();        
     }
+
+    public Dialog getDlgeditar() {
+        return dlgeditar;
+    }
+
+    public void setDlgeditar(Dialog dlgeditar) {
+        this.dlgeditar = dlgeditar;
+    }
+
+    public Dialog getDlgnuevo() {
+        return dlgnuevo;
+    }
+
+    public void setDlgnuevo(Dialog dlgnuevo) {
+        this.dlgnuevo = dlgnuevo;
+    }
+    
     public void guardarNuevoRol(){
         System.out.println("Guardado del nuevo rol: "+rol.getDescripcion());
         RolDAO rolDAO = new RolDAOImpl();
@@ -54,6 +75,7 @@ public class RolBean {
     }
     
     public void prepararActualizadoDelRol(Integer Id){
+        dlgeditar.setVisible(Boolean.TRUE);
         RolDAO rolDAO=new RolDAOImpl();
         rol=rolDAO.buscarRolPorId(Id);        
     }
@@ -74,6 +96,10 @@ public class RolBean {
      public void prepararEliminarDelRol(Integer Id){
         RolDAO rolDAO=new RolDAOImpl();
         rol=rolDAO.buscarRolPorId(Id);        
+    }
+     public int totalRoles(){
+        int total=roles.size();
+        return total;
     }
     
               

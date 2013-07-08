@@ -61,6 +61,21 @@
             <from-outcome>listarvariaciones</from-outcome>
             <to-view-id>/paginas/articulos/Listar_Variaciones.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{navegacion.ir_a_Gestionar_Roles()}</from-action> 
+            <from-outcome>gestionarroles</from-outcome>
+            <to-view-id>/paginas/accesoyseguridad/Gestionar_Roles.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navegacion.ir_a_Listar_Roles()}</from-action> 
+            <from-outcome>listarroles</from-outcome>
+            <to-view-id>/paginas/accesoyseguridad/Listar_Roles.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navegacion.ir_a_Gestionar_Cargos()}</from-action> 
+            <from-outcome>gestionarcargos</from-outcome>
+            <to-view-id>/paginas/accesoyseguridad/Gestionar_Cargo.xhtml</to-view-id>
+        </navigation-case>
         
     </navigation-rule>
     <managed-bean>

@@ -22,8 +22,13 @@ public class RolDAOImpl implements RolDAO{
     @Override
     public void insertarRol(Rol rol) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
+        String descripcion=null;
         try{
             session.beginTransaction();
+            descripcion=rol.getDescripcion();
+            descripcion=descripcion.toUpperCase();
+            descripcion=descripcion.trim();
+            rol.setDescripcion(descripcion);
             session.save(rol);
             session.beginTransaction().commit();
             }catch(Exception e){
@@ -37,8 +42,13 @@ public class RolDAOImpl implements RolDAO{
     @Override
     public void actualizarRol(Rol rol) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
+        String descripcion=null;
         try{
             session.beginTransaction();
+            descripcion=rol.getDescripcion();
+            descripcion=descripcion.toUpperCase();
+            descripcion=descripcion.trim();
+            rol.setDescripcion(descripcion);
             session.merge(rol);
             session.beginTransaction().commit();            
         }catch(Exception e){

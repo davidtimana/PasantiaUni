@@ -24,6 +24,7 @@ public class CategoriaDAOImpl implements CategoriaDAO{
             session.beginTransaction();
             descripcion=categoria.getDescripcion();
             descripcion=descripcion.toUpperCase();
+            descripcion=descripcion.trim();
             categoria.setDescripcion(descripcion);
             session.save(categoria);
             session.beginTransaction().commit();
@@ -43,6 +44,7 @@ public class CategoriaDAOImpl implements CategoriaDAO{
             session.beginTransaction();
             descripcion=categoria.getDescripcion();
             descripcion=descripcion.toUpperCase();
+            descripcion=descripcion.trim();
             categoria.setDescripcion(descripcion);
             session.update(categoria);
             session.beginTransaction().commit();            

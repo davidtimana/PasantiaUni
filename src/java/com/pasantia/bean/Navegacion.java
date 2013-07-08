@@ -45,6 +45,15 @@ public class Navegacion {
     public String ir_a_Listar_Variaciones(){
         return "listarvariaciones";
     }
+    public String ir_a_Gestionar_Roles(){
+        return "gestionarroles";
+    }
+    public String ir_a_Listar_Roles(){
+        return "listarroles";
+    }
+    public String ir_a_Gestionar_Cargos(){
+        return "gestionarcargos";
+    }
     
     
 }
