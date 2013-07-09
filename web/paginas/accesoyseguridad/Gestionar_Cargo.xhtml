@@ -1,7 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./../../plantillas/plantillaprincipal.xhtml">
+                template="./../../plantillas/plantillaprincipal.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
 
     <ui:define name="titulo">
         Gestion De Cargos - SICOVI
@@ -20,7 +22,14 @@
     </ui:define>
 
     <ui:define name="cuerpo">
-        cuerpo
+        
+        <p:spacer width="10" height="5" /><br/>
+                <h:form>
+                    <p:commandButton value="&nbsp;Nuevo Cargo" title="Crear Una Nueva Categoria" image="icon-add" onclick="dlgNuevo.show();"
+                                     actionListener="#{cargoBean.prepararGuardadoDelCargo()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                </h:form><br/>
+                <p:spacer width="10" height="5" />
+        
     </ui:define>
 
 </ui:composition>
