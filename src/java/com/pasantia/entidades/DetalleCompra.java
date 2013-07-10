@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -18,7 +18,7 @@ public class DetalleCompra  implements java.io.Serializable {
      private long iva;
      private Long subtotal;
      private Long total;
-     private Set<Inventario> inventarios = new HashSet<Inventario>(0);
+     private Set inventarios = new HashSet(0);
 
     public DetalleCompra() {
     }
@@ -30,7 +30,7 @@ public class DetalleCompra  implements java.io.Serializable {
         this.cantidad = cantidad;
         this.iva = iva;
     }
-    public DetalleCompra(Proveedor proveedor, Producto producto, int cantidad, long iva, Long subtotal, Long total, Set<Inventario> inventarios) {
+    public DetalleCompra(Proveedor proveedor, Producto producto, int cantidad, long iva, Long subtotal, Long total, Set inventarios) {
        this.proveedor = proveedor;
        this.producto = producto;
        this.cantidad = cantidad;
@@ -89,11 +89,11 @@ public class DetalleCompra  implements java.io.Serializable {
     public void setTotal(Long total) {
         this.total = total;
     }
-    public Set<Inventario> getInventarios() {
+    public Set getInventarios() {
         return this.inventarios;
     }
     
-    public void setInventarios(Set<Inventario> inventarios) {
+    public void setInventarios(Set inventarios) {
         this.inventarios = inventarios;
     }
 

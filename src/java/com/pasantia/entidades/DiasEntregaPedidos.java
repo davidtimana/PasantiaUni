@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -19,7 +19,7 @@ public class DiasEntregaPedidos  implements java.io.Serializable {
      private int viernes;
      private int sabado;
      private int domingo;
-     private Set<CatalogoVenta> catalogoVentas = new HashSet<CatalogoVenta>(0);
+     private Set catalogoVentas = new HashSet(0);
 
     public DiasEntregaPedidos() {
     }
@@ -34,7 +34,7 @@ public class DiasEntregaPedidos  implements java.io.Serializable {
         this.sabado = sabado;
         this.domingo = domingo;
     }
-    public DiasEntregaPedidos(int lunes, int martes, int miercoles, int jueves, int viernes, int sabado, int domingo, Set<CatalogoVenta> catalogoVentas) {
+    public DiasEntregaPedidos(int lunes, int martes, int miercoles, int jueves, int viernes, int sabado, int domingo, Set catalogoVentas) {
        this.lunes = lunes;
        this.martes = martes;
        this.miercoles = miercoles;
@@ -101,11 +101,11 @@ public class DiasEntregaPedidos  implements java.io.Serializable {
     public void setDomingo(int domingo) {
         this.domingo = domingo;
     }
-    public Set<CatalogoVenta> getCatalogoVentas() {
+    public Set getCatalogoVentas() {
         return this.catalogoVentas;
     }
     
-    public void setCatalogoVentas(Set<CatalogoVenta> catalogoVentas) {
+    public void setCatalogoVentas(Set catalogoVentas) {
         this.catalogoVentas = catalogoVentas;
     }
 

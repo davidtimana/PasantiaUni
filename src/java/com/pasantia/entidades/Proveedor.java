@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -12,27 +12,27 @@ public class Proveedor  implements java.io.Serializable {
 
 
      private Integer idProveedor;
-     private Vendedores vendedores;
+     private Persona persona;
      private String nombre;
      private String telefono;
      private String direccion;
      private String nit;
-     private Set<DetalleCompra> detalleCompras = new HashSet<DetalleCompra>(0);
-     private Set<Compra> compras = new HashSet<Compra>(0);
+     private Set detalleCompras = new HashSet(0);
+     private Set compras = new HashSet(0);
 
     public Proveedor() {
     }
 
 	
-    public Proveedor(Vendedores vendedores, String nombre, String telefono, String direccion, String nit) {
-        this.vendedores = vendedores;
+    public Proveedor(Persona persona, String nombre, String telefono, String direccion, String nit) {
+        this.persona = persona;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
         this.nit = nit;
     }
-    public Proveedor(Vendedores vendedores, String nombre, String telefono, String direccion, String nit, Set<DetalleCompra> detalleCompras, Set<Compra> compras) {
-       this.vendedores = vendedores;
+    public Proveedor(Persona persona, String nombre, String telefono, String direccion, String nit, Set detalleCompras, Set compras) {
+       this.persona = persona;
        this.nombre = nombre;
        this.telefono = telefono;
        this.direccion = direccion;
@@ -48,12 +48,12 @@ public class Proveedor  implements java.io.Serializable {
     public void setIdProveedor(Integer idProveedor) {
         this.idProveedor = idProveedor;
     }
-    public Vendedores getVendedores() {
-        return this.vendedores;
+    public Persona getPersona() {
+        return this.persona;
     }
     
-    public void setVendedores(Vendedores vendedores) {
-        this.vendedores = vendedores;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
     public String getNombre() {
         return this.nombre;
@@ -83,18 +83,18 @@ public class Proveedor  implements java.io.Serializable {
     public void setNit(String nit) {
         this.nit = nit;
     }
-    public Set<DetalleCompra> getDetalleCompras() {
+    public Set getDetalleCompras() {
         return this.detalleCompras;
     }
     
-    public void setDetalleCompras(Set<DetalleCompra> detalleCompras) {
+    public void setDetalleCompras(Set detalleCompras) {
         this.detalleCompras = detalleCompras;
     }
-    public Set<Compra> getCompras() {
+    public Set getCompras() {
         return this.compras;
     }
     
-    public void setCompras(Set<Compra> compras) {
+    public void setCompras(Set compras) {
         this.compras = compras;
     }
 

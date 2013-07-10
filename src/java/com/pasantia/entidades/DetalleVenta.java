@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -18,8 +18,8 @@ public class DetalleVenta  implements java.io.Serializable {
      private long iva;
      private Long subtotal;
      private Long total;
-     private Set<Venta> ventas = new HashSet<Venta>(0);
-     private Set<Inventario> inventarios = new HashSet<Inventario>(0);
+     private Set ventas = new HashSet(0);
+     private Set inventarios = new HashSet(0);
 
     public DetalleVenta() {
     }
@@ -31,7 +31,7 @@ public class DetalleVenta  implements java.io.Serializable {
         this.cantidad = cantidad;
         this.iva = iva;
     }
-    public DetalleVenta(Producto producto, FormaDePagar formaDePagar, int cantidad, long iva, Long subtotal, Long total, Set<Venta> ventas, Set<Inventario> inventarios) {
+    public DetalleVenta(Producto producto, FormaDePagar formaDePagar, int cantidad, long iva, Long subtotal, Long total, Set ventas, Set inventarios) {
        this.producto = producto;
        this.formaDePagar = formaDePagar;
        this.cantidad = cantidad;
@@ -91,18 +91,18 @@ public class DetalleVenta  implements java.io.Serializable {
     public void setTotal(Long total) {
         this.total = total;
     }
-    public Set<Venta> getVentas() {
+    public Set getVentas() {
         return this.ventas;
     }
     
-    public void setVentas(Set<Venta> ventas) {
+    public void setVentas(Set ventas) {
         this.ventas = ventas;
     }
-    public Set<Inventario> getInventarios() {
+    public Set getInventarios() {
         return this.inventarios;
     }
     
-    public void setInventarios(Set<Inventario> inventarios) {
+    public void setInventarios(Set inventarios) {
         this.inventarios = inventarios;
     }
 

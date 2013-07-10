@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class Cargo  implements java.io.Serializable {
 
      private Integer idCargo;
      private String descripcion;
-     private Set<Usuario> usuarios = new HashSet<Usuario>(0);
+     private Set personas = new HashSet(0);
 
     public Cargo() {
     }
@@ -22,9 +22,9 @@ public class Cargo  implements java.io.Serializable {
     public Cargo(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Cargo(String descripcion, Set<Usuario> usuarios) {
+    public Cargo(String descripcion, Set personas) {
        this.descripcion = descripcion;
-       this.usuarios = usuarios;
+       this.personas = personas;
     }
    
     public Integer getIdCargo() {
@@ -41,12 +41,12 @@ public class Cargo  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Set<Usuario> getUsuarios() {
-        return this.usuarios;
+    public Set getPersonas() {
+        return this.personas;
     }
     
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setPersonas(Set personas) {
+        this.personas = personas;
     }
 
 

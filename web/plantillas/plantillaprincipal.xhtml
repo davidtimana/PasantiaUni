@@ -27,9 +27,13 @@
 
         <h:body>
             
-           <p:dialog  widgetVar="dlg" header="..." closable="false" resizable="false" maximizable="false" minimizable="false" showEffect="explode" hideEffect="bounce" position="1720,720">  
-            <h:graphicImage value="../../resources/img/loadinfo.net.gif"/> 
-        </p:dialog>  
+           
+            <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+                
+            <p:dialog modal="true" widgetVar="statusDialog" header="...Cargando..."   
+                      draggable="false" closable="false" resizable="false">  
+                <p:graphicImage value="../../resources/img/cargando.gif" />  
+            </p:dialog> 
 
             <p:layout fullPage="true" >
 
@@ -39,20 +43,20 @@
                     <p:menubar>
                         <p:submenu label="Productos" icon="ui-icon-document">
                             <p:submenu label="Articulos" icon="ui-icon-contact">
-                                <p:menuitem value="Gestion De Articulos" action="#{navegacion.ir_a_Gestion_Articulos()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                                <p:menuitem value="Listar Articulos" action="#{navegacion.ir_a_Listar_Articulos()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                <p:menuitem value="Gestion De Articulos" action="#{navegacion.ir_a_Gestion_Articulos()}" />
+                                <p:menuitem value="Listar Articulos" action="#{navegacion.ir_a_Listar_Articulos()}" />
                             </p:submenu>
                                <p:submenu label="Ubicaciones" icon="ui-icon-contact">
-                                   <p:menuitem value="Gestion De Ubicaciones" action="#{navegacion.ir_a_Gestion_Ubicaciones()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                                   <p:menuitem value="Listar Ubicaciones" action="#{navegacion.ir_a_Listar_Ubicaciones()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                   <p:menuitem value="Gestion De Ubicaciones" action="#{navegacion.ir_a_Gestion_Ubicaciones()}" />
+                                   <p:menuitem value="Listar Ubicaciones" action="#{navegacion.ir_a_Listar_Ubicaciones()}" />
                                </p:submenu>
                              <p:submenu label="Categorias" icon="ui-icon-contact">
-                                 <p:menuitem value="Gestion De Categorias" action="#{navegacion.ir_a_Gestion_Categorias()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                                 <p:menuitem value="Listar Categorias" action="#{navegacion.ir_a_Listar_Categorias()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                 <p:menuitem value="Gestion De Categorias" action="#{navegacion.ir_a_Gestion_Categorias()}" />
+                                 <p:menuitem value="Listar Categorias" action="#{navegacion.ir_a_Listar_Categorias()}" />
                              </p:submenu>
                              <p:submenu label="Precios De Compra" icon="ui-icon-contact">
-                                 <p:menuitem value="Gestion De Precios" action="#{navegacion.ir_a_Gestion_Precios_Compra()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                                 <p:menuitem value="Listar Variaciones" action="#{navegacion.ir_a_Listar_Variaciones()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                 <p:menuitem value="Gestion De Precios" action="#{navegacion.ir_a_Gestion_Precios_Compra()}" />
+                                 <p:menuitem value="Listar Variaciones" action="#{navegacion.ir_a_Listar_Variaciones()}" />
                              </p:submenu>
                             
                         </p:submenu>
@@ -77,16 +81,16 @@
                         </p:submenu>
                         <p:submenu label="Acceso y Seguridad" icon="ui-icon-pencil">
                             <p:submenu label="Usuario" icon="ui-icon-contact">
-                                <p:menuitem value="Gestion De Usuarios" action="#{navegacion.ir_a_Gestionar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                                <p:menuitem value="Listar Usuarios" action="#{navegacion.ir_a_Listar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                <p:menuitem value="Gestion De Usuarios" action="#{navegacion.ir_a_Gestionar_Roles()}" />
+                                <p:menuitem value="Listar Usuarios" action="#{navegacion.ir_a_Listar_Roles()}" />
                             </p:submenu>
                             <p:submenu label="Roles" icon="ui-icon-contact">
-                                <p:menuitem value="Gestion De Roles" action="#{navegacion.ir_a_Gestionar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                                <p:menuitem value="Listar Roles" action="#{navegacion.ir_a_Listar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                <p:menuitem value="Gestion De Roles" action="#{navegacion.ir_a_Gestionar_Roles()}" />
+                                <p:menuitem value="Listar Roles" action="#{navegacion.ir_a_Listar_Roles()}" />
                             </p:submenu>
                             <p:submenu label="Cargo" icon="ui-icon-contact">
-                                <p:menuitem value="Gestion De Cargos" action="#{navegacion.ir_a_Gestionar_Cargos()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                                <p:menuitem value="Listar Cargos" action="#{navegacion.ir_a_Listar_Roles()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                                <p:menuitem value="Gestion De Cargos" action="#{navegacion.ir_a_Gestionar_Cargos()}" />
+                                <p:menuitem value="Listar Cargos" action="#{navegacion.ir_a_Listar_Roles()}" />
                             </p:submenu>
                         </p:submenu>
                          <p:submenu label="Configuracion Punto De Venta" icon="ui-icon-pencil">

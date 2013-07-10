@@ -29,14 +29,14 @@ public class CargoBean {
     private List<Cargo> cargos;
     private Integer id;
     private String descripcion;
-    private Dialog dlgNuevaCategoria,dlgeditarcategoria,dlgeliminarcomfirmar;
+    private Dialog dlgNuevoCargo,dlgeditarcargo,dlgeliminarcomfirmar;
     private InputText txtdescripcioning,txtdescripcioneditar,txtideditar,txtideliminar;
     
     public CargoBean() {
         cargo = new Cargo();
-        dlgNuevaCategoria = new Dialog();
+        dlgNuevoCargo = new Dialog();
         txtdescripcioning = new InputText();
-        dlgeditarcategoria = new Dialog(); 
+        dlgeditarcargo = new Dialog(); 
         txtdescripcioneditar = new InputText();
         txtideditar = new InputText();
         dlgeliminarcomfirmar = new Dialog();
@@ -52,6 +52,8 @@ public class CargoBean {
     }
 
     public List<Cargo> getCargos() {
+        CargoDAO cargoDAO = new CargoDAOImpl();
+        cargos=cargoDAO.buscartodosCargos();
         return cargos;
     }
 
@@ -67,21 +69,25 @@ public class CargoBean {
         this.descripcion = descripcion;
     }
 
-    public Dialog getDlgNuevaCategoria() {
-        return dlgNuevaCategoria;
+    public Dialog getDlgNuevoCargo() {
+        return dlgNuevoCargo;
     }
 
-    public void setDlgNuevaCategoria(Dialog dlgNuevaCategoria) {
-        this.dlgNuevaCategoria = dlgNuevaCategoria;
+    public void setDlgNuevoCargo(Dialog dlgNuevoCargo) {
+        this.dlgNuevoCargo = dlgNuevoCargo;
     }
 
-    public Dialog getDlgeditarcategoria() {
-        return dlgeditarcategoria;
+    public Dialog getDlgeditarcargo() {
+        return dlgeditarcargo;
     }
 
-    public void setDlgeditarcategoria(Dialog dlgeditarcategoria) {
-        this.dlgeditarcategoria = dlgeditarcategoria;
+    public void setDlgeditarcargo(Dialog dlgeditarcargo) {
+        this.dlgeditarcargo = dlgeditarcargo;
     }
+
+    
+
+    
 
     public Dialog getDlgeliminarcomfirmar() {
         return dlgeliminarcomfirmar;
@@ -133,10 +139,10 @@ public class CargoBean {
     
     public void prepararGuardadoDelCargo(){
         cargo=new Cargo();
-        dlgNuevaCategoria.setVisible(Boolean.TRUE);
+        dlgNuevoCargo.setVisible(Boolean.TRUE);
         
     }
-    public void guardarNuevaCategoria(){
+    public void guardarNuevoCargo(){
         System.out.println("Guardando el cargo con descripcion  -->>>"+this.descripcion);
         Cargo c= new Cargo();
         c.setDescripcion(this.descripcion);        
@@ -144,7 +150,7 @@ public class CargoBean {
           if (c.getDescripcion().equals("")) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error Al Guardar El Cargo Del Usuario"
                     , "Descripcion Del Cargo Requerida"));
-            dlgNuevaCategoria.setVisible(Boolean.TRUE);
+            dlgNuevoCargo.setVisible(Boolean.TRUE);
             
             
           }else{
@@ -154,13 +160,13 @@ public class CargoBean {
               cargoDAO.insertarCargo(c);
               FacesContext context = FacesContext.getCurrentInstance();
               context.addMessage(null, new FacesMessage("Cargo Guardado Exitosamente"));
-              dlgNuevaCategoria.setVisible(Boolean.TRUE);
+              dlgNuevoCargo.setVisible(Boolean.TRUE);
               this.descripcion=null;
           }        
         cargo=new Cargo();
     }
     public void prepararActualizadoDeCategoria(Integer Id,String descripcion){
-        dlgeditarcategoria.setVisible(Boolean.TRUE);
+        dlgeditarcargo.setVisible(Boolean.TRUE);
         System.out.println("Preparando para actualizar un cargo con id:"+Id);
         CargoDAO cargoDAO=new CargoDAOImpl();
         cargo=cargoDAO.buscarCargoporId(Id);
@@ -179,7 +185,7 @@ public class CargoBean {
         if (c.getDescripcion().equals("")) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error En La Actualizacion Del Cargo Del Usuario"
                     , "Descripcion Del Cargo Requerido"));
-            dlgeditarcategoria.setVisible(Boolean.FALSE);
+            dlgeditarcargo.setVisible(Boolean.FALSE);
           }else{
             CargoDAO cargoDAO=new CargoDAOImpl();
             System.out.println("---------------------------"+c.getDescripcion());
@@ -187,7 +193,7 @@ public class CargoBean {
             cargoDAO.actualizarCargo(c);
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Cargo Actualizado Exitosamente"));
-            dlgeditarcategoria.setVisible(Boolean.TRUE);
+            dlgeditarcargo.setVisible(Boolean.TRUE);
         }
         cargo=new Cargo();
     }

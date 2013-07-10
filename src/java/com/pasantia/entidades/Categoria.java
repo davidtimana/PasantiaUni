@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class Categoria  implements java.io.Serializable {
 
      private Integer idCategoria;
      private String descripcion;
-     private Set<Producto> productos = new HashSet<Producto>(0);
+     private Set productos = new HashSet(0);
 
     public Categoria() {
     }
@@ -22,7 +22,7 @@ public class Categoria  implements java.io.Serializable {
     public Categoria(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Categoria(String descripcion, Set<Producto> productos) {
+    public Categoria(String descripcion, Set productos) {
        this.descripcion = descripcion;
        this.productos = productos;
     }
@@ -41,11 +41,11 @@ public class Categoria  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Set<Producto> getProductos() {
+    public Set getProductos() {
         return this.productos;
     }
     
-    public void setProductos(Set<Producto> productos) {
+    public void setProductos(Set productos) {
         this.productos = productos;
     }
 

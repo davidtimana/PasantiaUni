@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -14,7 +14,7 @@ public class FechaEntrega  implements java.io.Serializable {
 
      private Integer idFechaEntrega;
      private Date fecha;
-     private Set<Compra> compras = new HashSet<Compra>(0);
+     private Set compras = new HashSet(0);
 
     public FechaEntrega() {
     }
@@ -23,7 +23,7 @@ public class FechaEntrega  implements java.io.Serializable {
     public FechaEntrega(Date fecha) {
         this.fecha = fecha;
     }
-    public FechaEntrega(Date fecha, Set<Compra> compras) {
+    public FechaEntrega(Date fecha, Set compras) {
        this.fecha = fecha;
        this.compras = compras;
     }
@@ -42,11 +42,11 @@ public class FechaEntrega  implements java.io.Serializable {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Set<Compra> getCompras() {
+    public Set getCompras() {
         return this.compras;
     }
     
-    public void setCompras(Set<Compra> compras) {
+    public void setCompras(Set compras) {
         this.compras = compras;
     }
 

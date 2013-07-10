@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class FormaDePagar  implements java.io.Serializable {
 
      private Integer idFormaDePagar;
      private String nombrePago;
-     private Set<DetalleVenta> detalleVentas = new HashSet<DetalleVenta>(0);
+     private Set detalleVentas = new HashSet(0);
 
     public FormaDePagar() {
     }
@@ -22,7 +22,7 @@ public class FormaDePagar  implements java.io.Serializable {
     public FormaDePagar(String nombrePago) {
         this.nombrePago = nombrePago;
     }
-    public FormaDePagar(String nombrePago, Set<DetalleVenta> detalleVentas) {
+    public FormaDePagar(String nombrePago, Set detalleVentas) {
        this.nombrePago = nombrePago;
        this.detalleVentas = detalleVentas;
     }
@@ -41,11 +41,11 @@ public class FormaDePagar  implements java.io.Serializable {
     public void setNombrePago(String nombrePago) {
         this.nombrePago = nombrePago;
     }
-    public Set<DetalleVenta> getDetalleVentas() {
+    public Set getDetalleVentas() {
         return this.detalleVentas;
     }
     
-    public void setDetalleVentas(Set<DetalleVenta> detalleVentas) {
+    public void setDetalleVentas(Set detalleVentas) {
         this.detalleVentas = detalleVentas;
     }
 

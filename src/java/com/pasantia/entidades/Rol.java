@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,7 +13,7 @@ public class Rol  implements java.io.Serializable {
 
      private Integer idRol;
      private String descripcion;
-     private Set<Usuario> usuarios = new HashSet<Usuario>(0);
+     private Set usuarios = new HashSet(0);
 
     public Rol() {
     }
@@ -22,7 +22,7 @@ public class Rol  implements java.io.Serializable {
     public Rol(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Rol(String descripcion, Set<Usuario> usuarios) {
+    public Rol(String descripcion, Set usuarios) {
        this.descripcion = descripcion;
        this.usuarios = usuarios;
     }
@@ -41,11 +41,11 @@ public class Rol  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Set<Usuario> getUsuarios() {
+    public Set getUsuarios() {
         return this.usuarios;
     }
     
-    public void setUsuarios(Set<Usuario> usuarios) {
+    public void setUsuarios(Set usuarios) {
         this.usuarios = usuarios;
     }
 

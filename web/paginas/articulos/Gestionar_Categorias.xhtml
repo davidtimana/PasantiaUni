@@ -30,15 +30,21 @@
             <ui:define name="cuerpo">
                 <p:spacer width="10" height="5" /><br/>
                 <h:form>
-                    <p:commandButton value="&nbsp;Nueva Categoria" title="Crear Una Nueva Categoria" image="icon-add" onclick="dlgNuevo.show();"
-                                     actionListener="#{categoriaBean.prepararGuardadoDelaCategoria()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                    <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:commandButton value="&nbsp;Nueva Categoria" title="Crear Una Nueva Categoria" image="icon-add" onclick="dlgNuevo.show();"
+                                     actionListener="#{categoriaBean.prepararGuardadoDelaCategoria()}" />
+                            <h:outputText value="Agregar una nueva categoria para los articulos."/>
+                        </h:panelGrid>  
+                    </p:fieldset>  
+                    
                 </h:form><br/>
                 <p:spacer width="10" height="5" />
                 
                 <!--Form: Tabla Categorias -->                           
                 <h:form id="frmcategoria">        
                     <p:dataTable id="datatable" var="categoria" value="#{categoriaBean.categorias}" sortMode="multiple"  emptyMessage="No hay Categorias disponibles"
-                                 paginator="true" rows="15" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                                 paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
                         
                         <f:facet name="header">  
@@ -54,10 +60,10 @@
                             <h:outputText value="#{categoria.descripcion}"  />  
                         </p:column>
                         <p:column headerText="Acciones" style="width:8%; text-align: center">
-                            <p:commandButton  update=":frmeditarcategoria"  onstart="dlg.show();" oncomplete="dlg.hide();" actionListener="#{categoriaBean.prepararActualizadoDeCategoria(categoria.idCategoria, categoria.descripcion)}" 
+                            <p:commandButton  update=":frmeditarcategoria"   actionListener="#{categoriaBean.prepararActualizadoDeCategoria(categoria.idCategoria, categoria.descripcion)}" 
                                       title="&nbsp;Editar" image="icon-edit" />
                             <p:commandButton  update=":frmEliminar" title="&nbsp;Eliminar" image="icon-delete" actionListener="#{categoriaBean.prepararEliminarCategoria(categoria.idCategoria, categoria.descripcion)}" 
-                                              onstart="dlg.show();" oncomplete="dlg.hide();"/>  
+                                              />  
                         </p:column>
                         <f:facet name="footer">  
                             En total hay #{categoriaBean.totalCategorias()} categorias.  
@@ -85,14 +91,14 @@
                         <p:separator id="customSeparator2" style="width:500px;height:8px" />
                         <p:commandButton  update=":frmcategoria:datatable,growl,dlgNuevo"  
                                           action="#{categoriaBean.guardarNuevaCategoria()}" value="Guardar" 
-                                          title="&nbsp;Guardar" image="icon-guardar" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                        <p:commandButton  update=":frmcategoria" oncomplete="dlg.hide()" value="Cancelar" title="&nbsp;Cancelar" 
-                                          image="icon-cancel" onstart="dlg.show();" onclick="dlgNuevo.hide();"/>   
+                                          title="&nbsp;Guardar" image="icon-guardar" />
+                        <p:commandButton  update=":frmcategoria" onclick="dlgNuevo.hide();" value="Cancelar" title="&nbsp;Cancelar" 
+                                          image="icon-cancel" />   
                        
                     </p:dialog>
                 </h:form> 
                 
-                <!--Form: Editar Categoria -->
+        <!--Form: Editar Categoria -->
         <h:form id="frmeditarcategoria">
             <p:dialog header="Edicion De Una Categoria Para Los Articulos" widgetVar="dlgEditar" resizable="false" 
                       id="dlgEditar" modal="false" binding="#{categoriaBean.dlgeditarcategoria}">  
@@ -112,13 +118,13 @@
                 <p:separator id="customSeparator" style="width:500px;height:8px" />
                 <p:commandButton  update=":frmcategoria:datatable,growlEditar,dlgEditar" 
                                   actionListener="#{categoriaBean.actualizarCategoria()}" value="Actualizar" 
-                                  title="&nbsp;Actualizar" image="icon-guardar" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                <p:commandButton  update=":frmcategoria:datatable" onstart="dlg.show();" oncomplete="dlg.hide();" onclick="dlgEditar.hide();" value="Cancelar" title="&nbsp;Cancelar" 
+                                  title="&nbsp;Actualizar" image="icon-guardar" />
+                <p:commandButton  update=":frmcategoria:datatable"  onclick="dlgEditar.hide();" value="Cancelar" title="&nbsp;Cancelar" 
                                   image="icon-cancel" />  
             </p:dialog>
         </h:form>
                 
-            <!--Form: Eliminar Ubicacion -->                    
+        <!--Form: Eliminar Ubicacion -->                    
         <h:form id="frmEliminar">  
                       
             <p:growl id="growlEliminar"  sticky="true" />  
@@ -131,8 +137,8 @@
                 </h:panelGrid>
                 <p:commandButton  update=":frmcategoria:datatable,growlEliminar,dlgEliminar" 
                                   actionListener="#{categoriaBean.eliminarCategoria()}" value="Eliminar" 
-                                  title="&nbsp;Actualizar" image="icon-guardar" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                <p:commandButton  update=":frmcategoria:datatable" onclick="dlgEliminar.hide();" onstart="dlg.show();" oncomplete="dlg.hide();" value="Cancelar" title="&nbsp;Cancelar" 
+                                  title="&nbsp;Actualizar" image="icon-guardar" />
+                <p:commandButton  update=":frmcategoria:datatable" onclick="dlgEliminar.hide();"  value="Cancelar" title="&nbsp;Cancelar" 
                                   image="icon-cancel" />                       
             </p:dialog>  
             

@@ -30,15 +30,21 @@
             <ui:define  name="cuerpo">
                 <p:spacer width="10" height="5" /><br/>
                 <h:form>
-                    <p:commandButton value="&nbsp;Nueva Ubicacion" title="Crear Una Nueva Ubicacion" image="icon-add" onclick="dlgNuevo.show();"
-                                     actionListener="#{ubicacionBean.prepararGuardadoDelaUbicacion()}" onstart="dlg.show();" oncomplete="dlg.hide();"/>
+                    <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:commandButton value="&nbsp;Nueva Ubicacion" title="Crear Una Nueva Ubicacion" image="icon-add" onclick="dlgNuevo.show();"
+                                     actionListener="#{ubicacionBean.prepararGuardadoDelaUbicacion()}" />
+                            <h:outputText value="Agregar una nueva ubicacion para los articulos."/>
+                        </h:panelGrid>  
+                    </p:fieldset>  
+                    
                 </h:form><br/>
                 <p:spacer width="10" height="5" />
                         
                 <!--Form: Tabla Ubicacion -->                           
                 <h:form id="frmubicacion">        
                     <p:dataTable id="datatable" var="ubicacion" value="#{ubicacionBean.ubicaciones}" sortMode="multiple"  emptyMessage="No hay Ubicaciones disponibles"
-                                 paginator="true" rows="15" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                                 paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
                         
                         <f:facet name="header">  
@@ -54,10 +60,10 @@
                             <h:outputText value="#{ubicacion.descripcion}"  />  
                         </p:column>
                         <p:column headerText="Acciones" style="width:8%; text-align: center">
-                            <p:commandButton  update=":frmeditarubicacion" action="#{ubicacionBean.abrirEditar()}" onstart="dlg.show();" oncomplete="dlg.hide();" actionListener="#{ubicacionBean.prepararActualizadoDeUbicacion(ubicacion.idUbicacion,ubicacion.descripcion)}" 
+                            <p:commandButton  update=":frmeditarubicacion" action="#{ubicacionBean.abrirEditar()}"  actionListener="#{ubicacionBean.prepararActualizadoDeUbicacion(ubicacion.idUbicacion,ubicacion.descripcion)}" 
                                       title="&nbsp;Editar" image="icon-edit" />
                             <p:commandButton  update=":frmEliminar"  actionListener="#{ubicacionBean.prepararEliminarUbicacion(ubicacion.idUbicacion,ubicacion.descripcion)}"
-                                              title="&nbsp;Eliminar" image="icon-delete" action="#{ubicacionBean.comfirmarEliminado(ubicacion.idUbicacion,ubicacion.descripcion)}" onstart="dlg.show();" oncomplete="dlg.hide();"/>  
+                                              title="&nbsp;Eliminar" image="icon-delete" action="#{ubicacionBean.comfirmarEliminado(ubicacion.idUbicacion,ubicacion.descripcion)}" />  
                         </p:column>
                         <f:facet name="footer">  
                             En total hay #{ubicacionBean.totalUbicaciones()} ubicaciones.  
@@ -85,9 +91,9 @@
                         <p:separator id="customSeparator2" style="width:500px;height:8px" />
                         <p:commandButton  update=":frmubicacion:datatable,growl,dlgNuevo"  
                                           action="#{ubicacionBean.guardarNuevaUbicacion()}" value="Guardar" 
-                                          title="&nbsp;Guardar" image="icon-guardar" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                        <p:commandButton  update=":frmubicacion" oncomplete="dlg.hide()" value="Cancelar" title="&nbsp;Cancelar" 
-                                          image="icon-cancel" onstart="dlg.show();" onclick="dlgNuevo.hide();"/>   
+                                          title="&nbsp;Guardar" image="icon-guardar" />
+                        <p:commandButton  update=":frmubicacion"  value="Cancelar" title="&nbsp;Cancelar" 
+                                          image="icon-cancel" onclick="dlgNuevo.hide();"/>   
                        
                     </p:dialog>
                 </h:form>
@@ -105,8 +111,8 @@
                 </h:panelGrid>
                 <p:commandButton  update=":frmubicacion:datatable,growlEliminar,dlgEliminar" 
                                   actionListener="#{ubicacionBean.eliminarUbicacion()}" value="Eliminar" 
-                                  title="&nbsp;Actualizar" image="icon-guardar" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                <p:commandButton  update=":frmubicacion:datatable" onclick="dlgEliminar.hide();" onstart="dlg.show();" oncomplete="dlg.hide();" value="Cancelar" title="&nbsp;Cancelar" 
+                                  title="&nbsp;Actualizar" image="icon-guardar" />
+                <p:commandButton  update=":frmubicacion:datatable" onclick="dlgEliminar.hide();"  value="Cancelar" title="&nbsp;Cancelar" 
                                   image="icon-cancel" />                       
             </p:dialog>  
   
@@ -133,8 +139,8 @@
                 <p:separator id="customSeparator" style="width:500px;height:8px" />
                 <p:commandButton  update=":frmubicacion:datatable,growlEditar,dlgEditar" 
                                   actionListener="#{ubicacionBean.actualizarUbicacion()}" value="Actualizar" 
-                                  title="&nbsp;Actualizar" image="icon-guardar" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                <p:commandButton  update=":frmubicacion:datatable" onstart="dlg.show();" oncomplete="dlg.hide();" onclick="dlgEditar.hide();" value="Cancelar" title="&nbsp;Cancelar" 
+                                  title="&nbsp;Actualizar" image="icon-guardar" />
+                <p:commandButton  update=":frmubicacion:datatable"  onclick="dlgEditar.hide();" value="Cancelar" title="&nbsp;Cancelar" 
                                   image="icon-cancel" />  
             </p:dialog>
         </h:form>

@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -11,16 +11,16 @@ public class Venta  implements java.io.Serializable {
 
 
      private Integer idVenta;
-     private Cliente cliente;
      private DetalleVenta detalleVenta;
+     private Persona persona;
      private Date fechaVenta;
 
     public Venta() {
     }
 
-    public Venta(Cliente cliente, DetalleVenta detalleVenta, Date fechaVenta) {
-       this.cliente = cliente;
+    public Venta(DetalleVenta detalleVenta, Persona persona, Date fechaVenta) {
        this.detalleVenta = detalleVenta;
+       this.persona = persona;
        this.fechaVenta = fechaVenta;
     }
    
@@ -31,19 +31,19 @@ public class Venta  implements java.io.Serializable {
     public void setIdVenta(Integer idVenta) {
         this.idVenta = idVenta;
     }
-    public Cliente getCliente() {
-        return this.cliente;
-    }
-    
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
     public DetalleVenta getDetalleVenta() {
         return this.detalleVenta;
     }
     
     public void setDetalleVenta(DetalleVenta detalleVenta) {
         this.detalleVenta = detalleVenta;
+    }
+    public Persona getPersona() {
+        return this.persona;
+    }
+    
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
     public Date getFechaVenta() {
         return this.fechaVenta;

@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -12,27 +12,19 @@ public class Pais  implements java.io.Serializable {
 
 
      private Integer idPais;
-     private Casino casino;
-     private Departamento departamento;
      private String nombrePais;
-     private Set<Casino> casinos = new HashSet<Casino>(0);
-     private Set<Cliente> clientes = new HashSet<Cliente>(0);
+     private Set departamentos = new HashSet(0);
 
     public Pais() {
     }
 
 	
-    public Pais(Casino casino, Departamento departamento, String nombrePais) {
-        this.casino = casino;
-        this.departamento = departamento;
+    public Pais(String nombrePais) {
         this.nombrePais = nombrePais;
     }
-    public Pais(Casino casino, Departamento departamento, String nombrePais, Set<Casino> casinos, Set<Cliente> clientes) {
-       this.casino = casino;
-       this.departamento = departamento;
+    public Pais(String nombrePais, Set departamentos) {
        this.nombrePais = nombrePais;
-       this.casinos = casinos;
-       this.clientes = clientes;
+       this.departamentos = departamentos;
     }
    
     public Integer getIdPais() {
@@ -42,20 +34,6 @@ public class Pais  implements java.io.Serializable {
     public void setIdPais(Integer idPais) {
         this.idPais = idPais;
     }
-    public Casino getCasino() {
-        return this.casino;
-    }
-    
-    public void setCasino(Casino casino) {
-        this.casino = casino;
-    }
-    public Departamento getDepartamento() {
-        return this.departamento;
-    }
-    
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
     public String getNombrePais() {
         return this.nombrePais;
     }
@@ -63,19 +41,12 @@ public class Pais  implements java.io.Serializable {
     public void setNombrePais(String nombrePais) {
         this.nombrePais = nombrePais;
     }
-    public Set<Casino> getCasinos() {
-        return this.casinos;
+    public Set getDepartamentos() {
+        return this.departamentos;
     }
     
-    public void setCasinos(Set<Casino> casinos) {
-        this.casinos = casinos;
-    }
-    public Set<Cliente> getClientes() {
-        return this.clientes;
-    }
-    
-    public void setClientes(Set<Cliente> clientes) {
-        this.clientes = clientes;
+    public void setDepartamentos(Set departamentos) {
+        this.departamentos = departamentos;
     }
 
 

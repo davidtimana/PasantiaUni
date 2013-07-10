@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -12,22 +12,22 @@ public class Departamento  implements java.io.Serializable {
 
 
      private Integer idDepartamento;
-     private Ciudad ciudad;
+     private Pais pais;
      private String nombreDepartamento;
-     private Set<Pais> paises = new HashSet<Pais>(0);
+     private Set ciudads = new HashSet(0);
 
     public Departamento() {
     }
 
 	
-    public Departamento(Ciudad ciudad, String nombreDepartamento) {
-        this.ciudad = ciudad;
+    public Departamento(Pais pais, String nombreDepartamento) {
+        this.pais = pais;
         this.nombreDepartamento = nombreDepartamento;
     }
-    public Departamento(Ciudad ciudad, String nombreDepartamento, Set<Pais> paises) {
-       this.ciudad = ciudad;
+    public Departamento(Pais pais, String nombreDepartamento, Set ciudads) {
+       this.pais = pais;
        this.nombreDepartamento = nombreDepartamento;
-       this.paises = paises;
+       this.ciudads = ciudads;
     }
    
     public Integer getIdDepartamento() {
@@ -37,12 +37,12 @@ public class Departamento  implements java.io.Serializable {
     public void setIdDepartamento(Integer idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
-    public Ciudad getCiudad() {
-        return this.ciudad;
+    public Pais getPais() {
+        return this.pais;
     }
     
-    public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
     public String getNombreDepartamento() {
         return this.nombreDepartamento;
@@ -51,12 +51,12 @@ public class Departamento  implements java.io.Serializable {
     public void setNombreDepartamento(String nombreDepartamento) {
         this.nombreDepartamento = nombreDepartamento;
     }
-    public Set<Pais> getPaises() {
-        return this.paises;
+    public Set getCiudads() {
+        return this.ciudads;
     }
     
-    public void setPaises(Set<Pais> paises) {
-        this.paises = paises;
+    public void setCiudads(Set ciudads) {
+        this.ciudads = ciudads;
     }
 
 

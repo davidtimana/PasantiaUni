@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -23,9 +23,9 @@ public class Producto  implements java.io.Serializable {
      private long iva;
      private String codigoBarras;
      private int cantidadMinima;
-     private byte[] imagen;
-     private Set<DetalleVenta> detalleVentas = new HashSet<DetalleVenta>(0);
-     private Set<DetalleCompra> detalleCompras = new HashSet<DetalleCompra>(0);
+     private String imagen;
+     private Set detalleVentas = new HashSet(0);
+     private Set detalleCompras = new HashSet(0);
 
     public Producto() {
     }
@@ -43,7 +43,7 @@ public class Producto  implements java.io.Serializable {
         this.codigoBarras = codigoBarras;
         this.cantidadMinima = cantidadMinima;
     }
-    public Producto(Casino casino, Categoria categoria, PrecioCompra precioCompra, Ubicacion ubicacion, String descripcion, int cantidadActual, long precioVenta1, Long precioVenta2, long iva, String codigoBarras, int cantidadMinima, byte[] imagen, Set<DetalleVenta> detalleVentas, Set<DetalleCompra> detalleCompras) {
+    public Producto(Casino casino, Categoria categoria, PrecioCompra precioCompra, Ubicacion ubicacion, String descripcion, int cantidadActual, long precioVenta1, Long precioVenta2, long iva, String codigoBarras, int cantidadMinima, String imagen, Set detalleVentas, Set detalleCompras) {
        this.casino = casino;
        this.categoria = categoria;
        this.precioCompra = precioCompra;
@@ -144,25 +144,25 @@ public class Producto  implements java.io.Serializable {
     public void setCantidadMinima(int cantidadMinima) {
         this.cantidadMinima = cantidadMinima;
     }
-    public byte[] getImagen() {
+    public String getImagen() {
         return this.imagen;
     }
     
-    public void setImagen(byte[] imagen) {
+    public void setImagen(String imagen) {
         this.imagen = imagen;
     }
-    public Set<DetalleVenta> getDetalleVentas() {
+    public Set getDetalleVentas() {
         return this.detalleVentas;
     }
     
-    public void setDetalleVentas(Set<DetalleVenta> detalleVentas) {
+    public void setDetalleVentas(Set detalleVentas) {
         this.detalleVentas = detalleVentas;
     }
-    public Set<DetalleCompra> getDetalleCompras() {
+    public Set getDetalleCompras() {
         return this.detalleCompras;
     }
     
-    public void setDetalleCompras(Set<DetalleCompra> detalleCompras) {
+    public void setDetalleCompras(Set detalleCompras) {
         this.detalleCompras = detalleCompras;
     }
 

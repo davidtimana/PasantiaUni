@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 10/07/2013 10:05:51 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.pasantia.entidades.Casino" table="Casino" catalog="CasinoSub">
+    <class name="com.pasantia.entidades.Casino" table="Casino" catalog="CasinoPasantia">
         <id name="idCasino" type="java.lang.Integer">
             <column name="idCasino" />
             <generator class="identity" />
         </id>
-        <many-to-one name="usuario" class="com.pasantia.entidades.Usuario" fetch="select">
-            <column name="fk_id_usuario" not-null="true" />
+        <many-to-one name="persona" class="com.pasantia.entidades.Persona" fetch="select">
+            <column name="fk_id_persona" not-null="true" />
         </many-to-one>
-        <many-to-one name="pais" class="com.pasantia.entidades.Pais" fetch="select">
-            <column name="fk_id_pais" not-null="true" />
+        <many-to-one name="ciudad" class="com.pasantia.entidades.Ciudad" fetch="select">
+            <column name="fk_id_ciudad" not-null="true" />
         </many-to-one>
         <property name="nombre" type="string">
             <column name="nombre" length="45" not-null="true" />
@@ -28,12 +28,6 @@
                 <column name="fk_id_casino" not-null="true" />
             </key>
             <one-to-many class="com.pasantia.entidades.Producto" />
-        </set>
-        <set name="paises" inverse="true">
-            <key>
-                <column name="fk_id_casino" not-null="true" />
-            </key>
-            <one-to-many class="com.pasantia.entidades.Pais" />
         </set>
     </class>
 </hibernate-mapping>

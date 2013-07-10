@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 10/07/2013 10:05:51 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.pasantia.entidades.Rol" table="Rol" catalog="CasinoSub">
+    <class name="com.pasantia.entidades.Rol" table="Rol" catalog="CasinoPasantia">
         <id name="idRol" type="java.lang.Integer">
             <column name="idRol" />
             <generator class="identity" />
@@ -13,7 +13,7 @@
         </property>
         <set name="usuarios" inverse="true">
             <key>
-                <column name="fk_id_rol" not-null="true" />
+                <column name="secrol" not-null="true" />
             </key>
             <one-to-many class="com.pasantia.entidades.Usuario" />
         </set>

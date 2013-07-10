@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class CatalogoVenta  implements java.io.Serializable {
      private DiasEntregaPedidos diasEntregaPedidos;
      private DiasPedidos diasPedidos;
      private String descripcion;
-     private Set<Vendedores> vendedoreses = new HashSet<Vendedores>(0);
+     private Set personas = new HashSet(0);
 
     public CatalogoVenta() {
     }
@@ -26,11 +26,11 @@ public class CatalogoVenta  implements java.io.Serializable {
         this.diasPedidos = diasPedidos;
         this.descripcion = descripcion;
     }
-    public CatalogoVenta(DiasEntregaPedidos diasEntregaPedidos, DiasPedidos diasPedidos, String descripcion, Set<Vendedores> vendedoreses) {
+    public CatalogoVenta(DiasEntregaPedidos diasEntregaPedidos, DiasPedidos diasPedidos, String descripcion, Set personas) {
        this.diasEntregaPedidos = diasEntregaPedidos;
        this.diasPedidos = diasPedidos;
        this.descripcion = descripcion;
-       this.vendedoreses = vendedoreses;
+       this.personas = personas;
     }
    
     public Integer getIdCatalogoVenta() {
@@ -61,12 +61,12 @@ public class CatalogoVenta  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public Set<Vendedores> getVendedoreses() {
-        return this.vendedoreses;
+    public Set getPersonas() {
+        return this.personas;
     }
     
-    public void setVendedoreses(Set<Vendedores> vendedoreses) {
-        this.vendedoreses = vendedoreses;
+    public void setPersonas(Set personas) {
+        this.personas = personas;
     }
 
 

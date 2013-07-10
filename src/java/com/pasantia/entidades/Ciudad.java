@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 18/05/2013 04:10:49 PM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -12,19 +12,24 @@ public class Ciudad  implements java.io.Serializable {
 
 
      private Integer idCiudad;
+     private Departamento departamento;
      private String nombreCiudad;
-     private Set<Departamento> departamentos = new HashSet<Departamento>(0);
+     private Set personas = new HashSet(0);
+     private Set casinos = new HashSet(0);
 
     public Ciudad() {
     }
 
 	
-    public Ciudad(String nombreCiudad) {
+    public Ciudad(Departamento departamento, String nombreCiudad) {
+        this.departamento = departamento;
         this.nombreCiudad = nombreCiudad;
     }
-    public Ciudad(String nombreCiudad, Set<Departamento> departamentos) {
+    public Ciudad(Departamento departamento, String nombreCiudad, Set personas, Set casinos) {
+       this.departamento = departamento;
        this.nombreCiudad = nombreCiudad;
-       this.departamentos = departamentos;
+       this.personas = personas;
+       this.casinos = casinos;
     }
    
     public Integer getIdCiudad() {
@@ -34,6 +39,13 @@ public class Ciudad  implements java.io.Serializable {
     public void setIdCiudad(Integer idCiudad) {
         this.idCiudad = idCiudad;
     }
+    public Departamento getDepartamento() {
+        return this.departamento;
+    }
+    
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
     public String getNombreCiudad() {
         return this.nombreCiudad;
     }
@@ -41,12 +53,19 @@ public class Ciudad  implements java.io.Serializable {
     public void setNombreCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
     }
-    public Set<Departamento> getDepartamentos() {
-        return this.departamentos;
+    public Set getPersonas() {
+        return this.personas;
     }
     
-    public void setDepartamentos(Set<Departamento> departamentos) {
-        this.departamentos = departamentos;
+    public void setPersonas(Set personas) {
+        this.personas = personas;
+    }
+    public Set getCasinos() {
+        return this.casinos;
+    }
+    
+    public void setCasinos(Set casinos) {
+        this.casinos = casinos;
     }
 
 

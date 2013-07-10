@@ -16,17 +16,23 @@
         <ui:define  name="cuerpo">
         
         <h:form>
-            <p:commandButton value="&nbsp;Nuevo Rol" title="Crear Un Nuevo Rol" image="icon-add" onclick="dlgNuevo.show()" 
-                             actionListener="#{rolBean.prepararGuardadoDelRol()}" onstart="dlg.show();" oncomplete="dlg.hide();" />      
+            <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:commandButton value="&nbsp;Nuevo Rol" title="Crear Un Nuevo Rol" image="icon-add" onclick="dlgNuevo.show()" 
+                             actionListener="#{rolBean.prepararGuardadoDelRol()}"  />      
+                            <h:outputText value="Agregar un nuevo rol para los usuarios."/>
+                        </h:panelGrid>  
+                    </p:fieldset>  
+            
         
         </h:form><br/>
         
         <!--Form: Tabla Roles -->
         <h:form id="frmroles">        
             <p:dataTable id="datatable" var="rol" value="#{rolBean.roles}" emptyMessage="No hay roles disponibles"
-                         paginator="true" rows="15" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                         paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
                          {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} " 
-                         rowsPerPageTemplate="5,10,15" >
+                          >
                 <f:facet name="header">  
                    Lista de Roles 
                 </f:facet> 
@@ -41,9 +47,9 @@
                 </p:column>
                 <p:column headerText="Acciones" style="width:8%; text-align: center">
                     <p:commandButton  update=":frmeditar" onclick="dlgEditar.show();" actionListener="#{rolBean.prepararActualizadoDelRol(rol.idRol)}" 
-                                      title="&nbsp;Editar" image="icon-edit" onstart="dlg.show();" oncomplete="dlg.hide();" />
+                                      title="&nbsp;Editar" image="icon-edit"  />
                     <p:commandButton  update=":frmEliminar" onclick="dlgEliminar.show();" actionListener="#{rolBean.prepararEliminarDelRol(rol.idRol)}"
-                                      title="&nbsp;Eliminar" image="icon-delete" onstart="dlg.show();" oncomplete="dlg.hide();"/>  
+                                      title="&nbsp;Eliminar" image="icon-delete" />  
                 </p:column>
                 <f:facet name="footer" >  
                     En total hay #{rolBean.totalRoles()} roles.  
@@ -70,9 +76,9 @@
                 <p:separator id="customSeparatoruno" style="width:500px;height:8px" />
                 <p:commandButton  update=":frmroles:datatable,growl,dlgNuevo" onclick="dlgNuevo.hide()" 
                                   actionListener="#{rolBean.guardarNuevoRol()}" value="Guardar" 
-                                  title="&nbsp;Guardar" image="icon-guardar" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                <p:commandButton  update=":frmroles" onclick="dlgNuevo.hide()" value="Cancelar" title="&nbsp;Cancelar" 
-                                  image="icon-cancel" onstart="dlg.show();" oncomplete="dlg.hide();"/>  
+                                  title="&nbsp;Guardar" image="icon-guardar" />
+                <p:commandButton  update=":frmroles" onclick="dlgNuevo.hide();" value="Cancelar" title="&nbsp;Cancelar" 
+                                  image="icon-cancel" />  
             </p:dialog>
         </h:form>
         
@@ -95,9 +101,9 @@
                 <p:separator id="customSeparatordos" style="width:500px;height:8px" />
                 <p:commandButton  update=":frmroles:datatable,growlEditar,dlgEditar"  
                                   actionListener="#{rolBean.actualizarRol()}" value="Actualizar" 
-                                  title="&nbsp;Actualizar" image="icon-guardar" onstart="dlg.show();" oncomplete="dlg.hide();"/>
-                <p:commandButton  update=":frmroles:datatable" onclick="dlgEditar.hide()" value="Cancelar" title="&nbsp;Cancelar" 
-                                  image="icon-cancel" onstart="dlg.show();" oncomplete="dlg.hide();"/>  
+                                  title="&nbsp;Actualizar" image="icon-guardar" />
+                <p:commandButton  update=":frmroles:datatable" oncomplete="dlgEditar.hide()" value="Cancelar" title="&nbsp;Cancelar" 
+                                  image="icon-cancel" />  
             </p:dialog>
         </h:form>
             
