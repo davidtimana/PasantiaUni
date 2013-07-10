@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -11,30 +11,34 @@ import java.util.Set;
 public class Departamento  implements java.io.Serializable {
 
 
-     private Integer idDepartamento;
+     private int idDepartamento;
      private Pais pais;
      private String nombreDepartamento;
      private Set ciudads = new HashSet(0);
+     private Set divisioneses = new HashSet(0);
 
     public Departamento() {
     }
 
 	
-    public Departamento(Pais pais, String nombreDepartamento) {
+    public Departamento(int idDepartamento, Pais pais, String nombreDepartamento) {
+        this.idDepartamento = idDepartamento;
         this.pais = pais;
         this.nombreDepartamento = nombreDepartamento;
     }
-    public Departamento(Pais pais, String nombreDepartamento, Set ciudads) {
+    public Departamento(int idDepartamento, Pais pais, String nombreDepartamento, Set ciudads, Set divisioneses) {
+       this.idDepartamento = idDepartamento;
        this.pais = pais;
        this.nombreDepartamento = nombreDepartamento;
        this.ciudads = ciudads;
+       this.divisioneses = divisioneses;
     }
    
-    public Integer getIdDepartamento() {
+    public int getIdDepartamento() {
         return this.idDepartamento;
     }
     
-    public void setIdDepartamento(Integer idDepartamento) {
+    public void setIdDepartamento(int idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
     public Pais getPais() {
@@ -57,6 +61,13 @@ public class Departamento  implements java.io.Serializable {
     
     public void setCiudads(Set ciudads) {
         this.ciudads = ciudads;
+    }
+    public Set getDivisioneses() {
+        return this.divisioneses;
+    }
+    
+    public void setDivisioneses(Set divisioneses) {
+        this.divisioneses = divisioneses;
     }
 
 

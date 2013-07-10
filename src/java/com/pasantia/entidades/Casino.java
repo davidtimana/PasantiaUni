@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -13,29 +13,30 @@ public class Casino  implements java.io.Serializable {
 
      private Integer idCasino;
      private Persona persona;
-     private Ciudad ciudad;
+     private Batallon batallon;
      private String nombre;
-     private String direccion;
      private String nit;
+     private String telefono1;
+     private String telefono2;
      private Set productos = new HashSet(0);
 
     public Casino() {
     }
 
 	
-    public Casino(Persona persona, Ciudad ciudad, String nombre, String direccion, String nit) {
-        this.persona = persona;
-        this.ciudad = ciudad;
+    public Casino(Batallon batallon, String nombre, String nit, String telefono1) {
+        this.batallon = batallon;
         this.nombre = nombre;
-        this.direccion = direccion;
         this.nit = nit;
+        this.telefono1 = telefono1;
     }
-    public Casino(Persona persona, Ciudad ciudad, String nombre, String direccion, String nit, Set productos) {
+    public Casino(Persona persona, Batallon batallon, String nombre, String nit, String telefono1, String telefono2, Set productos) {
        this.persona = persona;
-       this.ciudad = ciudad;
+       this.batallon = batallon;
        this.nombre = nombre;
-       this.direccion = direccion;
        this.nit = nit;
+       this.telefono1 = telefono1;
+       this.telefono2 = telefono2;
        this.productos = productos;
     }
    
@@ -53,12 +54,12 @@ public class Casino  implements java.io.Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-    public Ciudad getCiudad() {
-        return this.ciudad;
+    public Batallon getBatallon() {
+        return this.batallon;
     }
     
-    public void setCiudad(Ciudad ciudad) {
-        this.ciudad = ciudad;
+    public void setBatallon(Batallon batallon) {
+        this.batallon = batallon;
     }
     public String getNombre() {
         return this.nombre;
@@ -67,19 +68,26 @@ public class Casino  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getDireccion() {
-        return this.direccion;
-    }
-    
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
     public String getNit() {
         return this.nit;
     }
     
     public void setNit(String nit) {
         this.nit = nit;
+    }
+    public String getTelefono1() {
+        return this.telefono1;
+    }
+    
+    public void setTelefono1(String telefono1) {
+        this.telefono1 = telefono1;
+    }
+    public String getTelefono2() {
+        return this.telefono2;
+    }
+    
+    public void setTelefono2(String telefono2) {
+        this.telefono2 = telefono2;
     }
     public Set getProductos() {
         return this.productos;

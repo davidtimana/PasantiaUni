@@ -1,0 +1,47 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.pasantia.dao;
+
+import com.pasantia.entidades.Divisiones;
+import java.util.List;
+
+/**
+ *
+ * @author root
+ */
+public interface DivisionesDAO {
+    /**
+     *Metodo que se encarga de la
+     * insercion de un nueva division
+     * @param division 
+     */
+    public void insertarDivisiones(Divisiones divisiones);
+    /**
+     *Metodo que se encarga de la
+     * actualizacion de un nueva division
+     * @param division 
+     */
+    public void actualizarDivisiones(Divisiones divisiones);
+    /**
+     *Metodo que se encarga de 
+     * eliminar una division
+     * @param division
+     */
+    public boolean eliminarDivisiones(Divisiones divisiones);
+    /**
+     *Metodo que se encarga de buscar
+     * un Casino por su id
+     * @param id
+     * @return division
+     */
+    public Divisiones buscarDivisionesporId(Integer id);
+    /**
+     *Metodo que se encarga de
+     * listar las division
+     * @return lista de divisiones
+     */
+    public List<Divisiones> buscartodasDivisiones();
+    
+}

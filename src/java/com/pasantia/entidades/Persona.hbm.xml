@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/07/2013 10:05:51 AM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.pasantia.entidades.Persona" table="Persona" catalog="CasinoPasantia">
         <id name="idTblpersona" type="java.lang.Integer">
@@ -62,6 +62,12 @@
         <property name="barrio" type="string">
             <column name="BARRIO" length="45" not-null="true" />
         </property>
+        <set name="batallons" inverse="true">
+            <key>
+                <column name="seccoronel" not-null="true" />
+            </key>
+            <one-to-many class="com.pasantia.entidades.Batallon" />
+        </set>
         <set name="usuarios" inverse="true">
             <key>
                 <column name="secpersona" not-null="true" />
@@ -82,7 +88,7 @@
         </set>
         <set name="casinos" inverse="true">
             <key>
-                <column name="fk_id_persona" not-null="true" />
+                <column name="fk_id_persona" />
             </key>
             <one-to-many class="com.pasantia.entidades.Casino" />
         </set>

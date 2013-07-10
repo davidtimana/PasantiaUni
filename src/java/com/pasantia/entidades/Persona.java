@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 10/07/2013 10:05:50 AM by Hibernate Tools 3.2.1.GA
+// Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -31,6 +31,7 @@ public class Persona  implements java.io.Serializable {
      private String foto;
      private String direccion;
      private String barrio;
+     private Set batallons = new HashSet(0);
      private Set usuarios = new HashSet(0);
      private Set proveedors = new HashSet(0);
      private Set ventas = new HashSet(0);
@@ -52,7 +53,7 @@ public class Persona  implements java.io.Serializable {
         this.direccion = direccion;
         this.barrio = barrio;
     }
-    public Persona(CatalogoVenta catalogoVenta, Cargo cargo, Ciudad ciudad, TipoIdentificacion tipoIdentificacion, Sexo sexo, TipoPersona tipoPersona, String pnombre, String snombre, String papellido, String sapellido, String cedula, Date fechaNacimiento, String email, String telefono, String movil, String foto, String direccion, String barrio, Set usuarios, Set proveedors, Set ventas, Set casinos) {
+    public Persona(CatalogoVenta catalogoVenta, Cargo cargo, Ciudad ciudad, TipoIdentificacion tipoIdentificacion, Sexo sexo, TipoPersona tipoPersona, String pnombre, String snombre, String papellido, String sapellido, String cedula, Date fechaNacimiento, String email, String telefono, String movil, String foto, String direccion, String barrio, Set batallons, Set usuarios, Set proveedors, Set ventas, Set casinos) {
        this.catalogoVenta = catalogoVenta;
        this.cargo = cargo;
        this.ciudad = ciudad;
@@ -71,6 +72,7 @@ public class Persona  implements java.io.Serializable {
        this.foto = foto;
        this.direccion = direccion;
        this.barrio = barrio;
+       this.batallons = batallons;
        this.usuarios = usuarios;
        this.proveedors = proveedors;
        this.ventas = ventas;
@@ -209,6 +211,13 @@ public class Persona  implements java.io.Serializable {
     
     public void setBarrio(String barrio) {
         this.barrio = barrio;
+    }
+    public Set getBatallons() {
+        return this.batallons;
+    }
+    
+    public void setBatallons(Set batallons) {
+        this.batallons = batallons;
     }
     public Set getUsuarios() {
         return this.usuarios;

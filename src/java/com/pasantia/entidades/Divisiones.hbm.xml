@@ -3,22 +3,22 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.pasantia.entidades.Ciudad" table="Ciudad" catalog="CasinoPasantia">
-        <id name="idCiudad" type="java.lang.Integer">
-            <column name="idCiudad" />
+    <class name="com.pasantia.entidades.Divisiones" table="Divisiones" catalog="CasinoPasantia">
+        <id name="idDivisiones" type="java.lang.Integer">
+            <column name="idDivisiones" />
             <generator class="identity" />
         </id>
         <many-to-one name="departamento" class="com.pasantia.entidades.Departamento" fetch="select">
             <column name="secdepartamento" not-null="true" />
         </many-to-one>
-        <property name="nombreCiudad" type="string">
-            <column name="nombre_ciudad" length="45" not-null="true" />
+        <property name="nombreDivision" type="string">
+            <column name="nombre_division" not-null="true" />
         </property>
-        <set name="personas" inverse="true">
+        <set name="batallons" inverse="true">
             <key>
-                <column name="SECCIUDAD" not-null="true" />
+                <column name="secdivision" not-null="true" />
             </key>
-            <one-to-many class="com.pasantia.entidades.Persona" />
+            <one-to-many class="com.pasantia.entidades.Batallon" />
         </set>
     </class>
 </hibernate-mapping>
