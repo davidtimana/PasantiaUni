@@ -54,6 +54,12 @@ public class Navegacion {
     public String ir_a_Gestionar_Cargos(){
         return "gestionarcargos";
     }
+    public String ir_a_Gestionar_Usuario(){
+        return "gestionarusuarios";
+    }
+    public String ir_a_Listar_Usuario(){
+        return "listarusuarios";
+    }
     
     
 }
