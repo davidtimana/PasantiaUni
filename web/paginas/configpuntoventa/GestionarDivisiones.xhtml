@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../../plantillas/plantillaprincipal.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="titulo">
+        Gestion De Divisiones - SICOVI
+    </ui:define>
+
+    <ui:define name="abajo">
+        abajo
+    </ui:define>
+
+    <ui:define name="izquierda">
+        izquierda
+    </ui:define>
+
+    <ui:define name="derecha">
+        derecha
+    </ui:define>
+
+    <ui:define name="cuerpo">
+        <!--Form: Tabla De Cargos -->                           
+                <h:form id="frmdivision">        
+                    <p:dataTable id="datatable" var="divisiones" value="#{divisionesBean.divisioneslista}" sortMode="multiple"  emptyMessage="No hay Divisiones disponibles"
+                                 paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+                        
+                        <f:facet name="header">  
+                            Lista de Divisiones 
+                        </f:facet> 
+                        <p:column headerText="ID" style="text-align: center" sortBy="#{divisiones.idDivisiones}" filterBy="#{divisiones.idDivisiones}">
+                            <f:facet name="header">  
+                                Codigo Division 
+                            </f:facet>  
+                            <h:outputText value="#{divisiones.idDivisiones}" />  
+                        </p:column>
+                        <p:column headerText="Descripcion" style="text-align: center" sortBy="#{divisiones.nombreDivision}" filterBy="#{divisiones.nombreDivision}">  
+                            <h:outputText value="#{divisiones.nombreDivision}"  />  
+                        </p:column>
+                        <p:column headerText="Pais" style="text-align: center" sortBy="#{divisiones.departamento.pais.nombrePais}" filterBy="#{divisiones.departamento.pais.nombrePais}">  
+                            <h:outputText value="#{divisiones.departamento.pais.nombrePais}"  />  
+                        </p:column>
+                        <p:column headerText="Departamento" style="text-align: center" sortBy="#{divisiones.departamento.nombreDepartamento}" filterBy="#{divisiones.departamento.nombreDepartamento}">  
+                            <h:outputText value="#{divisiones.departamento.nombreDepartamento}"  />  
+                        </p:column>
+                        <p:column headerText="Acciones" style="width:8%; text-align: center">
+                            
+                                      
+                        </p:column>
+                        <f:facet name="footer">  
+                            En total hay #{divisionesBean.totalDivisiones()} divisiones.  
+                        </f:facet>
+                   </p:dataTable>      
+                </h:form>
+    </ui:define>
+
+</ui:composition>
