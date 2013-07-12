@@ -81,6 +81,21 @@
             <from-outcome>gestionarusuarios</from-outcome>
             <to-view-id>/paginas/usuariossistema/GestionarUsuarios.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-action>#{navegacion.ir_a_Gestionar_Divisiones()}</from-action> 
+            <from-outcome>gestionardivisiones</from-outcome>
+            <to-view-id>/paginas/configpuntoventa/GestionarDivisiones.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navegacion.ir_a_Gestionar_Batallones()}</from-action> 
+            <from-outcome>gestionarbatallones</from-outcome>
+            <to-view-id>/paginas/configpuntoventa/GestionarBatallones.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{navegacion.ir_a_Gestionar_Casinos()}</from-action> 
+            <from-outcome>gestionarcasinos</from-outcome>
+            <to-view-id>/paginas/configpuntoventa/GestionarCasinos.xhtml</to-view-id>
+        </navigation-case>
         
     </navigation-rule>
     <managed-bean>

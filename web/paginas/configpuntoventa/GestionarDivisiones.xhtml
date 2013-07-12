@@ -11,7 +11,7 @@
     </ui:define>
 
     <ui:define name="abajo">
-        abajo
+        <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true"  />
     </ui:define>
 
     <ui:define name="izquierda">
@@ -23,6 +23,18 @@
     </ui:define>
 
     <ui:define name="cuerpo">
+        <p:growl id="growl"  sticky="true"  />
+        <h:form>                    
+                    <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
+                        <h:panelGrid columns="2" cellpadding="10">  
+                            <p:commandButton value="&nbsp;Nueva Division" title="Crear Una Nueva Division" image="icon-add" onclick="dlgNuevo.show();"
+                                             actionListener="#{divisionesBean.prepararGuardadoDelasDivisiones()}"/>
+                            <h:outputText value="Agregar una nueva division."/>
+                        </h:panelGrid>  
+                    </p:fieldset>  
+                </h:form><br/>
+                
+                
         <!--Form: Tabla De Cargos -->                           
                 <h:form id="frmdivision">        
                     <p:dataTable id="datatable" var="divisiones" value="#{divisionesBean.divisioneslista}" sortMode="multiple"  emptyMessage="No hay Divisiones disponibles"
@@ -56,6 +68,46 @@
                         </f:facet>
                    </p:dataTable>      
                 </h:form>
+                
+        <!--Form: Nuevo Cargo -->          
+                  <h:form id="frmnuevadivision">
+                    <p:dialog header="Creacion de un nueva division" widgetVar="dlgNuevo" resizable="false" 
+                              id="dlgNuevo" showEffect="explode" hideEffect="bounce"  modal="false"  width="700" binding="#{divisionesBean.dlgNuevaDivision}">  
+                       <!-- <p:growl id="growl"  sticky="true"  />
+                        <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true"  /> -->
+                            <h:panelGrid id="pgNuevo" columns="2" cellpadding="6" style="margin:0 auto;">  
+
+                               
+                                <p:outputLabel value="Nombre De la División" />
+                                <p:inputText id="des" value="#{divisionesBean.descripcion}"   style="width: 300px" binding="#{divisionesBean.txtdescripcioning}" />
+                                
+                                <p:outputLabel value="País De la División"  />
+                                <p:selectOneMenu id="pais" value="#{divisionesBean.pais}" binding="#{divisionesBean.cmbpais}" 
+                            validatorMessage="Debe seleccionar Pais" effect="fold" filter="true" filterMatchMode="startsWith"  >  
+                                    <f:selectItem itemLabel="...Seleccione..." itemValue="" />  
+                                    <f:selectItems value="#{divisionesBean.paisescombo}"  />
+                                    <p:ajax update="frmnuevadivision:departamento" listener="#{divisionesBean.cargarListaDepartamentoxpais()}" 
+                                             />                                     
+                                </p:selectOneMenu>  
+                                
+                                <p:outputLabel value="Departamento De la División"  binding="#{divisionesBean.lbldepartamento}"/>
+                                <p:selectOneMenu id="departamento" value="#{divisionesBean.secdepartamento}" binding="#{divisionesBean.cmbdepartamento}" >  
+                                    <f:selectItem itemLabel="...Seleccione..."  />  
+                                    <f:selectItems value="#{divisionesBean.departamentoscombo}"  />  
+                                    
+                                </p:selectOneMenu>  
+
+                                
+                        </h:panelGrid>  
+                        <p:separator id="customSeparator2" style="width:650px;height:8px" />
+                        <p:commandButton  update=":frmdivision:datatable"  
+                                          action="#{divisionesBean.guardarNuevaDivision()}"  value="Guardar" 
+                                          title="&nbsp;Guardar" image="icon-guardar" />
+                        <p:commandButton  update=":frmdivision" onclick="dlgNuevo.hide();" value="Cancelar" title="&nbsp;Cancelar" 
+                                          image="icon-cancel" />   
+                       
+                    </p:dialog>
+                </h:form> 
     </ui:define>
 
 </ui:composition>

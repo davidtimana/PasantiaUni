@@ -94,8 +94,18 @@
                             </p:submenu>
                         </p:submenu>
                          <p:submenu label="Configuracion Punto De Venta" icon="ui-icon-pencil">
-                            <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w"></p:menuitem>
-                            <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e"></p:menuitem>
+                            <p:submenu label="Divisiones" icon="ui-icon-contact">
+                                <p:menuitem value="Gestionar De Divisiones" action="#{navegacion.ir_a_Gestionar_Divisiones()}" />
+                                <p:menuitem value="Listar Divisiones" action="#{navegacion.ir_a_Listar_Roles()}" />
+                            </p:submenu>
+                            <p:submenu label="Batallones" icon="ui-icon-contact">
+                                <p:menuitem value="Gestionar Batallones" action="#{navegacion.ir_a_Gestionar_Batallones()}" />
+                                <p:menuitem value="Listar Batallones" action="#{navegacion.ir_a_Listar_Roles()}" />
+                            </p:submenu>
+                            <p:submenu label="Casinos" icon="ui-icon-contact">
+                                <p:menuitem value="Gestionar Casinos" action="#{navegacion.ir_a_Gestionar_Casinos()}" />
+                                <p:menuitem value="Listar Casinos" action="#{navegacion.ir_a_Listar_Roles()}" />
+                            </p:submenu>
                         </p:submenu>
                         <p:submenu label="Usuarios Del Sistema" icon="ui-icon-document">
                             <p:submenu label="Usuarios" icon="ui-icon-contact">

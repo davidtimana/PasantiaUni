@@ -60,6 +60,16 @@ public class Navegacion {
     public String ir_a_Listar_Usuario(){
         return "listarusuarios";
     }
+    public String ir_a_Gestionar_Divisiones(){
+        return "gestionardivisiones";
+    }
+    public String ir_a_Gestionar_Batallones(){
+        return "gestionarbatallones";
+    }
+    public String ir_a_Gestionar_Casinos(){
+        return "gestionarcasinos";
+    }
+    
     
     
 }
