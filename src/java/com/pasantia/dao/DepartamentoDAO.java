@@ -5,6 +5,7 @@
 package com.pasantia.dao;
 
 import com.pasantia.entidades.Departamento;
+import com.pasantia.entidades.DivisionesUbicacion;
 import java.util.List;
 
 /**

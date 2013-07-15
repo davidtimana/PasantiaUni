@@ -101,7 +101,7 @@
                                 
                                 <p:outputLabel value="Departamento"  binding="#{divisionesBean.lbldepartamento}"/>
                                 <p:selectOneMenu id="departamento" value="#{divisionesBean.secdepartamento}" 
-                                                 binding="#{divisionesBean.cmbdepartamento}" >  
+                                                 binding="#{divisionesBean.cmbdepartamento}" filter="true" filterMatchMode="startsWith" >  
                                     <f:selectItem itemLabel="...Seleccione..."  />  
                                     <f:selectItems value="#{divisionesBean.departamentoscombo}"  />                                      
                                 </p:selectOneMenu>
@@ -112,12 +112,12 @@
                        </h:panelGrid>
                        </p:panel >
                         <p:separator id="customSeparator2" style="width:900px;height:2px" />
-                        <p:dataTable id="tablaasig" var="asig" value="#{divisionesBean.listubicaciones}" sortMode="multiple"  emptyMessage="No hay Ubicaciones para: #{divisionesBean.descripcion} disponibles"
+                        <p:dataTable  id="tablaasig" var="asig" value="#{divisionesBean.listubicaciones}" sortMode="multiple"  
                                  paginator="true" rows="5" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
-                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" binding="#{divisionesBean.tblasigubicaciones}">
                         
                         <f:facet name="header">  
-                            Lista de Ubicaciones para: #{divisionesBean.descripcion} 
+                            Lista de Ubicaciones para: <p:outputLabel binding="#{divisionesBean.etiqueta}" /> 
                         </f:facet> 
                         <p:column headerText="ID" style="text-align: center" >
                             <f:facet name="header">  
@@ -135,7 +135,7 @@
                         
                       
                         <f:facet name="footer">  
-                            En total hay #{divisionesBean.totalDivisiones()} ubicaciones.  
+                            En total hay <p:outputLabel binding="#{divisionesBean.lbltotalubicaciones}" /> ubicaciones.  
                         </f:facet>
                    </p:dataTable>      
                    <p:commandButton  update=":frmdivision" onclick="dlgNuevo.hide();" value="Cancelar" title="&nbsp;Cancelar" 

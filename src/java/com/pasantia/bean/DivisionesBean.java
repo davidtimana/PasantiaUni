@@ -26,6 +26,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import org.primefaces.component.commandbutton.CommandButton;
+import org.primefaces.component.datatable.DataTable;
 import org.primefaces.component.dialog.Dialog;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.outputlabel.OutputLabel;
@@ -55,12 +56,16 @@ public class DivisionesBean {
     private List<SelectItem> paisescombo,departamentoscombo;
     private SelectOneMenu cmbpais;
     private CommandButton btnagregardivision,btnagregarubicacion;
-    private List<DivisionesUbicacion> listubicaciones;
+    private List<DivisionesUbicacion> listubicaciones,liscomprobar;
     private DepartamentoDAO departamentoDAO;
     private PaisDAO paisDAO;
     private DivisionesUbicacion divisionesUbicacion;
     private String desasig;
     private DivisionesUbicacionDAO divisionesubicacionDAO;
+    private OutputLabel lbltotalubicaciones,etiqueta;
+    private DataTable tblasigubicaciones;
+    
+    
     
     
     
@@ -89,6 +94,12 @@ public class DivisionesBean {
         departamento = new Departamento();
         divisionesUbicacion = new DivisionesUbicacion();
         divisionesubicacionDAO = new DivisionesUbicacionDAOImpl();
+        lbltotalubicaciones = new OutputLabel();
+        tblasigubicaciones = new DataTable();
+        tblasigubicaciones.setStyle("display: none");
+        etiqueta = new  OutputLabel();
+        departamentoscombo=cargarDepartamentos("");
+        
     }
 
     public Departamento getDepartamento() {
@@ -217,7 +228,7 @@ public class DivisionesBean {
 
     public List<SelectItem> getPaisescombo() {
          
-        paises=paisDAO.buscartodasPaises();
+        paises=paisDAO.buscartodasPaises();        
         paisescombo = new ArrayList<SelectItem>();
         for (int i=0;i<paises.size();i++){
             paisescombo.add(new SelectItem(paises.get(i).getIdPais(), paises.get(i).getNombrePais()));
@@ -238,13 +249,7 @@ public class DivisionesBean {
     }
 
     public List<SelectItem> getDepartamentoscombo() {
-         
-        departamentos= departamentoDAO.buscartodosDepartamentos();
-        departamentoscombo = new ArrayList<SelectItem>();
-       
-         for (int i=0;i<departamentos.size();i++) {
-            departamentoscombo.add(new SelectItem(departamentos.get(i).getIdDepartamento(),departamentos.get(i).getNombreDepartamento()));
-        }
+        
         
         return departamentoscombo;
     }
@@ -286,7 +291,7 @@ public class DivisionesBean {
     }
 
     public List<DivisionesUbicacion> getListubicaciones() {
-        listubicaciones=divisionesubicacionDAO.buscarubicacionesxiddivision();
+        
         return listubicaciones;
     }
 
@@ -358,20 +363,48 @@ public class DivisionesBean {
         this.divisionesubicacionDAO = divisionesubicacionDAO;
     }
 
-   
+    public OutputLabel getLbltotalubicaciones() {
+        return lbltotalubicaciones;
+    }
+
+    public void setLbltotalubicaciones(OutputLabel lbltotalubicaciones) {
+        this.lbltotalubicaciones = lbltotalubicaciones;
+    }
+
+    public DataTable getTblasigubicaciones() {
+        return tblasigubicaciones;
+    }
+
+    public void setTblasigubicaciones(DataTable tblasigubicaciones) {
+        this.tblasigubicaciones = tblasigubicaciones;
+    }
+
+    public OutputLabel getEtiqueta() {
+        return etiqueta;
+    }
+
+    public void setEtiqueta(OutputLabel etiqueta) {
+        this.etiqueta = etiqueta;
+    }
+
+    public List<DivisionesUbicacion> getLiscomprobar() {
+        return liscomprobar;
+    }
+
+    public void setLiscomprobar(List<DivisionesUbicacion> liscomprobar) {
+        this.liscomprobar = liscomprobar;
+    }
 
     
 
-    
-
-    
+      
     
     
     
     public void prepararGuardadoDelasDivisiones(){
         divisiones=new Divisiones();
         dlgNuevaDivision.setVisible(Boolean.TRUE);
-        
+        tblasigubicaciones.setStyle("display: none");
         
         
     }
@@ -383,21 +416,20 @@ public class DivisionesBean {
         
         
         String secpais = cmbpais.getValue().toString();      
+        departamentoscombo=cargarDepartamentos(secpais);
         
-        if(secpais!=null){
-            departamentos=departamentoDAO.buscarDepartamentoporId(Integer.parseInt(pais));
+        if(!departamentoscombo.isEmpty()){
+            this.setDepartamentoscombo(departamentoscombo);
+            cmbdepartamento.setDisabled(Boolean.FALSE);               
         }else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Cuidado."
-                    , "No se ha seleccionado ningun pais."));
-        }       
-        
-        departamentoscombo = new ArrayList<SelectItem>();
-        for (int i=0;i<departamentos.size();i++) {
-            departamentoscombo.add(new SelectItem(departamentos.get(i).getIdDepartamento(),departamentos.get(i).getNombreDepartamento()));
+            
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"...Cuidado..."
+                        , "Pais sin departamentos asociados o todos los departamentos asignados."));
+                cmbdepartamento.setDisabled(Boolean.TRUE);               
+            
         }
         
-       setDepartamentoscombo(departamentoscombo);
-       cmbdepartamento.setDisabled(Boolean.FALSE);               
+        
     }
    
     public void guardarNuevaDivision(){
@@ -428,10 +460,9 @@ public class DivisionesBean {
     } 
     
     public void asignarDepartamentoaUbicacion(){
-        DivisionesDAO dDAO = new DivisionesDAOImpl();
-        System.out.println("*************El departamento es "+secdepartamento);        
-        System.out.println("*************El pais es "+pais);
-        System.out.println("el desasig queda con -->");
+                  
+        
+        DivisionesDAO divisionDAO = new DivisionesDAOImpl();
         
         
         if(pais == null || pais.equals("") || pais.isEmpty()){
@@ -443,17 +474,20 @@ public class DivisionesBean {
                            , "Seleccion de Departamento requerido."));
                         }else{
                                 
-                                departamento=departamentoDAO.buscarDepartamentoporIdUno(Integer.parseInt(secdepartamento));
-                                divisiones2=dDAO.buscarDivisionesporNombre(descripcion);
-                                
-                                System.out.println("divisiones 2 queda con"+divisiones2.getNombreDivision()+divisiones.getIdDivisiones());
+                               departamento=departamentoDAO.buscarDepartamentoporIdUno(Integer.parseInt(secdepartamento));
+                               divisiones2=divisionDAO.buscarUltimaIngresada();
                                
+                               
+                                
                                divisionesUbicacion.setDepartamento(departamento);
                                divisionesUbicacion.setDivisiones(divisiones2);
-                               System.out.println("la division es "+divisionesUbicacion.getDepartamento().getNombreDepartamento());
-                               System.out.println("el departamento es "+divisionesUbicacion.getDivisiones().getNombreDivision());
-                               //listubicaciones.add(divisionesUbicacion);
+                               
                                divisionesubicacionDAO.insertarDivisionesUbicacion(divisionesUbicacion);
+                               this.setListubicaciones(divisionesubicacionDAO.buscarubicacionesxiddivision(divisiones2.getIdDivisiones()));
+                               lbltotalubicaciones.setValue(this.totalUbicaciones());
+                               tblasigubicaciones.setStyle("display: block");
+                               tblasigubicaciones.setEmptyMessage("No hay Ubicaciones para: "+divisiones2.getNombreDivision()+" disponibles.");
+                               etiqueta.setValue(divisiones2.getNombreDivision());
                                
                                
                         }
@@ -471,8 +505,30 @@ public class DivisionesBean {
         return total;
     }
     
-    public void inicializar(){
+    private List<SelectItem> cargarDepartamentos(String secpais){
         
+        if(secpais!=null && !secpais.equals("")){
+            departamentos=departamentoDAO.buscarDepartamentoporId(Integer.parseInt(pais));
+        }else{
+            departamentos=departamentoDAO.buscartodosDepartamentos();
+        }       
+        
+        for(int i=0;i<departamentos.size();i++){
+            int sec=departamentos.get(i).getIdDepartamento();
+                liscomprobar=divisionesubicacionDAO.buscarubicacionesxidDepartamento(sec);
+                    if(!liscomprobar.isEmpty()){
+                        departamentos.remove(i);                        
+                    }                 
+        }
+        
+        
+        
+        departamentoscombo = new ArrayList<SelectItem>();
+        for (int i=0;i<departamentos.size();i++) {
+            departamentoscombo.add(new SelectItem(departamentos.get(i).getIdDepartamento(),departamentos.get(i).getNombreDepartamento()));
+        }
+        
+       return departamentoscombo;
     }
     
     

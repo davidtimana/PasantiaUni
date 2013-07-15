@@ -9,6 +9,7 @@ import com.pasantia.dao.DivisionesUbicacionDAO;
 import com.pasantia.entidades.DivisionesUbicacion;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.Query;
 
 /**
  *
@@ -50,9 +51,26 @@ public class DivisionesUbicacionDAOImpl implements DivisionesUbicacionDAO{
     }
 
     @Override
-    public List<DivisionesUbicacion> buscarubicacionesxiddivision() {
+    public List<DivisionesUbicacion> buscarubicaciones() {
         Session session = ConexionHibernate.getSessionFactory().openSession();
         return session.createQuery("from DivisionesUbicacion").list();
+    }
+
+    @Override
+    public List<DivisionesUbicacion> buscarubicacionesxiddivision(Integer id) {
+        Session session = ConexionHibernate.getSessionFactory().openSession();        
+        Query q=session.createQuery("from DivisionesUbicacion as d where d.divisiones.idDivisiones=:id");
+        q.setInteger("id", id);
+        return q.list();
+        
+    }
+
+    @Override
+    public List<DivisionesUbicacion> buscarubicacionesxidDepartamento(Integer id) {
+        Session session = ConexionHibernate.getSessionFactory().openSession();        
+        Query q=session.createQuery("from DivisionesUbicacion as d where d.departamento.idDepartamento=:id");
+        q.setInteger("id", id);
+        return q.list();
     }
     
 }

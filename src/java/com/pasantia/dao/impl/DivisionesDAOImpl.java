@@ -100,11 +100,17 @@ public class DivisionesDAOImpl implements DivisionesDAO{
 
     @Override
     public Divisiones buscarDivisionesporNombre(String nombre) {
-        Session session = ConexionHibernate.getSessionFactory().openSession();
-        
+        Session session = ConexionHibernate.getSessionFactory().openSession();        
         Query q=session.createQuery("from Divisiones as d where d.nombreDivision= :nombre");
-        q.setString("nombre", nombre);
-        
+        q.setString("nombre", nombre);        
+        return (Divisiones)(q.uniqueResult());
+    }
+
+    @Override
+    public Divisiones buscarUltimaIngresada() {
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        String jpql ="select max(d) from Divisiones as d";
+        Query q=session.createQuery(jpql);       
         return (Divisiones)(q.uniqueResult());
     }
     

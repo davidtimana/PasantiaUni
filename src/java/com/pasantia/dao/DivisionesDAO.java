@@ -51,4 +51,12 @@ public interface DivisionesDAO {
      * @return division
      */
     public Divisiones buscarDivisionesporNombre(String nombre);
+    
+    /**
+     *Metodo que se encarga de buscar
+     * una ultima division ingresada
+     
+     * @return division
+     */
+    public Divisiones buscarUltimaIngresada();
 }

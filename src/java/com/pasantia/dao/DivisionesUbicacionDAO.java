@@ -34,5 +34,21 @@ public interface DivisionesUbicacionDAO {
      * de ubicacion para las divisiones
      * @param id 
      */
-    public List<DivisionesUbicacion> buscarubicacionesxiddivision();
+    public List<DivisionesUbicacion> buscarubicaciones();
+    
+    /**
+     *Metodo que se encarga
+     * de buscar las asignaciones
+     * de ubicacion para las divisiones
+     * @param id 
+     */
+    public List<DivisionesUbicacion> buscarubicacionesxiddivision(Integer id);
+    
+    /**
+     *Metodo que se encarga
+     * de buscar las asignaciones
+     * de ubicacion por departamentos
+     * @param id 
+     */
+    public List<DivisionesUbicacion> buscarubicacionesxidDepartamento(Integer id);
 }
