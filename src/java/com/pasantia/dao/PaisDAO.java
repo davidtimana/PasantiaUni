@@ -20,4 +20,11 @@ public interface PaisDAO {
      */
     public List<Pais> buscartodasPaises();
     
+    /**
+     *Metodo que se encarga de
+     * buscar un pais por su id
+     * @return lista de paises
+     */
+    public Pais buscarPaisxId(Integer id);
+    
 }

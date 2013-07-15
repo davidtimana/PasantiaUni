@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA
+// Generated 13/07/2013 11:12:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -14,8 +14,8 @@ public class Departamento  implements java.io.Serializable {
      private int idDepartamento;
      private Pais pais;
      private String nombreDepartamento;
+     private Set divisionesUbicacions = new HashSet(0);
      private Set ciudads = new HashSet(0);
-     private Set divisioneses = new HashSet(0);
 
     public Departamento() {
     }
@@ -26,12 +26,12 @@ public class Departamento  implements java.io.Serializable {
         this.pais = pais;
         this.nombreDepartamento = nombreDepartamento;
     }
-    public Departamento(int idDepartamento, Pais pais, String nombreDepartamento, Set ciudads, Set divisioneses) {
+    public Departamento(int idDepartamento, Pais pais, String nombreDepartamento, Set divisionesUbicacions, Set ciudads) {
        this.idDepartamento = idDepartamento;
        this.pais = pais;
        this.nombreDepartamento = nombreDepartamento;
+       this.divisionesUbicacions = divisionesUbicacions;
        this.ciudads = ciudads;
-       this.divisioneses = divisioneses;
     }
    
     public int getIdDepartamento() {
@@ -55,19 +55,19 @@ public class Departamento  implements java.io.Serializable {
     public void setNombreDepartamento(String nombreDepartamento) {
         this.nombreDepartamento = nombreDepartamento;
     }
+    public Set getDivisionesUbicacions() {
+        return this.divisionesUbicacions;
+    }
+    
+    public void setDivisionesUbicacions(Set divisionesUbicacions) {
+        this.divisionesUbicacions = divisionesUbicacions;
+    }
     public Set getCiudads() {
         return this.ciudads;
     }
     
     public void setCiudads(Set ciudads) {
         this.ciudads = ciudads;
-    }
-    public Set getDivisioneses() {
-        return this.divisioneses;
-    }
-    
-    public void setDivisioneses(Set divisioneses) {
-        this.divisioneses = divisioneses;
     }
 
 

@@ -36,5 +36,15 @@ public class DepartamentoDAOImpl implements DepartamentoDAO{
         q.setInteger("pais", id);
         return q.list();
     }
+
+    @Override
+    public Departamento buscarDepartamentoporIdUno(Integer id) {
+        
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        
+        Query q=session.createQuery("from Departamento as d where d.idDepartamento= :id");
+        q.setInteger("id", id);
+        return (Departamento)(q.uniqueResult());
+    }
     
 }

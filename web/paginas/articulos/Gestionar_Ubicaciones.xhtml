@@ -75,7 +75,7 @@
                  <!--Form: Nueva Ubicacion -->          
                   <h:form id="frmnuevaubicacion">
                     <p:dialog header="Creacion de una nueva ubicacion de los productos" widgetVar="dlgNuevo" resizable="false" 
-                              id="dlgNuevo" showEffect="explode" hideEffect="bounce"  modal="false"  width="550" binding="#{ubicacionBean.dlgnuevaubicacion}">  
+                              id="dlgNuevo" showEffect="explode" hideEffect="explode"  modal="false"  width="550" binding="#{ubicacionBean.dlgnuevaubicacion}">  
                         <p:growl id="growl"  sticky="true" />
                         <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true" /> 
                             <h:panelGrid id="pgNuevo" columns="2" cellpadding="4" style="margin:0 auto;">  
@@ -104,7 +104,7 @@
             <p:growl id="growlEliminar"  sticky="true" />  
             
             <p:dialog id="dlgEliminar"  
-                             header="Eliminar Ubicacion" widgetVar="dlgEliminar" showEffect="explode" hideEffect="bounce" binding="#{ubicacionBean.dlgconfireliminar}">  
+                             header="Eliminar Ubicacion" widgetVar="dlgEliminar" showEffect="explode" hideEffect="explode" binding="#{ubicacionBean.dlgconfireliminar}">  
                 <h:panelGrid id="pgEliminar" columns="2" cellpadding="2" style="margin:0 auto;">  
                     <h:outputText value="Id De La Ubicacion" /> 
                 <p:inputText value="#{ubicacionBean.id}" style="width: 200px" binding="#{ubicacionBean.txtideliminar}"/>

@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA
+// Generated 13/07/2013 11:12:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -12,22 +12,21 @@ public class Divisiones  implements java.io.Serializable {
 
 
      private Integer idDivisiones;
-     private Departamento departamento;
      private String nombreDivision;
      private Set batallons = new HashSet(0);
+     private Set divisionesUbicacions = new HashSet(0);
 
     public Divisiones() {
     }
 
 	
-    public Divisiones(Departamento departamento, String nombreDivision) {
-        this.departamento = departamento;
+    public Divisiones(String nombreDivision) {
         this.nombreDivision = nombreDivision;
     }
-    public Divisiones(Departamento departamento, String nombreDivision, Set batallons) {
-       this.departamento = departamento;
+    public Divisiones(String nombreDivision, Set batallons, Set divisionesUbicacions) {
        this.nombreDivision = nombreDivision;
        this.batallons = batallons;
+       this.divisionesUbicacions = divisionesUbicacions;
     }
    
     public Integer getIdDivisiones() {
@@ -36,13 +35,6 @@ public class Divisiones  implements java.io.Serializable {
     
     public void setIdDivisiones(Integer idDivisiones) {
         this.idDivisiones = idDivisiones;
-    }
-    public Departamento getDepartamento() {
-        return this.departamento;
-    }
-    
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
     }
     public String getNombreDivision() {
         return this.nombreDivision;
@@ -57,6 +49,13 @@ public class Divisiones  implements java.io.Serializable {
     
     public void setBatallons(Set batallons) {
         this.batallons = batallons;
+    }
+    public Set getDivisionesUbicacions() {
+        return this.divisionesUbicacions;
+    }
+    
+    public void setDivisionesUbicacions(Set divisionesUbicacions) {
+        this.divisionesUbicacions = divisionesUbicacions;
     }
 
 

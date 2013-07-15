@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA
+// Generated 13/07/2013 11:12:50 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;

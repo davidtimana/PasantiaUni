@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 10/07/2013 05:30:45 PM by Hibernate Tools 3.2.1.GA -->
+<!-- Generated 13/07/2013 11:12:50 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.pasantia.entidades.Departamento" table="Departamento" catalog="CasinoPasantia">
         <id name="idDepartamento" type="int">
@@ -14,17 +14,17 @@
         <property name="nombreDepartamento" type="string">
             <column name="nombre_departamento" length="45" not-null="true" />
         </property>
+        <set name="divisionesUbicacions" inverse="true">
+            <key>
+                <column name="secdepartamento" not-null="true" />
+            </key>
+            <one-to-many class="com.pasantia.entidades.DivisionesUbicacion" />
+        </set>
         <set name="ciudads" inverse="true">
             <key>
                 <column name="secdepartamento" not-null="true" />
             </key>
             <one-to-many class="com.pasantia.entidades.Ciudad" />
-        </set>
-        <set name="divisioneses" inverse="true">
-            <key>
-                <column name="secdepartamento" not-null="true" />
-            </key>
-            <one-to-many class="com.pasantia.entidades.Divisiones" />
         </set>
     </class>
 </hibernate-mapping>

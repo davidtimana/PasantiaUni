@@ -8,6 +8,7 @@ import com.pasantia.conexion.ConexionHibernate;
 import com.pasantia.dao.DivisionesDAO;
 import com.pasantia.entidades.Divisiones;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
@@ -81,6 +82,7 @@ public class DivisionesDAOImpl implements DivisionesDAO{
         Divisiones divisiones=null;
         try{
             divisiones=(Divisiones)session.load(Divisiones.class,id);
+            
         }catch(Exception e){
             System.out.println("Error al buscar el id: "+id+" :"+e.getMessage());
         }
@@ -94,6 +96,16 @@ public class DivisionesDAOImpl implements DivisionesDAO{
     public List<Divisiones> buscartodasDivisiones() {
         Session session = ConexionHibernate.getSessionFactory().openSession();
         return session.createQuery("from Divisiones").list();
+    }
+
+    @Override
+    public Divisiones buscarDivisionesporNombre(String nombre) {
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        
+        Query q=session.createQuery("from Divisiones as d where d.nombreDivision= :nombre");
+        q.setString("nombre", nombre);
+        
+        return (Divisiones)(q.uniqueResult());
     }
     
 }

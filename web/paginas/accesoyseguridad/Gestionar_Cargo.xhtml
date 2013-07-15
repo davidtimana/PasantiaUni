@@ -69,7 +69,7 @@
                 <!--Form: Nuevo Cargo -->          
                   <h:form id="frmnuevocargo">
                     <p:dialog header="Creacion de un nuevo cargo de los Usuarios" widgetVar="dlgNuevo" resizable="false" 
-                              id="dlgNuevo" showEffect="explode" hideEffect="bounce"  modal="false"  width="550" binding="#{cargoBean.dlgNuevoCargo}">  
+                              id="dlgNuevo" showEffect="explode" hideEffect="explode"  modal="false"  width="550" binding="#{cargoBean.dlgNuevoCargo}">  
                         <p:growl id="growl"  sticky="true"  />
                         <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true"  /> 
                             <h:panelGrid id="pgNuevo" columns="2" cellpadding="4" style="margin:0 auto;">  
@@ -124,7 +124,7 @@
             <p:growl id="growlEliminar"  sticky="true" />  
             
             <p:dialog id="dlgEliminar"  
-                      header="Eliminar Cargo" widgetVar="dlgEliminar" showEffect="explode" hideEffect="bounce" binding="#{cargoBean.dlgeliminarcomfirmar}">  
+                      header="Eliminar Cargo" widgetVar="dlgEliminar" showEffect="explode" hideEffect="explode" binding="#{cargoBean.dlgeliminarcomfirmar}">  
                 <h:panelGrid id="pgEliminar" columns="2" cellpadding="2" style="margin:0 auto;">  
                     <h:outputText value="Id Del Cargo" /> 
                     <p:inputText value="#{cargoBean.id}" style="width: 200px" binding="#{cargoBean.txtideliminar}"/>

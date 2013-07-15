@@ -75,7 +75,7 @@
                 <!--Form: Nueva Categoria -->          
                   <h:form id="frmnuevacategoria">
                     <p:dialog header="Creacion de una nueva categoria de los productos" widgetVar="dlgNuevo" resizable="false" 
-                              id="dlgNuevo" showEffect="explode" hideEffect="bounce"  modal="false"  width="550" binding="#{categoriaBean.dlgNuevaCategoria}">  
+                              id="dlgNuevo" showEffect="explode" hideEffect="explode"  modal="false"  width="550" binding="#{categoriaBean.dlgNuevaCategoria}">  
                         <p:growl id="growl"  sticky="true"  />
                         <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true"  /> 
                             <h:panelGrid id="pgNuevo" columns="2" cellpadding="4" style="margin:0 auto;">  
@@ -130,7 +130,7 @@
             <p:growl id="growlEliminar"  sticky="true" />  
             
             <p:dialog id="dlgEliminar"  
-                      header="Eliminar Categoria" widgetVar="dlgEliminar" showEffect="explode" hideEffect="bounce" binding="#{categoriaBean.dlgeliminarcomfirmar}">  
+                      header="Eliminar Categoria" widgetVar="dlgEliminar" showEffect="explode" hideEffect="explode" binding="#{categoriaBean.dlgeliminarcomfirmar}">  
                 <h:panelGrid id="pgEliminar" columns="2" cellpadding="2" style="margin:0 auto;">  
                     <h:outputText value="Id De La Categoria" /> 
                     <p:inputText value="#{categoriaBean.id}" style="width: 200px" binding="#{categoriaBean.txtideliminar}"/>

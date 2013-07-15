@@ -21,5 +21,20 @@ public class PaisDAOImpl implements PaisDAO{
         Session session = ConexionHibernate.getSessionFactory().openSession();
         return session.createQuery("from Pais").list();
     }
+
+    @Override
+    public Pais buscarPaisxId(Integer id) {
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        Pais pais=null;
+        try{
+            pais=(Pais)session.load(Pais.class,id);
+        }catch(Exception e){
+            System.out.println("Error al buscar el id: "+id+" :"+e.getMessage());
+        }
+        finally{
+            session.close();
+        }
+        return pais;
+    }
     
 }

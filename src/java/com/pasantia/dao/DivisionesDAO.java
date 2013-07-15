@@ -44,4 +44,11 @@ public interface DivisionesDAO {
      */
     public List<Divisiones> buscartodasDivisiones();
     
+    /**
+     *Metodo que se encarga de buscar
+     * una division por su nombre
+     * @param nombre
+     * @return division
+     */
+    public Divisiones buscarDivisionesporNombre(String nombre);
 }
