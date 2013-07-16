@@ -58,7 +58,7 @@ public class DivisionesBean {
     private List<Departamento> departamentos;
     private List<SelectItem> paisescombo,departamentoscombo;
     private SelectOneMenu cmbpais;
-    private CommandButton btnagregardivision,btnagregarubicacion;
+    private CommandButton btnagregardivision,btnagregarubicacion,btngeolocalizacion;
     private List<DivisionesUbicacion> listubicaciones,liscomprobar,listaGeo;
     private DepartamentoDAO departamentoDAO;
     private PaisDAO paisDAO;
@@ -75,13 +75,17 @@ public class DivisionesBean {
     //*************************Inicio Declaracion De Metodos de divisionBean*********************************************
     public void prepararCargaGeolocalizacion(Integer id){
         
-        listaGeo=divisionesubicacionDAO.buscarubicacionesxiddivision(id);
-        this.setListaGeo(listaGeo);
-        divgeo = divDAO.buscarDivisionesporId(id);
-        String tituloDialog=divgeo.getNombreDivision();
-        dlggeolocallizacion.setVisible(Boolean.TRUE);
-        dlggeolocallizacion.setHeader("Geolocalizacion para: "+tituloDialog);
-        lblubigeo.setValue(tituloDialog);
+        
+        System.out.println("llegando con id-->"+id);
+//        Divisiones divu=new Divisiones();
+//        divu = divDAO.buscarDivisionesporId(id);
+//        String tituloDialog=divu.getNombreDivision();        
+//        dlggeolocallizacion.setHeader("Geolocalizacion para: "+tituloDialog);
+//        lblubigeo.setValue(tituloDialog);
+//        
+//        
+//        this.setListaGeo(listaGeo);
+        
         
     }
     
@@ -226,6 +230,9 @@ public class DivisionesBean {
         divDAO = new DivisionesDAOImpl();
         divgeo = new Divisiones();
         lblubigeo = new OutputLabel();
+        btngeolocalizacion = new CommandButton();
+        
+       // btngeolocalizacion.setOnclick("dlgMapa.show()");
     }
     
     
@@ -570,6 +577,14 @@ public class DivisionesBean {
 
     public void setLblubigeo(OutputLabel lblubigeo) {
         this.lblubigeo = lblubigeo;
+    }
+
+    public CommandButton getBtngeolocalizacion() {
+        return btngeolocalizacion;
+    }
+
+    public void setBtngeolocalizacion(CommandButton btngeolocalizacion) {
+        this.btngeolocalizacion = btngeolocalizacion;
     }
     
     

@@ -56,7 +56,9 @@
                             <h:outputText value="#{divisiones.nombreDivision}"  />  
                         </p:column>
                         <p:column headerText="Ubicacion" style="text-align: center" >  
-                            <p:commandButton  title="&nbsp;Visualizar Ubicaciones" onclick="dlgMapa.show();" actionListener="#{divisionesBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}" icon="ui-icon-pin-s"/>
+                            <p:commandButton  title="&nbsp;Visualizar Ubicaciones" binding="#{divisionesBean.btngeolocalizacion}" actionListener="#{divisionesBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}"
+                                              onclick="dlgMapa.show();" 
+                                              icon="ui-icon-pin-s"/>
                         </p:column>
                         
                         <p:column headerText="Acciones" style="width:8%; text-align: center">
@@ -149,7 +151,7 @@
         <!--formulario ubicacion en mapa-->
         <h:form id="frmubicacionMapa">
             
-            <p:dialog  widgetVar="dlgMapa" resizable="false" binding="#{divisionesBean.dlggeolocallizacion}"
+            <p:dialog  widgetVar="dlgMapa" resizable="false"  binding="#{divisionesBean.dlggeolocallizacion}"
                       id="dlgEditar" modal="false" width="900" height="550" >
                 <p:panelGrid style="margin-top:20px">  
                     <f:facet name="header">  
