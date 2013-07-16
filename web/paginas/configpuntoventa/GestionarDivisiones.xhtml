@@ -56,7 +56,7 @@
                             <h:outputText value="#{divisiones.nombreDivision}"  />  
                         </p:column>
                         <p:column headerText="Ubicacion" style="text-align: center" >  
-                            <p:commandButton  title="&nbsp;Visualizar Ubicaciones" onclick="dlgMapa.show();" icon="ui-icon-pin-s"/>
+                            <p:commandButton  title="&nbsp;Visualizar Ubicaciones" onclick="dlgMapa.show();" actionListener="#{divisionesBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}" icon="ui-icon-pin-s"/>
                         </p:column>
                         
                         <p:column headerText="Acciones" style="width:8%; text-align: center">
@@ -149,10 +149,27 @@
         <!--formulario ubicacion en mapa-->
         <h:form id="frmubicacionMapa">
             
-            <p:dialog  widgetVar="dlgMapa" resizable="false" 
-                      id="dlgEditar" modal="false" width="625" height="400" >  
+            <p:dialog  widgetVar="dlgMapa" resizable="false" binding="#{divisionesBean.dlggeolocallizacion}"
+                      id="dlgEditar" modal="false" width="900" height="550" >
+                <p:panelGrid style="margin-top:20px">  
+                    <f:facet name="header">  
+                        <p:row>  
+                            <p:column colspan="2">Ubicacion para la division:&nbsp;<p:outputLabel binding="#{divisionesBean.lblubigeo}"/> </p:column>  
+                        </p:row>  
+                        <p:row>                         
+                            <p:column >Departamento</p:column>  
+                            <p:column >Mapa</p:column>                              
+                        </p:row>
+                        <p:row>  
+                            <p:column style="font-weight: bold;"><ui:include src="tblGeolocalizacion.xhtml"  /></p:column>
+                            <p:column style="font-weight: bold;"><ui:include src="UbicacionMapa.xhtml"  /></p:column>                                                          
+                        </p:row>
+                        
+                        
+                    </f:facet>  
+                </p:panelGrid>  
                 
-                <ui:include src="UbicacionMapa.xhtml"  />              
+                <!--<ui:include src="UbicacionMapa.xhtml"  />              -->
             </p:dialog>
             
                 

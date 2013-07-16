@@ -82,7 +82,7 @@ public class DivisionesDAOImpl implements DivisionesDAO{
         Divisiones divisiones=null;
         try{
             divisiones=(Divisiones)session.load(Divisiones.class,id);
-            
+
         }catch(Exception e){
             System.out.println("Error al buscar el id: "+id+" :"+e.getMessage());
         }

@@ -34,14 +34,17 @@ import org.primefaces.component.selectonemenu.SelectOneMenu;
 
 /**
  *
- * @author root
+ * @author David Timana
  */
 @Named(value = "divisionesBean")
 @RequestScoped
 public class DivisionesBean {
 
+                         //******************************Inicio divisionBean*********************************************
    
-    private Divisiones divisiones,divisiones2;
+    
+    //*******************Inicio Declaracion de Atributos***********************************
+    private Divisiones divisiones,divisiones2,divgeo;
     private List<Divisiones> divisioneslista;
     private Integer id;
     private String descripcion,pais,secdepartamento;
@@ -56,21 +59,140 @@ public class DivisionesBean {
     private List<SelectItem> paisescombo,departamentoscombo;
     private SelectOneMenu cmbpais;
     private CommandButton btnagregardivision,btnagregarubicacion;
-    private List<DivisionesUbicacion> listubicaciones,liscomprobar;
+    private List<DivisionesUbicacion> listubicaciones,liscomprobar,listaGeo;
     private DepartamentoDAO departamentoDAO;
     private PaisDAO paisDAO;
     private DivisionesUbicacion divisionesUbicacion;
     private String desasig;
     private DivisionesUbicacionDAO divisionesubicacionDAO;
-    private OutputLabel lbltotalubicaciones,etiqueta;
-    private DataTable tblasigubicaciones;
+    private OutputLabel lbltotalubicaciones,etiqueta,lblubigeo;
+    private DataTable tblasigubicaciones,tblgeo;  
+    private Dialog dlggeolocallizacion;
+    private DivisionesDAO divDAO;
+    //*******************FIn Declaracion de Atributos***********************************
+    
+    
+    //*************************Inicio Declaracion De Metodos de divisionBean*********************************************
+    public void prepararCargaGeolocalizacion(Integer id){
+        
+        listaGeo=divisionesubicacionDAO.buscarubicacionesxiddivision(id);
+        this.setListaGeo(listaGeo);
+        divgeo = divDAO.buscarDivisionesporId(id);
+        String tituloDialog=divgeo.getNombreDivision();
+        dlggeolocallizacion.setVisible(Boolean.TRUE);
+        dlggeolocallizacion.setHeader("Geolocalizacion para: "+tituloDialog);
+        lblubigeo.setValue(tituloDialog);
+        
+    }
+    
+    public void prepararGuardadoDelasDivisiones(){
+        divisiones=new Divisiones();
+        dlgNuevaDivision.setVisible(Boolean.TRUE);
+        tblasigubicaciones.setStyle("display: none");      
+  }    
+    
+    
+    public void cargarListaDepartamentoxpais(){  
+        String secpais = cmbpais.getValue().toString();
+        departamentoscombo = cargarDepartamentos(secpais);
+
+        if (!departamentoscombo.isEmpty()) {
+            this.setDepartamentoscombo(departamentoscombo);
+            cmbdepartamento.setDisabled(Boolean.FALSE);
+        } else {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "...Cuidado...", "Pais sin departamentos asociados o todos sus departamentos ya asignados."));
+            cmbdepartamento.setDisabled(Boolean.TRUE);
+        }        
+        
+    }
+   
+    public void guardarNuevaDivision(){
+        DivisionesDAO divisionesDAO = new DivisionesDAOImpl();
+        Divisiones d = new Divisiones();       
+        
+        if(descripcion.equals("") || descripcion.isEmpty() || descripcion==null){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Error al guardar la division."
+                    , "Nombre de la division requerida."));                  }
+        else{                    
+            d.setNombreDivision(descripcion);
+            this.setDesasig(d.getNombreDivision());
+            divisiones.setNombreDivision(descripcion);
+            divisionesDAO.insertarDivisiones(d);
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Division Guardada Exitosamente"));                         
+            cmbpais.setDisabled(Boolean.FALSE);
+            txtdescripcioning.setReadonly(Boolean.TRUE);
+            btnagregardivision.setDisabled(Boolean.TRUE);
+            btnagregarubicacion.setDisabled(Boolean.FALSE);
+           }
+    } 
+    
+    public void asignarDepartamentoaUbicacion(){                  
+        
+        DivisionesDAO divisionDAO = new DivisionesDAOImpl();        
+        
+        if (pais == null || pais.equals("") || pais.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error al guardar la division.", "Seleccion de pais requerido."));
+        } else {
+            if (secdepartamento == null || secdepartamento.equals("") || secdepartamento.isEmpty()) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error al guardar la division.", "Seleccion de Departamento requerido."));
+            } else {
+
+                departamento = departamentoDAO.buscarDepartamentoporIdUno(Integer.parseInt(secdepartamento));
+                divisiones2 = divisionDAO.buscarUltimaIngresada();
+                divisionesUbicacion.setDepartamento(departamento);
+                divisionesUbicacion.setDivisiones(divisiones2);
+                divisionesubicacionDAO.insertarDivisionesUbicacion(divisionesUbicacion);
+                this.setListubicaciones(divisionesubicacionDAO.buscarubicacionesxiddivision(divisiones2.getIdDivisiones()));
+                lbltotalubicaciones.setValue(this.totalUbicaciones());
+                tblasigubicaciones.setStyle("display: block");
+                tblasigubicaciones.setEmptyMessage("No hay Ubicaciones para: " + divisiones2.getNombreDivision() + " disponibles.");
+                etiqueta.setValue(divisiones2.getNombreDivision());
+
+            }
+        }
+    } 
+    
+    public int totalDivisiones(){
+        int total=divisioneslista.size();
+        return total;
+    }
+    
+    public int totalUbicaciones(){
+        int total=listubicaciones.size();
+        return total;
+    }
+    
+    private List<SelectItem> cargarDepartamentos(String secpais){
+        
+        if (secpais != null && !secpais.equals("")) {
+            departamentos = departamentoDAO.buscarDepartamentoporId(Integer.parseInt(pais));
+        } else {
+            departamentos = departamentoDAO.buscartodosDepartamentos();
+        }
+
+        for (int i = 0; i < departamentos.size(); i++) {
+            int sec = departamentos.get(i).getIdDepartamento();
+            liscomprobar = divisionesubicacionDAO.buscarubicacionesxidDepartamento(sec);
+            if (!liscomprobar.isEmpty()) {
+                departamentos.remove(i);
+            }
+        }
+        
+        departamentoscombo = new ArrayList<SelectItem>();
+        for (int i = 0; i < departamentos.size(); i++) {
+            departamentoscombo.add(new SelectItem(departamentos.get(i).getIdDepartamento(), departamentos.get(i).getNombreDepartamento()));
+        }
+
+        return departamentoscombo;
+    }
+    //*************************Fin Declaracion De Metodos de divisionBean*********************************************
     
     
     
     
-    
-    
-    
+    //********************************************Constructor por Defecto**************************************************************
     
     public DivisionesBean() {
         divisiones = new Divisiones();
@@ -99,9 +221,16 @@ public class DivisionesBean {
         tblasigubicaciones.setStyle("display: none");
         etiqueta = new  OutputLabel();
         departamentoscombo=cargarDepartamentos("");
-        
+        dlggeolocallizacion = new Dialog();
+        tblgeo = new DataTable();
+        divDAO = new DivisionesDAOImpl();
+        divgeo = new Divisiones();
+        lblubigeo = new OutputLabel();
     }
-
+    
+    
+    //***********************Getters and Setters*************************************************
+    
     public Departamento getDepartamento() {
         return departamento;
     }
@@ -228,9 +357,9 @@ public class DivisionesBean {
 
     public List<SelectItem> getPaisescombo() {
          
-        paises=paisDAO.buscartodasPaises();        
+        paises = paisDAO.buscartodasPaises();
         paisescombo = new ArrayList<SelectItem>();
-        for (int i=0;i<paises.size();i++){
+        for (int i = 0; i < paises.size(); i++) {
             paisescombo.add(new SelectItem(paises.get(i).getIdPais(), paises.get(i).getNombrePais()));
         }
         return paisescombo;
@@ -395,142 +524,54 @@ public class DivisionesBean {
         this.liscomprobar = liscomprobar;
     }
 
-    
+    public Dialog getDlggeolocallizacion() {
+        return dlggeolocallizacion;
+    }
 
-      
-    
-    
-    
-    public void prepararGuardadoDelasDivisiones(){
-        divisiones=new Divisiones();
-        dlgNuevaDivision.setVisible(Boolean.TRUE);
-        tblasigubicaciones.setStyle("display: none");
-        
-        
+    public void setDlggeolocallizacion(Dialog dlggeolocallizacion) {
+        this.dlggeolocallizacion = dlggeolocallizacion;
     }
-    
-    
-    
-    public void cargarListaDepartamentoxpais(){
-                
-        
-        
-        String secpais = cmbpais.getValue().toString();      
-        departamentoscombo=cargarDepartamentos(secpais);
-        
-        if(!departamentoscombo.isEmpty()){
-            this.setDepartamentoscombo(departamentoscombo);
-            cmbdepartamento.setDisabled(Boolean.FALSE);               
-        }else{
-            
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"...Cuidado..."
-                        , "Pais sin departamentos asociados o todos sus departamentos ya asignados."));
-                cmbdepartamento.setDisabled(Boolean.TRUE);               
-            
-        }
-        
-        
-    }
-   
-    public void guardarNuevaDivision(){
-        DivisionesDAO divisionesDAO = new DivisionesDAOImpl();
-        Divisiones d = new Divisiones();
-        System.out.println("*************La descripcion es "+descripcion);       
-        
-        
-        if(descripcion.equals("") || descripcion.isEmpty() || descripcion==null){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Error al guardar la division."
-                    , "Nombre de la division requerida."));          
-        }
-        else{                    
-            d.setNombreDivision(descripcion);
-            this.setDesasig(d.getNombreDivision());
-            divisiones.setNombreDivision(descripcion);
-            divisionesDAO.insertarDivisiones(d);
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Division Guardada Exitosamente"));                         
-            cmbpais.setDisabled(Boolean.FALSE);
-            txtdescripcioning.setReadonly(Boolean.TRUE);
-            btnagregardivision.setDisabled(Boolean.TRUE);
-            btnagregarubicacion.setDisabled(Boolean.FALSE);
 
-            
-        }
-    } 
-    
-    public void asignarDepartamentoaUbicacion(){
-                  
-        
-        DivisionesDAO divisionDAO = new DivisionesDAOImpl();
-        
-        
-        if(pais == null || pais.equals("") || pais.isEmpty()){
-                        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Error al guardar la division."
-                    , "Seleccion de pais requerido."));
-                    }else{
-                        if(secdepartamento == null || secdepartamento.equals("") || secdepartamento.isEmpty()){
-                            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Error al guardar la division."
-                           , "Seleccion de Departamento requerido."));
-                        }else{
-                                
-                               departamento=departamentoDAO.buscarDepartamentoporIdUno(Integer.parseInt(secdepartamento));
-                               divisiones2=divisionDAO.buscarUltimaIngresada();
-                               
-                               
-                                
-                               divisionesUbicacion.setDepartamento(departamento);
-                               divisionesUbicacion.setDivisiones(divisiones2);
-                               
-                               divisionesubicacionDAO.insertarDivisionesUbicacion(divisionesUbicacion);
-                               this.setListubicaciones(divisionesubicacionDAO.buscarubicacionesxiddivision(divisiones2.getIdDivisiones()));
-                               lbltotalubicaciones.setValue(this.totalUbicaciones());
-                               tblasigubicaciones.setStyle("display: block");
-                               tblasigubicaciones.setEmptyMessage("No hay Ubicaciones para: "+divisiones2.getNombreDivision()+" disponibles.");
-                               etiqueta.setValue(divisiones2.getNombreDivision());
-                               
-                               
-                        }
-                    }
+    public List<DivisionesUbicacion> getListaGeo() {
+        return listaGeo;
     }
-        
-    
-    
-    public int totalDivisiones(){
-        int total=divisioneslista.size();
-        return total;
+
+    public void setListaGeo(List<DivisionesUbicacion> listaGeo) {
+        this.listaGeo = listaGeo;
     }
-    public int totalUbicaciones(){
-        int total=listubicaciones.size();
-        return total;
+
+    public DataTable getTblgeo() {
+        return tblgeo;
     }
-    
-    private List<SelectItem> cargarDepartamentos(String secpais){
-        
-        if(secpais!=null && !secpais.equals("")){
-            departamentos=departamentoDAO.buscarDepartamentoporId(Integer.parseInt(pais));
-        }else{
-            departamentos=departamentoDAO.buscartodosDepartamentos();
-        }       
-        
-        for(int i=0;i<departamentos.size();i++){
-            int sec=departamentos.get(i).getIdDepartamento();
-                liscomprobar=divisionesubicacionDAO.buscarubicacionesxidDepartamento(sec);
-                    if(!liscomprobar.isEmpty()){
-                        departamentos.remove(i);                        
-                    }                 
-        }
-        
-        
-        
-        departamentoscombo = new ArrayList<SelectItem>();
-        for (int i=0;i<departamentos.size();i++) {
-            departamentoscombo.add(new SelectItem(departamentos.get(i).getIdDepartamento(),departamentos.get(i).getNombreDepartamento()));
-        }
-        
-       return departamentoscombo;
+
+    public void setTblgeo(DataTable tblgeo) {
+        this.tblgeo = tblgeo;
+    }
+
+    public Divisiones getDivgeo() {
+        return divgeo;
+    }
+
+    public void setDivgeo(Divisiones divgeo) {
+        this.divgeo = divgeo;
+    }
+
+    public DivisionesDAO getDivDAO() {
+        return divDAO;
+    }
+
+    public void setDivDAO(DivisionesDAO divDAO) {
+        this.divDAO = divDAO;
+    }
+
+    public OutputLabel getLblubigeo() {
+        return lblubigeo;
+    }
+
+    public void setLblubigeo(OutputLabel lblubigeo) {
+        this.lblubigeo = lblubigeo;
     }
     
     
     
-    
-}
+}//******************************Fin divisionBean*********************************************
