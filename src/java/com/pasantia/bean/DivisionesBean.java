@@ -424,7 +424,7 @@ public class DivisionesBean {
         }else{
             
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"...Cuidado..."
-                        , "Pais sin departamentos asociados o todos los departamentos asignados."));
+                        , "Pais sin departamentos asociados o todos sus departamentos ya asignados."));
                 cmbdepartamento.setDisabled(Boolean.TRUE);               
             
         }
@@ -454,7 +454,6 @@ public class DivisionesBean {
             btnagregardivision.setDisabled(Boolean.TRUE);
             btnagregarubicacion.setDisabled(Boolean.FALSE);
 
-            
             
         }
     } 

@@ -24,6 +24,7 @@
     </ui:define>
 
     <ui:define name="cuerpo">
+        
         <p:growl id="growl"  sticky="true"  />
         <h:form>                    
                     <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
@@ -55,7 +56,7 @@
                             <h:outputText value="#{divisiones.nombreDivision}"  />  
                         </p:column>
                         <p:column headerText="Ubicacion" style="text-align: center" >  
-                            <p:commandButton />
+                            <p:commandButton  title="&nbsp;Visualizar Ubicaciones" onclick="dlgMapa.show();" icon="ui-icon-pin-s"/>
                         </p:column>
                         
                         <p:column headerText="Acciones" style="width:8%; text-align: center">
@@ -105,7 +106,7 @@
                                     <f:selectItem itemLabel="...Seleccione..."  />  
                                     <f:selectItems value="#{divisionesBean.departamentoscombo}"  />                                      
                                 </p:selectOneMenu>
-                                <p:commandButton  update=":frmnuevadivision:tablaasig" binding="#{divisionesBean.btnagregarubicacion}"   
+                                <p:commandButton  update=":frmnuevadivision:tablaasig,:frmnuevadivision" binding="#{divisionesBean.btnagregarubicacion}"   
                                           value="Agregar Ubicacion" title="&nbsp;Agregar Ubicacion" image="icon-add"
                                           action="#{divisionesBean.asignarDepartamentoaUbicacion()}"  />
                         
@@ -131,7 +132,9 @@
                         <p:column headerText="Departamento" style="text-align: center" >  
                             <h:outputText value="#{asig.departamento.nombreDepartamento}"  />  
                         </p:column>
+                        <p:column headerText="Acciones" style="width:8%; text-align: center">
                             
+                        </p:column>    
                         
                       
                         <f:facet name="footer">  
@@ -141,7 +144,23 @@
                    <p:commandButton  update=":frmdivision" onclick="dlgNuevo.hide();" value="Cancelar" title="&nbsp;Cancelar" 
                                           image="icon-cancel" />       
                     </p:dialog>
-                </h:form> 
+                </h:form>
+        
+        <!--formulario ubicacion en mapa-->
+        <h:form id="frmubicacionMapa">
+            
+            <p:dialog  widgetVar="dlgMapa" resizable="false" 
+                      id="dlgEditar" modal="false" width="625" height="400" >  
+                
+                <ui:include src="UbicacionMapa.xhtml"  />              
+            </p:dialog>
+            
+                
+            
+            
+        </h:form>
+        
+        
     </ui:define>
 
 </ui:composition>
