@@ -25,6 +25,7 @@ import org.primefaces.component.gmap.GMap;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.outputlabel.OutputLabel;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -60,7 +61,7 @@ public class DivisionesBean {
     private List<DivisionesUbicacion> listubicaciones,liscomprobar,listaGeo;
     private DepartamentoDAO departamentoDAO;
     private PaisDAO paisDAO;
-    private DivisionesUbicacion divisionesUbicacion;
+    private DivisionesUbicacion divisionesUbicacion,seleccionado;
     private String desasig;
     private DivisionesUbicacionDAO divisionesubicacionDAO;
     private OutputLabel lbltotalubicaciones,etiqueta,lblubigeo;
@@ -68,6 +69,7 @@ public class DivisionesBean {
     private Dialog dlggeolocallizacion;
     private DivisionesDAO divDAO;
     private MapModel modMapa;
+    
     //*******************FIn Declaracion de Atributos***********************************
     
     
@@ -208,6 +210,11 @@ public class DivisionesBean {
         return departamentoscombo;
     }
   
+    public void seleccionUbicacion(String dpto){
+        System.out.println("llegue a seleccion");
+        System.out.println("se selecciono el id: "+dpto);
+    }
+    
     //*************************Fin Declaracion De Metodos de divisionBean*********************************************
     
     
@@ -251,6 +258,7 @@ public class DivisionesBean {
         btngeolocalizacion = new CommandButton();
         dlggeolocallizacion.setVisible(false);
         modMapa = new DefaultMapModel();
+        seleccionado = new DivisionesUbicacion();
         
        
     }
@@ -615,6 +623,15 @@ public class DivisionesBean {
         this.modMapa = modMapa;
     }
 
+    public DivisionesUbicacion getSeleccionado() {
+        return seleccionado;
+    }
+
+    public void setSeleccionado(DivisionesUbicacion seleccionado) {
+        this.seleccionado = seleccionado;
+    }
+
+    
     
     
     

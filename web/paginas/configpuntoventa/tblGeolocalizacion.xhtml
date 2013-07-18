@@ -10,15 +10,22 @@ and open the template in the editor.
         <p:dataTable  id="tablageo" var="geo" value="#{divisionesBean.listaGeo}"   
                                  paginator="true" rows="5" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} 
                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} " 
-                                 emptyMessage="No hay Ubicaciones disponibles" binding="#{divisionesBean.tblgeo}">                      
+                                 emptyMessage="No hay Ubicaciones disponibles" binding="#{divisionesBean.tblgeo}" >                      
                         
+            
                         <p:column headerText="Ubicaciones" style="text-align: center" >  
-                            <h:outputText value="#{geo.departamento.nombreDepartamento}"  />  
-                        </p:column>                                        
+                            <h:outputText value="#{geo.departamento.nombreDepartamento}"   />  
+                            
+                        </p:column> 
+                        <p:column headerText="Ver">
+                            <p:commandButton id="viewButton" title="Visualizar" icon="ui-icon-search"  action="#{divisionesBean.seleccionUbicacion(geo.departamento.nombreDepartamento)}"/>  
+
+                        </p:column>
                         
                         <f:facet name="footer">  
                             En total hay <p:outputLabel value="aqui total" /> ubicaciones.  
                         </f:facet>
+                     
                    </p:dataTable>      
         </ui:composition>
     
