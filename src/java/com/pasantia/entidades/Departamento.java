@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 13/07/2013 11:12:50 AM by Hibernate Tools 3.2.1.GA
+// Generated 17/07/2013 04:01:51 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -14,6 +14,8 @@ public class Departamento  implements java.io.Serializable {
      private int idDepartamento;
      private Pais pais;
      private String nombreDepartamento;
+     private Double longitud;
+     private Double latitud;
      private Set divisionesUbicacions = new HashSet(0);
      private Set ciudads = new HashSet(0);
 
@@ -26,10 +28,12 @@ public class Departamento  implements java.io.Serializable {
         this.pais = pais;
         this.nombreDepartamento = nombreDepartamento;
     }
-    public Departamento(int idDepartamento, Pais pais, String nombreDepartamento, Set divisionesUbicacions, Set ciudads) {
+    public Departamento(int idDepartamento, Pais pais, String nombreDepartamento, Double longitud, Double latitud, Set divisionesUbicacions, Set ciudads) {
        this.idDepartamento = idDepartamento;
        this.pais = pais;
        this.nombreDepartamento = nombreDepartamento;
+       this.longitud = longitud;
+       this.latitud = latitud;
        this.divisionesUbicacions = divisionesUbicacions;
        this.ciudads = ciudads;
     }
@@ -54,6 +58,20 @@ public class Departamento  implements java.io.Serializable {
     
     public void setNombreDepartamento(String nombreDepartamento) {
         this.nombreDepartamento = nombreDepartamento;
+    }
+    public Double getLongitud() {
+        return this.longitud;
+    }
+    
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+    public Double getLatitud() {
+        return this.latitud;
+    }
+    
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
     }
     public Set getDivisionesUbicacions() {
         return this.divisionesUbicacions;

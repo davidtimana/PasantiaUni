@@ -4,6 +4,7 @@
  */
 package com.pasantia.conexion;
 
+import org.hibernate.Session;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
@@ -15,21 +16,33 @@ import org.hibernate.SessionFactory;
  */
 public class ConexionHibernate {
 
-    private static final SessionFactory sessionFactory;
-    
-    static {
-        try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-    
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+    private static SessionFactory sessionFactory;  
+    static {  
+        try {  
+            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();  
+        } catch (Throwable ex) {  
+            System.err.println("Initial SessionFactory creation failed." + ex);  
+            throw new ExceptionInInitializerError(ex);  
+        }  
+    }  
+    public static SessionFactory getSessionFactory() {  
+        if (sessionFactory == null) {  
+            try {  
+                sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();  
+            } catch (Throwable ex) {  
+                System.err.println("Initial SessionFactory creation failed." + ex);  
+                throw new ExceptionInInitializerError(ex);  
+            }  
+  
+        }  
+        return sessionFactory;  
+    }  
+    public static Session getSession() {  
+        return sessionFactory  
+                .getCurrentSession();  
+    }  
+    public static Session openSession() {  
+        return sessionFactory  
+                .openSession();  
+    }  
 }

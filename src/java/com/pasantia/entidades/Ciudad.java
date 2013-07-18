@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 13/07/2013 11:12:50 AM by Hibernate Tools 3.2.1.GA
+// Generated 17/07/2013 04:01:51 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -14,6 +14,8 @@ public class Ciudad  implements java.io.Serializable {
      private Integer idCiudad;
      private Departamento departamento;
      private String nombreCiudad;
+     private Double latitud;
+     private Double longitud;
      private Set personas = new HashSet(0);
 
     public Ciudad() {
@@ -24,9 +26,11 @@ public class Ciudad  implements java.io.Serializable {
         this.departamento = departamento;
         this.nombreCiudad = nombreCiudad;
     }
-    public Ciudad(Departamento departamento, String nombreCiudad, Set personas) {
+    public Ciudad(Departamento departamento, String nombreCiudad, Double latitud, Double longitud, Set personas) {
        this.departamento = departamento;
        this.nombreCiudad = nombreCiudad;
+       this.latitud = latitud;
+       this.longitud = longitud;
        this.personas = personas;
     }
    
@@ -50,6 +54,20 @@ public class Ciudad  implements java.io.Serializable {
     
     public void setNombreCiudad(String nombreCiudad) {
         this.nombreCiudad = nombreCiudad;
+    }
+    public Double getLatitud() {
+        return this.latitud;
+    }
+    
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+    public Double getLongitud() {
+        return this.longitud;
+    }
+    
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
     }
     public Set getPersonas() {
         return this.personas;

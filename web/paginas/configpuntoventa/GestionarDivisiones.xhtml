@@ -30,7 +30,7 @@
                     <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
                         <h:panelGrid columns="2" cellpadding="10">  
                             <p:commandButton value="&nbsp;Nueva Division" title="Crear Una Nueva Division" image="icon-add" onclick="dlgNuevo.show();"
-                                             actionListener="#{divisionesBean.prepararGuardadoDelasDivisiones()}"/>
+                                             actionListener="#{divisionesBean.prepararGuardadoDelasDivisiones()}"/>                            
                             <h:outputText value="Agregar una nueva division."/>
                         </h:panelGrid>  
                     </p:fieldset>  
@@ -56,8 +56,9 @@
                             <h:outputText value="#{divisiones.nombreDivision}"  />  
                         </p:column>
                         <p:column headerText="Ubicacion" style="text-align: center" >  
-                            <p:commandButton  title="&nbsp;Visualizar Ubicaciones" binding="#{divisionesBean.btngeolocalizacion}" actionListener="#{divisionesBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}"
-                                              onclick="dlgMapa.show();" 
+                            <p:commandButton  title="&nbsp;Visualizar Ubicaciones" binding="#{divisionesBean.btngeolocalizacion}"  
+                                              actionListener="#{divisionesBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}"
+                                              oncomplete="dlgMapa.show();" update=":frmubicacionMapa:dlgMapa"
                                               icon="ui-icon-pin-s"/>
                         </p:column>
                         
@@ -76,7 +77,7 @@
                     <p:dialog header="Creacion de un nueva division" widgetVar="dlgNuevo" resizable="false" 
                               id="dlgNuevo" showEffect="explode" hideEffect="explode"  modal="false"  width="1000" height="500" 
                               binding="#{divisionesBean.dlgNuevaDivision}" minimizable="true">  
-                       <!-- <p:growl id="growl"  sticky="true"  />
+                       <!--<p:growl id="growl"  sticky="true"  />
                         <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true"  /> -->
                        <p:panel header="Agregar Division" toggleable="true" toggleOrientation="horizontal">  
                             <h:panelGrid id="espacio1" columns="3" cellpadding="1" style="margin:0 auto;">                             
@@ -152,11 +153,11 @@
         <h:form id="frmubicacionMapa">
             
             <p:dialog  widgetVar="dlgMapa" resizable="false"  binding="#{divisionesBean.dlggeolocallizacion}"
-                      id="dlgEditar" modal="false" width="900" height="550" >
+                      id="dlgMapa" modal="false" width="950" height="500" >
                 <p:panelGrid style="margin-top:20px">  
                     <f:facet name="header">  
                         <p:row>  
-                            <p:column colspan="2">Ubicacion para la division:&nbsp;<p:outputLabel binding="#{divisionesBean.lblubigeo}"/> </p:column>  
+                            <p:column colspan="2">Ubicacion para:&nbsp;<p:outputLabel binding="#{divisionesBean.lblubigeo}"/> </p:column>  
                         </p:row>  
                         <p:row>                         
                             <p:column >Departamento</p:column>  

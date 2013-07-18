@@ -46,5 +46,25 @@ public class DepartamentoDAOImpl implements DepartamentoDAO{
         q.setInteger("id", id);
         return (Departamento)(q.uniqueResult());
     }
+
+    @Override
+    public void actualizarDepartamento(Departamento departamento) {
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        
+        try{
+            
+            session.beginTransaction();            
+            session.update(departamento);
+            session.beginTransaction().commit();            
+            
+        }catch(Exception e){
+            System.out.println("Error en actualizar "+e.getMessage());
+            session.beginTransaction().rollback();
+        }
+        finally{
+            System.out.println("cerrando la sesion");
+            session.close();
+        }
+    }
     
 }

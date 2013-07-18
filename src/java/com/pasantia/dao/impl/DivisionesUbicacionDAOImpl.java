@@ -7,6 +7,8 @@ package com.pasantia.dao.impl;
 import com.pasantia.conexion.ConexionHibernate;
 import com.pasantia.dao.DivisionesUbicacionDAO;
 import com.pasantia.entidades.DivisionesUbicacion;
+import com.sun.xml.ws.api.tx.at.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Query;
@@ -56,12 +58,30 @@ public class DivisionesUbicacionDAOImpl implements DivisionesUbicacionDAO{
         return session.createQuery("from DivisionesUbicacion").list();
     }
 
-    @Override
+    @Override    
     public List<DivisionesUbicacion> buscarubicacionesxiddivision(Integer id) {
-        Session session = ConexionHibernate.getSessionFactory().openSession();        
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        List list = new ArrayList();
+        List <DivisionesUbicacion> ubicaciones = new ArrayList<DivisionesUbicacion>();
+        try{
+        
         Query q=session.createQuery("from DivisionesUbicacion as d where d.divisiones.idDivisiones=:id");
         q.setInteger("id", id);
-        return q.list();
+        list=q.list();
+        ubicaciones=(List<DivisionesUbicacion>)list;
+        
+       }catch(Exception e){
+           ubicaciones=null;
+            System.out.println("Error en buscar "+e.getMessage());
+            session.beginTransaction().rollback();
+        }
+        finally{
+            System.out.println("cerrando la sesion en buscarubicacionesxiddivision");
+            session.flush();
+            session.close();
+        }
+      
+        return ubicaciones;
         
     }
 

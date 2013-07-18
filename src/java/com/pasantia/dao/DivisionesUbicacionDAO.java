@@ -24,7 +24,8 @@ public interface DivisionesUbicacionDAO {
      *Metodo que se encarga
      * de eliminar los departamentos
      * a los cuales pertenece
-     * @param divisionesUbicacion 
+     * @param divisionesUbicacion
+     * @return  
      */
     public boolean eliminarDivisionesUbicacion(DivisionesUbicacion divisionesUbicacion);
     
@@ -32,7 +33,7 @@ public interface DivisionesUbicacionDAO {
      *Metodo que se encarga
      * de buscar las asignaciones
      * de ubicacion para las divisiones
-     * @param id 
+     * @return  
      */
     public List<DivisionesUbicacion> buscarubicaciones();
     
@@ -40,7 +41,8 @@ public interface DivisionesUbicacionDAO {
      *Metodo que se encarga
      * de buscar las asignaciones
      * de ubicacion para las divisiones
-     * @param id 
+     * @param id
+     * @return List<DivisionesUbicacion> 
      */
     public List<DivisionesUbicacion> buscarubicacionesxiddivision(Integer id);
     

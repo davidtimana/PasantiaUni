@@ -6,6 +6,7 @@ package com.pasantia.dao.impl;
 
 import com.pasantia.conexion.ConexionHibernate;
 import com.pasantia.dao.DivisionesDAO;
+import com.pasantia.dao.PaisDAO;
 import com.pasantia.entidades.Divisiones;
 import java.util.List;
 import org.hibernate.Query;
@@ -81,15 +82,20 @@ public class DivisionesDAOImpl implements DivisionesDAO{
         Session session = ConexionHibernate.getSessionFactory().openSession();
         Divisiones divisiones=null;
         try{
-            divisiones=(Divisiones)session.load(Divisiones.class,id);
-
+            
+            Query q = session.createQuery("from Divisiones d where d.idDivisiones=:id ");
+            q.setInteger("id", id);
+            divisiones=(Divisiones)q.uniqueResult();            
+            
         }catch(Exception e){
+            divisiones=null;
             System.out.println("Error al buscar el id: "+id+" :"+e.getMessage());
         }
         finally{
+            System.out.println("Cerrando la session hibernate");
             session.close();
         }
-        return divisiones;
+        return divisiones; 
     }
 
     @Override

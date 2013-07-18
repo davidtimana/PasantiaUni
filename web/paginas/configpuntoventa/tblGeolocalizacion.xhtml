@@ -4,11 +4,9 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title></title>
-    </head>
-    <body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
+   
+    <ui:composition>
         <p:dataTable  id="tablageo" var="geo" value="#{divisionesBean.listaGeo}"   
                                  paginator="true" rows="5" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} 
                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} " 
@@ -22,5 +20,6 @@ and open the template in the editor.
                             En total hay <p:outputLabel value="aqui total" /> ubicaciones.  
                         </f:facet>
                    </p:dataTable>      
-    </body>
+        </ui:composition>
+    
 </html>

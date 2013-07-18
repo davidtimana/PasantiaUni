@@ -4,33 +4,31 @@
  */
 package com.pasantia.bean;
 
-import com.pasantia.dao.DepartamentoDAO;
-import com.pasantia.dao.DivisionesDAO;
-import com.pasantia.dao.DivisionesUbicacionDAO;
-import com.pasantia.dao.PaisDAO;
-import com.pasantia.dao.impl.DepartamentoDAOImpl;
-import com.pasantia.dao.impl.DivisionesDAOImpl;
-import com.pasantia.dao.impl.DivisionesUbicacionDAOImpl;
-import com.pasantia.dao.impl.PaisDAOImpl;
-import com.pasantia.entidades.Departamento;
-import com.pasantia.entidades.Divisiones;
-import com.pasantia.entidades.DivisionesUbicacion;
-import com.pasantia.entidades.Pais;
+import com.pasantia.dao.*;
+import com.pasantia.dao.impl.*;
+import com.pasantia.entidades.*;
 import com.sun.faces.taglib.html_basic.PanelGridTag;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.el.ValueExpression;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import org.hibernate.Hibernate;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.component.dialog.Dialog;
+import org.primefaces.component.gmap.GMap;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.outputlabel.OutputLabel;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 /**
  *
@@ -69,6 +67,7 @@ public class DivisionesBean {
     private DataTable tblasigubicaciones,tblgeo;  
     private Dialog dlggeolocallizacion;
     private DivisionesDAO divDAO;
+    private MapModel modMapa;
     //*******************FIn Declaracion de Atributos***********************************
     
     
@@ -76,25 +75,42 @@ public class DivisionesBean {
     public void prepararCargaGeolocalizacion(Integer id){
         
         
-        System.out.println("llegando con id-->"+id);
-//        Divisiones divu=new Divisiones();
-//        divu = divDAO.buscarDivisionesporId(id);
-//        String tituloDialog=divu.getNombreDivision();        
-//        dlggeolocallizacion.setHeader("Geolocalizacion para: "+tituloDialog);
-//        lblubigeo.setValue(tituloDialog);
-//        
-//        
-//        this.setListaGeo(listaGeo);
         
-        
+        Divisiones divu = new Divisiones();
+        divu = divDAO.buscarDivisionesporId(id);
+        String tituloDialog = divu.getNombreDivision();
+        dlggeolocallizacion.setHeader("Geolocalizacion para: " + tituloDialog);
+        lblubigeo.setValue(tituloDialog);
+        listaGeo = divisionesubicacionDAO.buscarubicacionesxiddivision(divu.getIdDivisiones());
+        if (listaGeo.isEmpty()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "...ERROR...", "Division sin Ubicacion"));
+            dlggeolocallizacion.setVisible(false);
+        } else {
+            cargarCoordenadasMapa();
+        }
+        btngeolocalizacion.setUpdate(":frmubicacionMapa");   
     }
     
     public void prepararGuardadoDelasDivisiones(){
         divisiones=new Divisiones();
         dlgNuevaDivision.setVisible(Boolean.TRUE);
-        tblasigubicaciones.setStyle("display: none");      
+        tblasigubicaciones.setStyle("display: none");   
+        dlggeolocallizacion.setVisible(true);
   }    
     
+  public void cargarCoordenadasMapa()  {
+      
+      List<LatLng> listaDeCoordenadas = new ArrayList<LatLng>();
+                LatLng coordenadaTemp;      
+               
+                for (DivisionesUbicacion ubic : listaGeo) {
+                    coordenadaTemp = new LatLng(ubic.getDepartamento().getLatitud(), ubic.getDepartamento().getLongitud());
+                    listaDeCoordenadas.add(coordenadaTemp); 
+                }
+                for (LatLng latLng : listaDeCoordenadas) {
+                    modMapa.addOverlay(new Marker(latLng));
+                }
+  }
     
     public void cargarListaDepartamentoxpais(){  
         String secpais = cmbpais.getValue().toString();
@@ -191,6 +207,7 @@ public class DivisionesBean {
 
         return departamentoscombo;
     }
+  
     //*************************Fin Declaracion De Metodos de divisionBean*********************************************
     
     
@@ -230,9 +247,12 @@ public class DivisionesBean {
         divDAO = new DivisionesDAOImpl();
         divgeo = new Divisiones();
         lblubigeo = new OutputLabel();
+        lblubigeo.setValue("prueba init");
         btngeolocalizacion = new CommandButton();
+        dlggeolocallizacion.setVisible(false);
+        modMapa = new DefaultMapModel();
         
-       // btngeolocalizacion.setOnclick("dlgMapa.show()");
+       
     }
     
     
@@ -586,6 +606,16 @@ public class DivisionesBean {
     public void setBtngeolocalizacion(CommandButton btngeolocalizacion) {
         this.btngeolocalizacion = btngeolocalizacion;
     }
+
+    public MapModel getModMapa() {
+        return modMapa;
+    }
+
+    public void setModMapa(MapModel modMapa) {
+        this.modMapa = modMapa;
+    }
+
+    
     
     
     
