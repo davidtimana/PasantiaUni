@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pasantia.bean;
+package com.pasantia.bean.configpuntoventa.divisiones;
 
 import com.pasantia.dao.*;
 import com.pasantia.dao.impl.*;
@@ -210,9 +210,9 @@ public class DivisionesBean {
         return departamentoscombo;
     }
   
-    public void seleccionUbicacion(String dpto){
+    public void seleccionUbicacion(){
         System.out.println("llegue a seleccion");
-        System.out.println("se selecciono el id: "+dpto);
+        System.out.println("se selecciono el id: ");
     }
     
     //*************************Fin Declaracion De Metodos de divisionBean*********************************************

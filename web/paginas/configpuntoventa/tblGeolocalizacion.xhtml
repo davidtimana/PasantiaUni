@@ -18,7 +18,7 @@ and open the template in the editor.
                             
                         </p:column> 
                         <p:column headerText="Ver">
-                            <p:commandButton id="viewButton" title="Visualizar" icon="ui-icon-search"  action="#{divisionesBean.seleccionUbicacion(geo.departamento.nombreDepartamento)}"/>  
+                            <p:commandButton id="viewButton" title="Visualizar" icon="ui-icon-search"  actionListener="#{controlMapaBean.visualizarMapa()}" process="@all"/>  
 
                         </p:column>
                         
