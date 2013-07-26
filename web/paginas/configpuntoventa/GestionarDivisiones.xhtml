@@ -63,7 +63,8 @@
                         </p:column>
                         
                         <p:column headerText="Acciones" style="width:8%; text-align: center">
-                            
+                            <p:commandButton onclick="dlgEditar.show();"  update=":frmdivision" actionListener="#{editarDivisionesBean.cargarEdicion(divisiones.idDivisiones,divisiones.idDivisiones)}"   
+                                      title="&nbsp;Editar" image="icon-edit" />          
                                       
                         </p:column>
                         <f:facet name="footer">  
@@ -175,6 +176,17 @@
                 <!--<ui:include src="UbicacionMapa.xhtml"  />              -->
             </p:dialog>
             
+            
+            <!-- Formulario editar divisiones -->            
+            <h:form id="frmeditardivisiones" >                
+                <ui:include src="frmeditardivision.xhtml" />                
+            </h:form>
+            
+            
+            <!-- Formulario eliminar divisiones -->
+            <h:form id="frmeliminardivisiones">                                
+                <ui:include src="frmeliminardivision.xhtml"/>
+            </h:form>
                 
             
             

@@ -4,10 +4,26 @@ To change this template, choose Tools | Templates
 and open the template in the editor.
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition>
-        
-        
-        
-    </ui:composition>
+        <p:dialog header="Edicion De Una Ubicaciòn Para Las Divisiones" widgetVar="dlgEditar" resizable="false" 
+                  id="dlgEditardivision" modal="false" binding="#{editarDivisionesBean.dlgeditarDivisiones}" width="800" height="800" minimizable="true">  
+                <p:panel header="Agregar Division" toggleable="true" toggleOrientation="horizontal">  
+                            <h:panelGrid id="espacio1" columns="2" cellpadding="1" style="margin:0 auto;">                             
+                                <p:outputLabel value="Nombre De la División"/>
+                                <p:inputText id="des1"  value="#{editarDivisionesBean.nombreDivision}"   style="width: 300px" 
+                                             binding="#{editarDivisionesBean.txtnombreDivision}" />
+                                
+                            </h:panelGrid>
+                    
+                 </p:panel>
+            
+            <p:commandButton value="Editar División" title="Editar División" image="icon-edit"/>
+                
+                       
+                    
+                        
+                
+            </p:dialog>       
+        </ui:composition>
 </html>
