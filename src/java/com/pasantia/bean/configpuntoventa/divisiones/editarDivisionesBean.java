@@ -31,17 +31,15 @@ public class editarDivisionesBean implements Serializable{
     //******************Fin Atributos de la clase**************************
 
     //****************Inicio Metodos de la clase***************************    
-    public void cargarEdicion(Integer idDivision,String nombreDiv){
-        System.out.println("Abriendo pop up editar con id division "+idDivision);
-        division = divisionesDAO.buscarDivisionesporId(idDivision);
-        System.out.println("El nombre de la division es el siguiente "+division.getNombreDivision());
+    public void cargarEdicion(Integer idDivision){
+        division = divisionesDAO.buscarDivisionesporId(idDivision);        
         this.setNombreDivision(division.getNombreDivision());
-        this.setIdDivision(idDivision);
-        System.out.println("El nombre de la division es el siguiente 2"+nombreDivision);
-        txtnombreDivision.setValue(nombreDivision);
-        
-        
-        
+        this.setIdDivision(idDivision);        
+        txtnombreDivision.setValue(this.nombreDivision);      
+    }
+    
+    public void habilitarEdicion(){
+        txtnombreDivision.setReadonly(false);       
     }
     //*****************Fin Metodos de la clase***************************    
     
@@ -97,7 +95,7 @@ public class editarDivisionesBean implements Serializable{
         dlgeditarDivisiones = new Dialog();
         division = new Divisiones();
         txtnombreDivision = new InputText();
-        //txtnombreDivision.setReadonly(true);
+        txtnombreDivision.setReadonly(true);
         divisionesDAO = new DivisionesDAOImpl();
     }
     

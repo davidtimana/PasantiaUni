@@ -7,26 +7,20 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
    
     <ui:composition>
-        <p:dataTable  id="tablageo" var="geo" value="#{divisionesBean.listaGeo}"   
-                                 paginator="true" rows="5" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} 
-                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} " 
-                                 emptyMessage="No hay Ubicaciones disponibles" binding="#{divisionesBean.tblgeo}" >                      
-                        
-            
-                        <p:column headerText="Ubicaciones" style="text-align: center" >  
-                            <h:outputText value="#{geo.departamento.nombreDepartamento}"   />  
-                            
-                        </p:column> 
-                        <p:column headerText="Ver">
-                            <p:commandButton id="viewButton" title="Visualizar" icon="ui-icon-search"  actionListener="#{controlMapaBean.visualizarMapa()}" process="@all"/>  
-
-                        </p:column>
-                        
-                        <f:facet name="footer">  
-                            En total hay <p:outputLabel value="aqui total" /> ubicaciones.  
-                        </f:facet>
-                     
-                   </p:dataTable>      
+        
+        <p:selectOneListbox id="ubic" value="#{controlMapaBean.idDivisionUbicacion}" 
+                             >  
+                                    
+                                    <f:selectItems value="#{controlMapaBean.comboUbicaciones}"  />
+                                    <p:ajax 
+                                            listener="#{controlMapaBean.verUbicacion()}" 
+                                             />                                     
+                                </p:selectOneListbox>        
+        
+        
+        
+        
+        
         </ui:composition>
     
 </html>

@@ -57,62 +57,29 @@ public class DivisionesBean {
     private List<Departamento> departamentos;
     private List<SelectItem> paisescombo,departamentoscombo;
     private SelectOneMenu cmbpais;
-    private CommandButton btnagregardivision,btnagregarubicacion,btngeolocalizacion;
+    private CommandButton btnagregardivision,btnagregarubicacion;
     private List<DivisionesUbicacion> listubicaciones,liscomprobar,listaGeo;
     private DepartamentoDAO departamentoDAO;
     private PaisDAO paisDAO;
     private DivisionesUbicacion divisionesUbicacion,seleccionado;
     private String desasig;
     private DivisionesUbicacionDAO divisionesubicacionDAO;
-    private OutputLabel lbltotalubicaciones,etiqueta,lblubigeo;
-    private DataTable tblasigubicaciones,tblgeo;  
-    private Dialog dlggeolocallizacion;
-    private DivisionesDAO divDAO;
-    private MapModel modMapa;
+    private OutputLabel lbltotalubicaciones,etiqueta;
+    private DataTable tblasigubicaciones;  
+    private Dialog dlggeolocallizacion;    
+    
     
     //*******************FIn Declaracion de Atributos***********************************
     
     
     //*************************Inicio Declaracion De Metodos de divisionBean*********************************************
-    public void prepararCargaGeolocalizacion(Integer id){
         
-        
-        
-        Divisiones divu = new Divisiones();
-        divu = divDAO.buscarDivisionesporId(id);
-        String tituloDialog = divu.getNombreDivision();
-        dlggeolocallizacion.setHeader("Geolocalizacion para: " + tituloDialog);
-        lblubigeo.setValue(tituloDialog);
-        listaGeo = divisionesubicacionDAO.buscarubicacionesxiddivision(divu.getIdDivisiones());
-        if (listaGeo.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "...ERROR...", "Division sin Ubicacion"));
-            dlggeolocallizacion.setVisible(false);
-        } else {
-            cargarCoordenadasMapa();
-        }
-        btngeolocalizacion.setUpdate(":frmubicacionMapa");   
-    }
-    
     public void prepararGuardadoDelasDivisiones(){
         divisiones=new Divisiones();
         dlgNuevaDivision.setVisible(Boolean.TRUE);
         tblasigubicaciones.setStyle("display: none");   
         dlggeolocallizacion.setVisible(true);
   }    
-    
-  public void cargarCoordenadasMapa()  {
-      
-      List<LatLng> listaDeCoordenadas = new ArrayList<LatLng>();
-                LatLng coordenadaTemp;      
-               
-                for (DivisionesUbicacion ubic : listaGeo) {
-                    coordenadaTemp = new LatLng(ubic.getDepartamento().getLatitud(), ubic.getDepartamento().getLongitud());
-                    listaDeCoordenadas.add(coordenadaTemp); 
-                }
-                for (LatLng latLng : listaDeCoordenadas) {
-                    modMapa.addOverlay(new Marker(latLng));
-                }
-  }
     
     public void cargarListaDepartamentoxpais(){  
         String secpais = cmbpais.getValue().toString();
@@ -208,12 +175,7 @@ public class DivisionesBean {
         }
 
         return departamentoscombo;
-    }
-  
-    public void seleccionUbicacion(){
-        System.out.println("llegue a seleccion");
-        System.out.println("se selecciono el id: ");
-    }
+    }   
     
     //*************************Fin Declaracion De Metodos de divisionBean*********************************************
     
@@ -249,15 +211,9 @@ public class DivisionesBean {
         tblasigubicaciones.setStyle("display: none");
         etiqueta = new  OutputLabel();
         departamentoscombo=cargarDepartamentos("");
-        dlggeolocallizacion = new Dialog();
-        tblgeo = new DataTable();
-        divDAO = new DivisionesDAOImpl();
+        dlggeolocallizacion = new Dialog();        
         divgeo = new Divisiones();
-        lblubigeo = new OutputLabel();
-        lblubigeo.setValue("prueba init");
-        btngeolocalizacion = new CommandButton();
         dlggeolocallizacion.setVisible(false);
-        modMapa = new DefaultMapModel();
         seleccionado = new DivisionesUbicacion();
         
        
@@ -575,52 +531,12 @@ public class DivisionesBean {
         this.listaGeo = listaGeo;
     }
 
-    public DataTable getTblgeo() {
-        return tblgeo;
-    }
-
-    public void setTblgeo(DataTable tblgeo) {
-        this.tblgeo = tblgeo;
-    }
-
-    public Divisiones getDivgeo() {
+     public Divisiones getDivgeo() {
         return divgeo;
     }
 
     public void setDivgeo(Divisiones divgeo) {
         this.divgeo = divgeo;
-    }
-
-    public DivisionesDAO getDivDAO() {
-        return divDAO;
-    }
-
-    public void setDivDAO(DivisionesDAO divDAO) {
-        this.divDAO = divDAO;
-    }
-
-    public OutputLabel getLblubigeo() {
-        return lblubigeo;
-    }
-
-    public void setLblubigeo(OutputLabel lblubigeo) {
-        this.lblubigeo = lblubigeo;
-    }
-
-    public CommandButton getBtngeolocalizacion() {
-        return btngeolocalizacion;
-    }
-
-    public void setBtngeolocalizacion(CommandButton btngeolocalizacion) {
-        this.btngeolocalizacion = btngeolocalizacion;
-    }
-
-    public MapModel getModMapa() {
-        return modMapa;
-    }
-
-    public void setModMapa(MapModel modMapa) {
-        this.modMapa = modMapa;
     }
 
     public DivisionesUbicacion getSeleccionado() {
