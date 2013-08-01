@@ -57,11 +57,13 @@ public class ControlMapaBean {
     private double latitud;
     private double longitud;
     private DepartamentoDAO departamentoDAO;
+    private FacesContext context;
+
     
     
     
    public void prepararCargaGeolocalizacion(Integer id){     
-        
+        mensajeAyuda();
         latitud=4.599047;
         longitud=-74.080917;
         divu = divDAO.buscarDivisionesporId(id);
@@ -124,6 +126,11 @@ public class ControlMapaBean {
            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "...ERROR...", "No se pudo obtener la ubicación."));            
        }
    }
+   
+   public void mensajeAyuda(){
+      context.addMessage("grwayuda", new FacesMessage("Informacion Mapa", "Seleccione Un Departamento para visualizar su ubicación en el mapa."));      
+      
+   }
     
     public ControlMapaBean() {
         divDAO = new DivisionesDAOImpl();
@@ -136,7 +143,9 @@ public class ControlMapaBean {
         listubicaciones = new SelectOneListbox();
         listubicaciones.setStyle("display : none");   
         departamentoDAO = new DepartamentoDAOImpl();
-        
+        context = FacesContext.getCurrentInstance();
+
+
     }
 
     public OutputLabel getLblubigeo() {

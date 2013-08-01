@@ -129,15 +129,15 @@ public class DivisionesBean {
             } else {
 
                 departamento = departamentoDAO.buscarDepartamentoporIdUno(Integer.parseInt(secdepartamento));
-                divisiones2 = divisionDAO.buscarUltimaIngresada();
-                divisionesUbicacion.setDepartamento(departamento);
-                divisionesUbicacion.setDivisiones(divisiones2);
-                divisionesubicacionDAO.insertarDivisionesUbicacion(divisionesUbicacion);
-                this.setListubicaciones(divisionesubicacionDAO.buscarubicacionesxiddivision(divisiones2.getIdDivisiones()));
-                lbltotalubicaciones.setValue(this.totalUbicaciones());
-                tblasigubicaciones.setStyle("display: block");
-                tblasigubicaciones.setEmptyMessage("No hay Ubicaciones para: " + divisiones2.getNombreDivision() + " disponibles.");
-                etiqueta.setValue(divisiones2.getNombreDivision());
+                //divisiones2 = divisionDAO.buscarUltimaIngresada();
+//                divisionesUbicacion.setDepartamento(departamento);
+//                divisionesUbicacion.setDivisiones(divisiones2);
+//                divisionesubicacionDAO.insertarDivisionesUbicacion(divisionesUbicacion);
+//                this.setListubicaciones(divisionesubicacionDAO.buscarubicacionesxiddivision(divisiones2.getIdDivisiones()));
+//                lbltotalubicaciones.setValue(this.totalUbicaciones());
+               tblasigubicaciones.setStyle("display: block");
+//                tblasigubicaciones.setEmptyMessage("No hay Ubicaciones para: " + divisiones2.getNombreDivision() + " disponibles.");
+//                etiqueta.setValue(divisiones2.getNombreDivision());
 
             }
         }
