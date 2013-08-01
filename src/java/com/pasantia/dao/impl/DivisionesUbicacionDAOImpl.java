@@ -92,5 +92,28 @@ public class DivisionesUbicacionDAOImpl implements DivisionesUbicacionDAO{
         q.setInteger("id", id);
         return q.list();
     }
+
+    @Override
+    public DivisionesUbicacion buscarubicacionesxid(Integer id) {
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        DivisionesUbicacion divisionUbicacion=null;;
+        try{
+            Query q=session.createQuery("from DivisionesUbicacion as d where d.idDivisionesUbicacion=:id");
+            q.setInteger("id", id);
+            divisionUbicacion=(DivisionesUbicacion)q.uniqueResult();
+            
+        }catch(Exception e){
+            System.out.println("Error en buscar x id Ubicacion "+e.getMessage());
+            session.beginTransaction().rollback();
+            divisionUbicacion= null;
+        }
+        finally{
+            System.out.println("cerrando la sesion en buscarubicacionesxid");
+            session.flush();
+            session.close();
+        }
+        return divisionUbicacion;
+        
+    }
     
 }

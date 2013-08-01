@@ -36,6 +36,11 @@ public interface DepartamentoDAO {
      * @return Departamento
      */
     public Departamento buscarDepartamentoporIdUno(Integer id);
-    
+      /**
+     *Metodo que se encarga de actualizar
+     * un departamento 
+     * @param Departamento
+     * @return Departamento
+     */
     public void actualizarDepartamento(Departamento departamento);
 }

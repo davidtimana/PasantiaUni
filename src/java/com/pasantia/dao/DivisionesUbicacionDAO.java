@@ -53,4 +53,14 @@ public interface DivisionesUbicacionDAO {
      * @param id 
      */
     public List<DivisionesUbicacion> buscarubicacionesxidDepartamento(Integer id);
+    
+    /**
+     *Metodo que se encarga
+     * de buscar las asignaciones
+     * de ubicacion por el id de la division
+     * de la ubicacion
+     * @param id 
+     */
+    public DivisionesUbicacion buscarubicacionesxid(Integer id);
+    
 }

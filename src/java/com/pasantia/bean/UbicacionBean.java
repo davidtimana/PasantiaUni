@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pasantia.bean.configpuntoventa.divisiones;
+package com.pasantia.bean;
 
 import com.pasantia.dao.UbicacionDAO;
 import com.pasantia.dao.impl.UbicacionDAOImpl;

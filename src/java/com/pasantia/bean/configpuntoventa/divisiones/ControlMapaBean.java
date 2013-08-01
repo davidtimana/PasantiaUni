@@ -2,12 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pasantia.bean;
+package com.pasantia.bean.configpuntoventa.divisiones;
 
+import com.pasantia.dao.DepartamentoDAO;
 import com.pasantia.dao.DivisionesDAO;
 import com.pasantia.dao.DivisionesUbicacionDAO;
+import com.pasantia.dao.impl.DepartamentoDAOImpl;
 import com.pasantia.dao.impl.DivisionesDAOImpl;
 import com.pasantia.dao.impl.DivisionesUbicacionDAOImpl;
+import com.pasantia.entidades.Departamento;
 import com.pasantia.entidades.Divisiones;
 import com.pasantia.entidades.DivisionesUbicacion;
 import java.util.ArrayList;
@@ -21,6 +24,7 @@ import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.component.dialog.Dialog;
 import org.primefaces.component.outputlabel.OutputLabel;
+import org.primefaces.component.selectonelistbox.SelectOneListbox;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
@@ -48,24 +52,33 @@ public class ControlMapaBean {
     private Divisiones divu;
     private SelectOneMenu comboUbicMostrar;
     private Integer idDivisionUbicacion;
+    private SelectOneListbox listubicaciones;
+    private Integer zoom;
+    private double latitud;
+    private double longitud;
+    private DepartamentoDAO departamentoDAO;
+    
     
     
    public void prepararCargaGeolocalizacion(Integer id){     
         
+        latitud=4.599047;
+        longitud=-74.080917;
         divu = divDAO.buscarDivisionesporId(id);
         String tituloDialog = divu.getNombreDivision();
         dlggeolocallizacion.setHeader("Geolocalizacion para: " + tituloDialog);
         lblubigeo.setValue(tituloDialog);
         listaGeo = divisionesubicacionDAO.buscarubicacionesxiddivision(divu.getIdDivisiones());
         if (listaGeo.isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "...ERROR...", "Division sin Ubicacion"));
-            
-            btngeolocalizacion.setOncomplete("dlgMapa.hide();");
-        } else {
-            dlggeolocallizacion.setVisible(false);
-            btngeolocalizacion.setOncomplete("dlgMapa.show();");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "...ERROR...", "Division sin Ubicaciones"));            
+            zoom=10;
+            listubicaciones.setStyle("display:none");
+        } else {   
+            zoom=6;
             cargarUbicacionesDivision();
             cargarCoordenadasMapa();
+            listubicaciones.setStyle("display:block");
+            
         }
         
     }
@@ -94,6 +107,22 @@ public class ControlMapaBean {
    public void verUbicacion (){
        
        System.out.println("seleccionando ubicaciones" + idDivisionUbicacion);
+       zoom=10;
+       Departamento departamento=null;
+       if(idDivisionUbicacion !=0 || idDivisionUbicacion !=null){
+            departamento=departamentoDAO.buscarDepartamentoporIdUno(idDivisionUbicacion);
+            System.out.println("la coordenadas para "+departamento.getNombreDepartamento());
+            System.out.println("latitud es-->"+departamento.getLatitud());
+            System.out.println("longitud es-->"+departamento.getLongitud());
+                if(departamento!=null){
+                    latitud=departamento.getLatitud();
+                    longitud=departamento.getLongitud();                      
+                }else{
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "...ERROR...", "No se encontro las coordenadas de la ubicaciòn"));            
+                }
+       }else{
+           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "...ERROR...", "No se pudo obtener la ubicación."));            
+       }
    }
     
     public ControlMapaBean() {
@@ -104,7 +133,10 @@ public class ControlMapaBean {
         dlggeolocallizacion = new Dialog();
         lblubigeo = new OutputLabel();   
         listaCombo = divisionesubicacionDAO.buscarubicaciones();
-        dlggeolocallizacion.setVisible(false);
+        listubicaciones = new SelectOneListbox();
+        listubicaciones.setStyle("display : none");   
+        departamentoDAO = new DepartamentoDAOImpl();
+        
     }
 
     public OutputLabel getLblubigeo() {
@@ -201,6 +233,43 @@ public class ControlMapaBean {
     public void setIdDivisionUbicacion(Integer idDivisionUbicacion) {
         this.idDivisionUbicacion = idDivisionUbicacion;
     }
+
+    public SelectOneListbox getListubicaciones() {
+        return listubicaciones;
+    }
+
+    public void setListubicaciones(SelectOneListbox listubicaciones) {
+        this.listubicaciones = listubicaciones;
+    }
+
+    public Integer getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(Integer zoom) {
+        this.zoom = zoom;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
+    
+    
+
+    
+   
     
     
     

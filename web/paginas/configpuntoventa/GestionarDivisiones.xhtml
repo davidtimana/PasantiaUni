@@ -58,7 +58,7 @@
                         <p:column headerText="Ubicacion" style="text-align: center" >  
                             <p:commandButton  title="&nbsp;Visualizar Ubicaciones" binding="#{controlMapaBean.btngeolocalizacion}"  
                                               actionListener="#{controlMapaBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}"
-                                              oncomplete="" update=":frmubicacionMapa,:frmubicacionMapa:mapa1" 
+                                              oncomplete="dlgMapa.show();" update=":frmubicacionMapa,:frmubicacionMapa:mapa1" 
                                               icon="ui-icon-pin-s" >
                                 
                             </p:commandButton>
