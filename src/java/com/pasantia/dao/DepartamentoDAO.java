@@ -27,7 +27,7 @@ public interface DepartamentoDAO {
      * @param id
      * @return Departamento
      */
-    public List<Departamento> buscarDepartamentoporId(Integer id);
+    public List<Departamento> buscarDepartamentoporIdPais(Integer id);
     
     /**
      *Metodo que se encarga de buscar

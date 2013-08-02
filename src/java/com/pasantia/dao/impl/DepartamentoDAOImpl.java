@@ -29,7 +29,7 @@ public class DepartamentoDAOImpl implements DepartamentoDAO{
     }
 
     @Override
-    public List<Departamento> buscarDepartamentoporId(Integer id) {
+    public List<Departamento> buscarDepartamentoporIdPais(Integer id) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
         
         Query q=session.createQuery("from Departamento as d where d.pais.idPais= :pais");
