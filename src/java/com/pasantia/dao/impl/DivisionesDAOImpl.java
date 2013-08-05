@@ -113,11 +113,11 @@ public class DivisionesDAOImpl implements DivisionesDAO{
     }
 
     @Override
-    public Divisiones buscarUltimaIngresada() {
+    public Integer buscarUltimaIngresada() {
         Session session = ConexionHibernate.getSessionFactory().openSession();
-        String jpql ="select max(d) from Divisiones as d";
+        String jpql ="select max(d.idDivisiones) from Divisiones as d";
         Query q=session.createQuery(jpql);       
-        return (Divisiones)(q.uniqueResult());
+        return (Integer)(q.uniqueResult());
     }
     
 }

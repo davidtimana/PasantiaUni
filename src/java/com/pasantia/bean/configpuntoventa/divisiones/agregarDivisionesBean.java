@@ -33,6 +33,7 @@ import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.datatable.DataTable;
 import org.primefaces.component.dialog.Dialog;
 import org.primefaces.component.inputtext.InputText;
+import org.primefaces.component.outputlabel.OutputLabel;
 import org.primefaces.component.selectonemenu.SelectOneMenu;
 import org.primefaces.context.RequestContext;
 
@@ -45,10 +46,10 @@ import org.primefaces.context.RequestContext;
 @RequestScoped
 public class agregarDivisionesBean {
     
-    private Divisiones divisiones;
+    private Divisiones divisiones,ultimaDivision;
     private Dialog dlggeolocallizacion; 
     private DataTable tblasigubicaciones; 
-    private String descripcion;
+    private String descripcion,titulo;
     private InputText txtdescripcioning;
     private CommandButton btnagregardivision;    
     private Utilidad utilidadMensajes;
@@ -63,12 +64,33 @@ public class agregarDivisionesBean {
     private Integer secdepartamento;
     private DivisionesUbicacionDAO divisionesUbicacionDAO;
     private List<DivisionesUbicacion> divisionesUbicacionlistcomprobar,divisionesUbicacionGuardadas;
+    private Departamento departamento;
+    private Integer secdivisionUltima,total;
+    private DivisionesUbicacion divisionesUbicacion,divisionesUbicacionEliminar;
+    
+    
+    
     
 
-    public void prepararGuardadoDelasDivisiones(){        
-        tblasigubicaciones.setStyle("display: none");        
-        Utilidad.abrirDialog("dlgNuevo");
-    }    
+    public void prepararGuardadoDelasDivisiones(){  
+        iniciarDialog();       
+    }  
+    public void prepararEliminadoUbicacion(Integer idDivisionUbicacion){
+        System.out.println("funciona con objeto es el siguiente-->"+idDivisionUbicacion);
+        System.out.println("buscando para eliminar");
+        divisionesUbicacionEliminar = divisionesUbicacionDAO.buscarubicacionesxid(idDivisionUbicacion);
+    }
+    
+    
+    public void eliminarUbicacion(){
+        System.out.println("entrando a eliminar con -->"+divisionesUbicacionEliminar.getIdDivisionesUbicacion());
+        if(divisionesUbicacionDAO.eliminarDivisionesUbicacion(divisionesUbicacionEliminar)){
+            Utilidad.mensajeInfo("Eliminar Ubicaciones.", "Ubicacion Eliminada correctamente.");
+            cargarListaDepartamentoxpais();
+        }else{
+            Utilidad.mensajeFatal("Eliminar Ubicaciones", "Error al eliminar la ubicacion.");
+        }
+    }
     
     public void cargarListaDepartamentoxpais(){  
         //String secpais = cmbpais.getValue().toString();
@@ -94,7 +116,7 @@ public class agregarDivisionesBean {
         
         if(descripcion.equals("") || descripcion.isEmpty() || descripcion==null){                       
             Utilidad.mensajeFatal("Error al guardar la division.", "Nombre de la division requerida.");
-            Utilidad.abrirDialog("dlgNuevo");
+            //Utilidad.abrirDialog("dlgNuevo");
         }
         else{  
             Utilidad.abrirDialog("dlgNuevo");
@@ -113,27 +135,32 @@ public class agregarDivisionesBean {
     
     public void asignarDepartamentoaUbicacion(){                  
         
-             
+       
         System.out.println("el pais es--->"+secpais);
         if (secpais==null) {            
             Utilidad.mensajeFatal("Error al guardar la division.", "Seleccion de pais requerido.");
+            //Utilidad.abrirDialog("dlgNuevo");
         } else {
             if (secdepartamento==null) {
                 Utilidad.mensajeFatal("Error al guardar la division.", "Seleccion de Departamento requerido.");
-                
+                //Utilidad.abrirDialog("dlgNuevo");
             } else {
-
-//                departamento = departamentoDAO.buscarDepartamentoporIdUno(Integer.parseInt(secdepartamento));
-//                System.out.println("El departamento es el siguiente-->"+departamento.getNombreDepartamento());
-//                divisiones2 = divisionDAO.buscarUltimaIngresada();
-//                divisionesUbicacion.setDepartamento(departamento);
-//                divisionesUbicacion.setDivisiones(divisiones2);
-//                divisionesubicacionDAO.insertarDivisionesUbicacion(divisionesUbicacion);
-//                this.setListubicaciones(divisionesubicacionDAO.buscarubicacionesxiddivision(divisiones2.getIdDivisiones()));
-//                lbltotalubicaciones.setValue(this.totalUbicaciones());
-               tblasigubicaciones.setStyle("display: block");
-//                tblasigubicaciones.setEmptyMessage("No hay Ubicaciones para: " + divisiones2.getNombreDivision() + " disponibles.");
-//                etiqueta.setValue(divisiones2.getNombreDivision());
+                  //Utilidad.abrirDialog("dlgNuevo");
+                  departamento = departamentoDAO.buscarDepartamentoporIdUno(secdepartamento);
+                  System.out.println("asignando departamento "+departamento.getNombreDepartamento());
+                  secdivisionUltima = divisionesDAO.buscarUltimaIngresada();
+                  System.out.println("obteniendo secuencial ultima division "+secdivisionUltima);
+                  ultimaDivision = divisionesDAO.buscarDivisionesporId(secdivisionUltima);
+                  System.out.println("asignando division "+ultimaDivision.getNombreDivision());
+                  divisionesUbicacion.setDepartamento(departamento);
+                  divisionesUbicacion.setDivisiones(ultimaDivision);
+                  divisionesUbicacionDAO.insertarDivisionesUbicacion(divisionesUbicacion);
+                  divisionesUbicacionGuardadas = divisionesUbicacionDAO.buscarubicacionesxiddivision(secdivisionUltima);
+                  total=divisionesUbicacionGuardadas.size();
+                  tblasigubicaciones.setStyle("display: block");
+                  tblasigubicaciones.setEmptyMessage("No hay Ubicaciones para: " + ultimaDivision.getNombreDivision() + " disponibles.");
+                  titulo=ultimaDivision.getNombreDivision();
+                  cargarListaDepartamentoxpais();
 
             }
         }
@@ -149,6 +176,17 @@ public class agregarDivisionesBean {
         }
     }      
 
+    public void iniciarDialog(){
+       
+        //RequestContext.getCurrentInstance().update(":frmnuevadivision");
+        tblasigubicaciones.setStyle("display: none");
+        cmbpais.setDisabled(Boolean.TRUE);
+        cmbdepartamento.setDisabled(Boolean.TRUE);
+        txtdescripcioning.setReadonly(Boolean.FALSE);
+        btnagregardivision.setDisabled(Boolean.FALSE);
+        cargarPaises();
+        cargarDepartamentos();
+    }
     
     public int totalUbicaciones(){
         int total=divisionesUbicacionGuardadas.size();
@@ -186,9 +224,14 @@ public class agregarDivisionesBean {
         cmbdepartamento = new SelectOneMenu();
         cmbpais = new SelectOneMenu();
         paisDAO = new PaisDAOImpl();
+        divisionesUbicacion = new DivisionesUbicacion();
+        divisionesUbicacionEliminar = new DivisionesUbicacion();
         
-        
-        
+        titulo="";
+        total=0;
+        secdivisionUltima=0;        
+        ultimaDivision = new Divisiones();
+        departamento = new Departamento();
         divisionesUbicacionDAO = new DivisionesUbicacionDAOImpl();
         secpais=0;
         secdepartamento=0;        
@@ -199,6 +242,7 @@ public class agregarDivisionesBean {
         tblasigubicaciones.setStyle("display: none");
         txtdescripcioning.setReadonly(false);
         btnagregardivision.setDisabled(false);
+        dlggeolocallizacion.setVisible(false);
         cargarPaises();
         cargarDepartamentos();
         cargarDivisionesUbicacion();
@@ -334,6 +378,76 @@ public class agregarDivisionesBean {
     public void setDivisionesUbicacionGuardadas(List<DivisionesUbicacion> divisionesUbicacionGuardadas) {
         this.divisionesUbicacionGuardadas = divisionesUbicacionGuardadas;
     }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public Divisiones getUltimaDivision() {
+        return ultimaDivision;
+    }
+
+    public void setUltimaDivision(Divisiones ultimaDivision) {
+        this.ultimaDivision = ultimaDivision;
+    }
+
+    public Integer getSecdivisionUltima() {
+        return secdivisionUltima;
+    }
+
+    public void setSecdivisionUltima(Integer secdivisionUltima) {
+        this.secdivisionUltima = secdivisionUltima;
+    }
+
+    public DivisionesUbicacion getDivisionesUbicacion() {
+        return divisionesUbicacion;
+    }
+
+    public void setDivisionesUbicacion(DivisionesUbicacion divisionesUbicacion) {
+        this.divisionesUbicacion = divisionesUbicacion;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public DivisionesUbicacion getDivisionesUbicacionEliminar() {
+        return divisionesUbicacionEliminar;
+    }
+
+    public void setDivisionesUbicacionEliminar(DivisionesUbicacion divisionesUbicacionEliminar) {
+        this.divisionesUbicacionEliminar = divisionesUbicacionEliminar;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

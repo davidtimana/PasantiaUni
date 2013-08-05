@@ -29,7 +29,8 @@
                     <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
                         <h:panelGrid columns="2" cellpadding="10">  
                             <p:commandButton value="&nbsp;Nueva Division" title="Crear Una Nueva Division" image="icon-add" onclick="dlgNuevo.show();"
-                                             actionListener="#{agregarDivisionesBean.prepararGuardadoDelasDivisiones()}"/>                            
+                                             actionListener="#{agregarDivisionesBean.prepararGuardadoDelasDivisiones()}" oncomplete="dlgNuevo.show()"
+                                             update=":frmnuevadivision:dlgNuevo"/>                            
                             <h:outputText value="Agregar una nueva division."/>
                         </h:panelGrid>  
                     </p:fieldset>  

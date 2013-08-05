@@ -58,5 +58,5 @@ public interface DivisionesDAO {
      
      * @return division
      */
-    public Divisiones buscarUltimaIngresada();
+    public Integer buscarUltimaIngresada();
 }

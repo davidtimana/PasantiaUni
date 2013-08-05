@@ -47,7 +47,7 @@ and open the template in the editor.
                        </p:panel >
                         <p:separator id="customSeparator2" style="width:900px;height:2px" />
                         
-                        <p:commandButton  update=":frmnuevadivision:tablaasig,:frmnuevadivision"    
+                        <p:commandButton  update=":frmnuevadivision:tablaasig,:frmnuevadivision:departamento,:frmnuevadivision:pais"    
                                           value="Agregar Ubicacion" title="Agregar Ubicacion" image="icon-add"
                                           action="#{agregarDivisionesBean.asignarDepartamentoaUbicacion()}"  />
                         
@@ -56,7 +56,7 @@ and open the template in the editor.
                                  {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" binding="#{agregarDivisionesBean.tblasigubicaciones}">
                         
                         <f:facet name="header">  
-                            Lista de Ubicaciones para: <p:outputLabel  /> 
+                            Lista de Ubicaciones para: <p:outputLabel value="#{agregarDivisionesBean.titulo}" /> 
                         </f:facet> 
                         <p:column headerText="ID" style="text-align: center" >
                             <f:facet name="header">  
@@ -71,21 +71,21 @@ and open the template in the editor.
                             <h:outputText value="#{asig.departamento.nombreDepartamento}"  />  
                         </p:column>
                         <p:column headerText="Acciones" style="width:8%; text-align: center">
-                            
+                            <p:commandButton  title="Eliminar" image="icon-delete" 
+                                              actionListener="#{agregarDivisionesBean.prepararEliminadoUbicacion(asig.idDivisionesUbicacion)}"
+                                              oncomplete="dlgEliminarAsig.show()"/>
                         </p:column>    
-                        
+                            
+                                       
                       
                         <f:facet name="footer">  
-                            En total hay <p:outputLabel  /> ubicaciones.  
+                            En total hay <p:outputLabel value="#{agregarDivisionesBean.total}"  /> ubicaciones.  
                         </f:facet>
                    </p:dataTable>      
-                   <p:commandButton  update=":frmdivision" onclick="dlgNuevo.hide();" value="Cancelar" title="Cancelar" 
-                                          image="icon-cancel" />  
-                       
-                        
-                    
-                       
+                   <p:commandButton  update=":frmnuevadivision" onclick="dlgNuevo.hide();" value="Cancelar" title="Cancelar" 
+                                          image="icon-cancel" />                 
                        
                     </p:dialog>
+                    
     </ui:composition>
 </html>
