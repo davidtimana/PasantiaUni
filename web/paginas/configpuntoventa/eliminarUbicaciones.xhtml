@@ -11,15 +11,14 @@ and open the template in the editor.
     <ui:composition>
         <h:form id="comelimiubi" >
             
-        <p:confirmDialog id="dlgEliminarAsig" message="¿Desea Eliminar Este Ubicacion?"  
-                         header="Eliminar Ubicacion" severity="alert" widgetVar="dlgEliminarAsig" 
-                         appendToBody="false">                
+            <p:dialog id="dlgEliminarAsig" header="¿Desea eliminar la ubicación seleccionada?"  widgetVar="dlgEliminarAsig" 
+                      binding="#{eliminarDivisionesBean.dlgcomfireliminarubic}" modal="true" closable="false" resizable="false" styleClass="addDialog" appendToBody="true"  >                
                 <p:commandButton  update=":frmnuevadivision:tablaasig,:frmnuevadivision:departamento" oncomplete="dlgEliminarAsig.hide()" 
-                                  actionListener="#{agregarDivisionesBean.eliminarUbicacion()}" value="Eliminar" 
+                                  actionListener="#{eliminarDivisionesBean.eliminarUbicacion()}" value="Eliminar" 
                                   title="Actualizar" image="icon-guardar"  />
                 <p:commandButton  onclick="dlgEliminarAsig.hide();" value="Cancelar" 
                                   title="Cancelar" image="icon-cancel" />                       
-            </p:confirmDialog>  
+            </p:dialog>  
         
       </h:form>
     </ui:composition>

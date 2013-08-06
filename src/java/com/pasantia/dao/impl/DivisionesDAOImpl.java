@@ -8,6 +8,7 @@ import com.pasantia.conexion.ConexionHibernate;
 import com.pasantia.dao.DivisionesDAO;
 import com.pasantia.dao.PaisDAO;
 import com.pasantia.entidades.Divisiones;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,8 +20,9 @@ import org.hibernate.Session;
 public class DivisionesDAOImpl implements DivisionesDAO{
 
     @Override
-    public void insertarDivisiones(Divisiones divisiones) {
+    public boolean insertarDivisiones(Divisiones divisiones) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
+        boolean resultado=false;
         String descripcion="";
         try{            
             session.beginTransaction();
@@ -30,18 +32,22 @@ public class DivisionesDAOImpl implements DivisionesDAO{
             divisiones.setNombreDivision(descripcion);
             session.save(divisiones);
             session.beginTransaction().commit();
+            resultado=true;
             }catch(Exception e){
             System.out.println("Error en insertar "+e.getMessage());
             session.beginTransaction().rollback();
+            resultado=false;
         }finally{
             session.close();
         }
+        return resultado;
     }
 
     @Override
-    public void actualizarDivisiones(Divisiones divisiones) {
+    public boolean actualizarDivisiones(Divisiones divisiones) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
         String descripcion="";
+        boolean result=false;
         try{
             session.beginTransaction();
             descripcion=divisiones.getNombreDivision();
@@ -49,14 +55,17 @@ public class DivisionesDAOImpl implements DivisionesDAO{
             descripcion=descripcion.trim();
             divisiones.setNombreDivision(descripcion);
             session.update(divisiones);
-            session.beginTransaction().commit();            
+            session.beginTransaction().commit();  
+            result=true;
         }catch(Exception e){
             System.out.println("Error en actualizar "+e.getMessage());
             session.beginTransaction().rollback();
+            result=false;
         }
         finally{
             session.close();
         }
+        return result;
     }
 
     @Override
@@ -70,7 +79,7 @@ public class DivisionesDAOImpl implements DivisionesDAO{
         }catch(Exception e){
             System.out.println("Error al eliminar "+e.getMessage());
             session.beginTransaction().rollback();
-            return true;
+            return false;
         }
         finally{
             session.close();
@@ -89,7 +98,7 @@ public class DivisionesDAOImpl implements DivisionesDAO{
             
         }catch(Exception e){
             divisiones=null;
-            System.out.println("Error al buscar el id: "+id+" :"+e.getMessage());
+            System.err.println("Error al buscar el id: "+id+" :"+e.getMessage());
         }
         finally{
             System.out.println("Cerrando la session hibernate");
@@ -101,15 +110,40 @@ public class DivisionesDAOImpl implements DivisionesDAO{
     @Override
     public List<Divisiones> buscartodasDivisiones() {
         Session session = ConexionHibernate.getSessionFactory().openSession();
-        return session.createQuery("from Divisiones").list();
+        List<Divisiones> divisiones= new ArrayList<Divisiones>();        
+        try {
+            Query q=session.createQuery("from Divisiones");
+            divisiones=q.list();
+        } catch (Exception e) {
+            divisiones=null;
+            System.err.println("Error al buscar todas las divisiones: "+e.getMessage());
+            session.beginTransaction().rollback();
+        } finally {
+            session.close();            
+        }
+        
+        return divisiones;
+        
     }
 
     @Override
     public Divisiones buscarDivisionesporNombre(String nombre) {
-        Session session = ConexionHibernate.getSessionFactory().openSession();        
-        Query q=session.createQuery("from Divisiones as d where d.nombreDivision= :nombre");
-        q.setString("nombre", nombre);        
-        return (Divisiones)(q.uniqueResult());
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        Divisiones divisiones = null;
+        try {
+            Query q = session.createQuery("from Divisiones as d where d.nombreDivision= :nombre");
+            q.setString("nombre", nombre);
+            divisiones = (Divisiones) (q.uniqueResult());
+
+        } catch (Exception e) {
+            divisiones = null;
+            System.err.println("Error al buscar el nombre: " + nombre + " :" + e.getMessage());
+        } finally {
+            System.out.println("Cerrando la session hibernate en buscarDivisionesporNombre");
+            session.close();
+        }
+
+        return divisiones;
     }
 
     @Override

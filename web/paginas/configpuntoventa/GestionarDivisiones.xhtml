@@ -11,7 +11,7 @@
     </ui:define>
 
     <ui:define name="abajo">
-       <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true"  />     
+        <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true"  />     
     </ui:define>
 
     <ui:define name="izquierda">
@@ -23,81 +23,87 @@
     </ui:define>
 
     <ui:define name="cuerpo">
-        
+
         <p:growl id="growl"  sticky="true"  />
         <h:form>                    
-                    <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
-                        <h:panelGrid columns="2" cellpadding="10">  
-                            <p:commandButton value="&nbsp;Nueva Division" title="Crear Una Nueva Division" image="icon-add" onclick="dlgNuevo.show();"
-                                             actionListener="#{agregarDivisionesBean.prepararGuardadoDelasDivisiones()}" oncomplete="dlgNuevo.show()"
-                                             update=":frmnuevadivision:dlgNuevo"/>                            
-                            <h:outputText value="Agregar una nueva division."/>
-                        </h:panelGrid>  
-                    </p:fieldset>  
-                </h:form><br/>
-                
-                
+            <p:fieldset legend="Opciones" toggleable="true" toggleSpeed="500">         
+                <h:panelGrid columns="2" cellpadding="6">  
+                    <p:commandButton value="&nbsp;Nueva Division" title="Crear Una Nueva Division" image="icon-add"
+                                     actionListener="#{agregarDivisionesBean.prepararGuardadoDelasDivisiones()}" 
+                                     update=":frmnuevadivision:dlgNuevo"/>                                                        
+                    <p:commandButton value="&nbsp;Asignar Ubicaciones" title="Asignar Ubicaciones" image="icon-add" onclick="dlgNuevo.show();"
+                                     actionListener="#{agregarDivisionesBean.prepararGuardadoDelasDivisiones()}" oncomplete="dlgNuevo.show()"
+                                     update=":frmnuevadivision:dlgNuevo"/>                                                        
+                </h:panelGrid>  
+            </p:fieldset>  
+        </h:form><br/>
+
+
         <!--Form: Tabla De Cargos -->                           
-                <h:form id="frmdivision">        
-                    <p:dataTable id="datatable" var="divisiones" value="#{divisionesBean.divisioneslista}" sortMode="multiple"  emptyMessage="No hay Divisiones disponibles"
-                                 paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
-                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
-                        
-                        <f:facet name="header">  
-                            Lista de Divisiones 
-                        </f:facet> 
-                        <p:column headerText="ID" style="text-align: center" sortBy="#{divisiones.idDivisiones}" filterBy="#{divisiones.idDivisiones}">
-                            <f:facet name="header">  
-                                Codigo Division 
-                            </f:facet>  
-                            <h:outputText value="#{divisiones.idDivisiones}" />  
-                        </p:column>
-                        <p:column headerText="Descripcion" style="text-align: center" sortBy="#{divisiones.nombreDivision}" filterBy="#{divisiones.nombreDivision}">  
-                            <h:outputText value="#{divisiones.nombreDivision}"  />  
-                        </p:column>
-                        <p:column headerText="Ubicacion" style="text-align: center" >  
-                            <p:commandButton  title="&nbsp;Visualizar Ubicaciones" binding="#{controlMapaBean.btngeolocalizacion}"  
-                                              actionListener="#{controlMapaBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}"
-                                              oncomplete="dlgMapa.show();" update=":frmubicacionMapa,:frmubicacionMapa:mapa1" 
-                                              icon="ui-icon-pin-s" >
-                                
-                            </p:commandButton>
-                                 
-                        </p:column>
-                        
-                        <p:column headerText="Acciones" style="width:8%; text-align: center">
-                            <p:commandButton oncomplete="dlgEditar.show();"  update=":frmeditardivisiones:des1" actionListener="#{editarDivisionesBean.cargarEdicion(divisiones.idDivisiones)}"   
-                                      title="&nbsp;Editar" image="icon-edit" />          
-                                      
-                        </p:column>
-                        <f:facet name="footer">  
-                            En total hay #{divisionesBean.totalDivisiones()} divisiones.  
-                        </f:facet>
-                   </p:dataTable>      
-                </h:form>
-                
+        <h:form id="frmdivision">        
+            <p:dataTable id="datatable" var="divisiones" value="#{divisionesBean.divisioneslista}" sortMode="multiple"  emptyMessage="No hay Divisiones disponibles"
+                         paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                         {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+
+                <f:facet name="header">  
+                    Lista de Divisiones 
+                </f:facet> 
+                <p:column headerText="ID" style="text-align: center" sortBy="#{divisiones.idDivisiones}" filterBy="#{divisiones.idDivisiones}">
+                    <f:facet name="header">  
+                        Codigo Division 
+                    </f:facet>  
+                    <h:outputText value="#{divisiones.idDivisiones}" />  
+                </p:column>
+                <p:column headerText="Descripcion" style="text-align: center" sortBy="#{divisiones.nombreDivision}" filterBy="#{divisiones.nombreDivision}">  
+                    <h:outputText value="#{divisiones.nombreDivision}"  />  
+                </p:column>
+                <p:column headerText="Ubicacion" style="text-align: center" >  
+                    <p:commandButton  title="&nbsp;Visualizar Ubicaciones" binding="#{controlMapaBean.btngeolocalizacion}"  
+                                      actionListener="#{controlMapaBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}"
+                                      oncomplete="dlgMapa.show();" update=":frmubicacionMapa,:frmubicacionMapa:mapa1" 
+                                      icon="ui-icon-pin-s" >
+
+                    </p:commandButton>
+
+                </p:column>
+
+                <p:column headerText="Acciones" style="width:8%; text-align: center">
+                    <p:commandButton update=":frmeditardivisiones:dlgEditardivision" 
+                                     actionListener="#{editarDivisionesBean.cargarEdicion(divisiones.idDivisiones)}"   
+                                     title="&nbsp;Editar" image="icon-edit" />          
+                    <p:commandButton update=":frmeliminardivisiones:dlgEliminardivision" 
+                                     actionListener="#{eliminarDivisionesPriBean.cargarEliminadoDivision(divisiones)}"   
+                                     title="&nbsp;Eliminar" image="icon-delete" />          
+
+                </p:column>
+                <f:facet name="footer">  
+                    En total hay #{divisionesBean.totalDivisiones()} divisiones.  
+                </f:facet>
+            </p:dataTable>      
+        </h:form>
+
         <!--Form: Nuevo Cargo -->          
         <h:form id="frmnuevadivision">
             <ui:include src="frmagregardivision.xhtml" />
         </h:form>
-            
+
         <!--formulario ubicacion en mapa-->
         <h:form id="frmubicacionMapa">
             <ui:include src="UbicacionMapa.xhtml"  />           
         </h:form>
-             
+
         <!-- Formulario editar divisiones -->            
         <h:form id="frmeditardivisiones" >                
             <ui:include src="frmeditardivision.xhtml" />                
         </h:form>
-                
-                
+
+
         <!-- Formulario eliminar divisiones -->
         <h:form id="frmeliminardivisiones">                                
             <ui:include src="frmeliminardivision.xhtml"/>
         </h:form>
-        
-        
+
+
     </ui:define>
 
 </ui:composition>

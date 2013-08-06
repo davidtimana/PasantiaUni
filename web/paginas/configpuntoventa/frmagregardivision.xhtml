@@ -8,84 +8,26 @@ and open the template in the editor.
     <ui:composition>
         
         <p:dialog header="Creacion de un nueva division" widgetVar="dlgNuevo" resizable="false" 
-                              id="dlgNuevo" showEffect="explode" hideEffect="explode"  modal="false"  width="1000" height="500" 
-                              minimizable="true"  >
+                              id="dlgNuevo" showEffect="explode" hideEffect="explode"  modal="false"  width="600" height="140" 
+                              minimizable="true" binding="#{agregarDivisionesBean.dlgNuevo}" >
             
             <!--<p:growl id="growl"  sticky="true"  />
                         <p:messages id="messagesnuevo" showDetail="true" autoUpdate="true" closable="true"  /> -->
                        <p:panel header="Agregar Division" toggleable="true" toggleOrientation="horizontal">  
-                            <h:panelGrid id="espacio1" columns="3" cellpadding="1" style="margin:0 auto;">                             
+                            <h:panelGrid id="espacio1" columns="2" cellpadding="2" style="margin:0 auto;">                             
                                 <p:outputLabel value="Nombre De la División" />
                                 <p:inputText id="des"  value="#{agregarDivisionesBean.descripcion}"   style="width: 300px" 
-                                             binding="#{agregarDivisionesBean.txtdescripcioning}" />
-                                <p:commandButton  update=":frmdivision:datatable,:frmnuevadivision"
-                                                  binding="#{agregarDivisionesBean.btnagregardivision}"
+                                              />
+                                <p:commandButton  update=":frmdivision:datatable,:frmnuevadivision:des"                                                 
                                           action="#{agregarDivisionesBean.guardarNuevaDivision()}"  value="Agregar Division" 
                                           title="Agregar Division" image="icon-add" />                        
+                                <p:commandButton  update=":frmdivision:datatable,:frmnuevadivision:dlgNuevo"                                                 
+                                                  action="#{agregarDivisionesBean.cancelarNuevaDivision()}"  value="Cancelar" 
+                                          title="Cancelar" image="icon-cancel" />                        
                             </h:panelGrid>
-                       </p:panel>   
-                           <p:panel header="Asignar Departamentos" toggleable="true" toggleOrientation="horizontal">  
-                       <h:panelGrid  id="espacio2" columns="4" cellpadding="2" style="margin:0 auto"  >
-                           <p:outputLabel value="País"  />
-                                <p:selectOneMenu id="pais" value="#{agregarDivisionesBean.secpais}" binding="#{agregarDivisionesBean.cmbpais}" 
-                            validatorMessage="Debe seleccionar Pais" effect="fold" filter="true" filterMatchMode="startsWith"
-                            disabled="true">  
-                                    <f:selectItem itemLabel="...Seleccione..." itemValue="" />  
-                                    <f:selectItems value="#{agregarDivisionesBean.paisescombo}"  />
-                                    <p:ajax update="frmnuevadivision:departamento" 
-                                            listener="#{agregarDivisionesBean.cargarListaDepartamentoxpais()}" />                                                                  
-                                </p:selectOneMenu>                  
-                                
-                                <p:outputLabel value="Departamento"  />
-                                <p:selectOneMenu id="departamento" value="#{agregarDivisionesBean.secdepartamento}" 
-                                                 binding="#{agregarDivisionesBean.cmbdepartamento}" filter="true" filterMatchMode="startsWith" >  
-                                    <f:selectItem itemLabel="...Seleccione..."  />  
-                                    <f:selectItems value="#{agregarDivisionesBean.departamentoscombo}"  />                                      
-                                </p:selectOneMenu>                         
-                        
-                       </h:panelGrid>
-                       </p:panel >
-                        <p:separator id="customSeparator2" style="width:900px;height:2px" />
-                        
-                        <p:commandButton  update=":frmnuevadivision:tablaasig,:frmnuevadivision:departamento,:frmnuevadivision:pais"    
-                                          value="Agregar Ubicacion" title="Agregar Ubicacion" image="icon-add"
-                                          action="#{agregarDivisionesBean.asignarDepartamentoaUbicacion()}"  />
-                        
-                        <p:dataTable  id="tablaasig" var="asig" value="#{agregarDivisionesBean.divisionesUbicacionGuardadas}" sortMode="multiple"  
-                                 paginator="true" rows="5" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
-                                 {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" binding="#{agregarDivisionesBean.tblasigubicaciones}">
-                        
-                        <f:facet name="header">  
-                            Lista de Ubicaciones para: <p:outputLabel value="#{agregarDivisionesBean.titulo}" /> 
-                        </f:facet> 
-                        <p:column headerText="ID" style="text-align: center" >
-                            <f:facet name="header">  
-                                Codigo Ubicacion 
-                            </f:facet>  
-                            <h:outputText value="#{asig.idDivisionesUbicacion}" />  
-                        </p:column>
-                            <p:column headerText="Pais" style="text-align: center" >  
-                                <h:outputText value="#{asig.departamento.pais.nombrePais}"  />  
-                        </p:column>                
-                        <p:column headerText="Departamento" style="text-align: center" >  
-                            <h:outputText value="#{asig.departamento.nombreDepartamento}"  />  
-                        </p:column>
-                        <p:column headerText="Acciones" style="width:8%; text-align: center">
-                            <p:commandButton  title="Eliminar" image="icon-delete" 
-                                              actionListener="#{agregarDivisionesBean.prepararEliminadoUbicacion(asig.idDivisionesUbicacion)}"
-                                              oncomplete="dlgEliminarAsig.show()"/>
-                        </p:column>    
-                            
-                                       
-                      
-                        <f:facet name="footer">  
-                            En total hay <p:outputLabel value="#{agregarDivisionesBean.total}"  /> ubicaciones.  
-                        </f:facet>
-                   </p:dataTable>      
-                   <p:commandButton  update=":frmnuevadivision" onclick="dlgNuevo.hide();" value="Cancelar" title="Cancelar" 
-                                          image="icon-cancel" />                 
-                       
-                    </p:dialog>
+                       </p:panel>  
+        </p:dialog>
+                    
                     
     </ui:composition>
 </html>

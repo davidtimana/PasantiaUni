@@ -17,13 +17,13 @@ public interface DivisionesDAO {
      * insercion de un nueva division
      * @param division 
      */
-    public void insertarDivisiones(Divisiones divisiones);
+    public boolean insertarDivisiones(Divisiones divisiones);
     /**
      *Metodo que se encarga de la
      * actualizacion de un nueva division
      * @param division 
      */
-    public void actualizarDivisiones(Divisiones divisiones);
+    public boolean actualizarDivisiones(Divisiones divisiones);
     /**
      *Metodo que se encarga de 
      * eliminar una division

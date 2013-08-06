@@ -15,3 +15,7 @@
 }
 .campo {color: #757575}
 
+.addDialog {
+    z-index: 2000 !important;
+}
+
