@@ -4,6 +4,7 @@
  */
 package com.pasantia.dao;
 
+import com.pasantia.entidades.Departamento;
 import com.pasantia.entidades.DivisionesUbicacion;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface DivisionesUbicacionDAO {
      * a los cuales pertenece
      * @param divisionesUbicacion 
      */
-    public void insertarDivisionesUbicacion(DivisionesUbicacion divisionesUbicacion);
+    public boolean insertarDivisionesUbicacion(DivisionesUbicacion divisionesUbicacion);
     
     /**
      *Metodo que se encarga
@@ -62,5 +63,15 @@ public interface DivisionesUbicacionDAO {
      * @param id 
      */
     public DivisionesUbicacion buscarubicacionesxid(Integer id);
+    
+     /**
+     *Metodo que se encarga
+     * de buscar las asignaciones
+     * de ubicacion por el id de la division
+     * de la ubicacion
+     * @param id 
+     */
+    public List<Departamento> buscarUbicacionesxIdDivision(Integer id);
+    
     
 }

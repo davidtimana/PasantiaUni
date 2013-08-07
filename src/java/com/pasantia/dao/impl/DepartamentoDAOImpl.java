@@ -25,7 +25,7 @@ public class DepartamentoDAOImpl implements DepartamentoDAO{
     @Override
     public List<Departamento> buscartodosDepartamentos() {
         Session session = ConexionHibernate.getSessionFactory().openSession();        
-        return session.createQuery("from Departamento").list();
+        return session.createQuery("from Departamento d order by d.nombreDepartamento").list();
     }
 
     @Override

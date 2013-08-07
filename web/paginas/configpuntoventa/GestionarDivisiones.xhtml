@@ -30,10 +30,8 @@
                 <h:panelGrid columns="2" cellpadding="6">  
                     <p:commandButton value="&nbsp;Nueva Division" title="Crear Una Nueva Division" image="icon-add"
                                      actionListener="#{agregarDivisionesBean.prepararGuardadoDelasDivisiones()}" 
-                                     update=":frmnuevadivision:dlgNuevo"/>                                                        
-                    <p:commandButton value="&nbsp;Asignar Ubicaciones" title="Asignar Ubicaciones" image="icon-add" onclick="dlgNuevo.show();"
-                                     actionListener="#{agregarDivisionesBean.prepararGuardadoDelasDivisiones()}" oncomplete="dlgNuevo.show()"
-                                     update=":frmnuevadivision:dlgNuevo"/>                                                        
+                                     update=":frmnuevadivision:dlgNuevo"/>                                                       
+                                                                         
                 </h:panelGrid>  
             </p:fieldset>  
         </h:form><br/>
@@ -47,35 +45,70 @@
 
                 <f:facet name="header">  
                     Lista de Divisiones 
-                </f:facet> 
-                <p:column headerText="ID" style="text-align: center" sortBy="#{divisiones.idDivisiones}" filterBy="#{divisiones.idDivisiones}">
+                </f:facet>
+                <p:ajax event="rowToggle" listener="#{divisionesBean.desplegarFila(divisiones)}" update=":frmdivision:datatable:tblexpandible" />  
+                <p:column style="width:2%">  
+                    <p:rowToggler />  
+                </p:column>  
+                <p:column headerText="ID" style="4%; text-align: center" sortBy="#{divisiones.idDivisiones}" filterBy="#{divisiones.idDivisiones}">
                     <f:facet name="header">  
                         Codigo Division 
                     </f:facet>  
                     <h:outputText value="#{divisiones.idDivisiones}" />  
                 </p:column>
-                <p:column headerText="Descripcion" style="text-align: center" sortBy="#{divisiones.nombreDivision}" filterBy="#{divisiones.nombreDivision}">  
+                <p:column headerText="Descripcion" style="14%; text-align: center" sortBy="#{divisiones.nombreDivision}" filterBy="#{divisiones.nombreDivision}">  
                     <h:outputText value="#{divisiones.nombreDivision}"  />  
                 </p:column>
-                <p:column headerText="Ubicacion" style="text-align: center" >  
+                <p:column headerText="Ubicación " style="4%; text-align: center" >  
                     <p:commandButton  title="&nbsp;Visualizar Ubicaciones" binding="#{controlMapaBean.btngeolocalizacion}"  
                                       actionListener="#{controlMapaBean.prepararCargaGeolocalizacion(divisiones.idDivisiones)}"
                                       oncomplete="dlgMapa.show();" update=":frmubicacionMapa,:frmubicacionMapa:mapa1" 
                                       icon="ui-icon-pin-s" >
-
                     </p:commandButton>
 
                 </p:column>
 
-                <p:column headerText="Acciones" style="width:8%; text-align: center">
+                <p:column headerText="Acciones" style="6%; text-align: center">
                     <p:commandButton update=":frmeditardivisiones:dlgEditardivision" 
                                      actionListener="#{editarDivisionesBean.cargarEdicion(divisiones.idDivisiones)}"   
-                                     title="&nbsp;Editar" image="icon-edit" />          
+                                     title="&nbsp;Editar" image="icon-edit"  />          
                     <p:commandButton update=":frmeliminardivisiones:dlgEliminardivision" 
                                      actionListener="#{eliminarDivisionesPriBean.cargarEliminadoDivision(divisiones)}"   
-                                     title="&nbsp;Eliminar" image="icon-delete" />          
-
+                                     title="&nbsp;Eliminar" image="icon-delete" />
+                    
+                    <p:commandButton id="btnasig" update=":asignarDepartamentosaDivision:dlgasignar,:asignarDepartamentosaDivision:tbldepartamentos" 
+                                     actionListener="#{asignarDepartamentosaDivision.cargarAsignacion(divisiones)}"   
+                                     title="Asignar Departamentos" image="icon-add" >                        
+                    </p:commandButton>
+                    
                 </p:column>
+                
+                <p:rowExpansion> 
+
+                    
+                    <p:dataTable id="tblexpandible"
+                                 var="ubic" 
+                                 value="#{divisionesBean.departamentosAsociados}"  
+                                 emptyMessage="No hay Ubicaciones disponibles"
+                                 style="width:100%;" 
+                                 paginator="true" 
+                                 rows="3" 
+                                 paginatorPosition="bottom" 
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                                                    {PreviousPageLink} {PageLinks} {NextPageLink} 
+                                                    {LastPageLink} {RowsPerPageDropdown}">
+                        <p:column headerText="Id " style="4%; text-align: center" >  
+                            <h:outputText  value="#{ubic.idDepartamento}" />  
+                        </p:column>
+                        <p:column headerText="Nombre Departamento" style="4%; text-align: center" >  
+                            <h:outputText  value="#{ubic.nombreDepartamento}" /> 
+                        </p:column>
+                        <f:facet name="footer">  
+                            En total hay #{divisionesBean.totalUbicaciones()} ubicaciones.  
+                </f:facet>
+                    </p:dataTable>                    
+
+                </p:rowExpansion>  
                 <f:facet name="footer">  
                     En total hay #{divisionesBean.totalDivisiones()} divisiones.  
                 </f:facet>
@@ -97,12 +130,15 @@
             <ui:include src="frmeditardivision.xhtml" />                
         </h:form>
 
-
         <!-- Formulario eliminar divisiones -->
         <h:form id="frmeliminardivisiones">                                
             <ui:include src="frmeliminardivision.xhtml"/>
         </h:form>
-
+        
+        <!-- Formulario asignar departamentos a division -->
+        <h:form id="asignarDepartamentosaDivision">
+            <ui:include src="asignarDepartamentosaDivision.xhtml" />
+        </h:form>
 
     </ui:define>
 

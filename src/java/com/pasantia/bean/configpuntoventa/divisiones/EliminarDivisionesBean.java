@@ -18,7 +18,7 @@ import org.primefaces.component.dialog.Dialog;
 
 /**
  *
- * @author root
+ * @author David Timaná
  */
 @Named(value = "eliminarDivisionesPriBean")
 @ApplicationScoped
