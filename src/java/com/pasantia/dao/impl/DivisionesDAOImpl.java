@@ -22,22 +22,22 @@ public class DivisionesDAOImpl implements DivisionesDAO{
     @Override
     public boolean insertarDivisiones(Divisiones divisiones) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
-        boolean resultado=false;
-        String descripcion="";
-        try{            
+        boolean resultado = false;
+        String descripcion = "";
+        try {
             session.beginTransaction();
-            descripcion=divisiones.getNombreDivision();
-            descripcion=descripcion.toUpperCase();
-            descripcion=descripcion.trim();
+            descripcion = divisiones.getNombreDivision();
+            descripcion = descripcion.toUpperCase();
+            descripcion = descripcion.trim();
             divisiones.setNombreDivision(descripcion);
             session.save(divisiones);
             session.beginTransaction().commit();
-            resultado=true;
-            }catch(Exception e){
-            System.out.println("Error en insertar "+e.getMessage());
+            resultado = true;
+        } catch (Exception e) {
+            System.err.println("Error en insertar " + e.getMessage());
             session.beginTransaction().rollback();
-            resultado=false;
-        }finally{
+            resultado = false;
+        } finally {
             session.close();
         }
         return resultado;

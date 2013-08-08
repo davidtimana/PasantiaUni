@@ -13,65 +13,70 @@ import java.util.List;
  * @author david
  */
 public interface DivisionesUbicacionDAO {
+
     /**
-     *Metodo que se encarga
-     * de guardar los departamentos
-     * a los cuales pertenece
-     * @param divisionesUbicacion 
+     * Metodo que se encarga de guardar los departamentos a los cuales pertenece
+     *
+     * @param divisionesUbicacion
      */
     public boolean insertarDivisionesUbicacion(DivisionesUbicacion divisionesUbicacion);
-    
+
     /**
-     *Metodo que se encarga
-     * de eliminar los departamentos
-     * a los cuales pertenece
+     * Metodo que se encarga de eliminar los departamentos a los cuales
+     * pertenece
+     *
      * @param divisionesUbicacion
-     * @return  
+     * @return
      */
     public boolean eliminarDivisionesUbicacion(DivisionesUbicacion divisionesUbicacion);
-    
+
     /**
-     *Metodo que se encarga
-     * de buscar las asignaciones
-     * de ubicacion para las divisiones
-     * @return  
+     * Metodo que se encarga de buscar las asignaciones de ubicacion para las
+     * divisiones
+     *
+     * @return
      */
     public List<DivisionesUbicacion> buscarubicaciones();
-    
+
     /**
-     *Metodo que se encarga
-     * de buscar las asignaciones
-     * de ubicacion para las divisiones
+     * Metodo que se encarga de buscar las asignaciones de ubicacion para las
+     * divisiones
+     *
      * @param id
-     * @return List<DivisionesUbicacion> 
+     * @return List<DivisionesUbicacion>
      */
     public List<DivisionesUbicacion> buscarubicacionesxiddivision(Integer id);
-    
+
     /**
-     *Metodo que se encarga
-     * de buscar las asignaciones
-     * de ubicacion por departamentos
-     * @param id 
+     * Metodo que se encarga de buscar las asignaciones de ubicacion por
+     * departamentos
+     *
+     * @param id
      */
     public List<DivisionesUbicacion> buscarubicacionesxidDepartamento(Integer id);
-    
+
     /**
-     *Metodo que se encarga
-     * de buscar las asignaciones
-     * de ubicacion por el id de la division
-     * de la ubicacion
-     * @param id 
+     * Metodo que se encarga de buscar las asignaciones de ubicacion por el id
+     * de la division de la ubicacion
+     *
+     * @param id
      */
     public DivisionesUbicacion buscarubicacionesxid(Integer id);
-    
-     /**
-     *Metodo que se encarga
-     * de buscar las asignaciones
-     * de ubicacion por el id de la division
-     * de la ubicacion
-     * @param id 
+
+    /**
+     * Metodo que se encarga de buscar las asignaciones de ubicacion por el id
+     * de la division de la ubicacion
+     *
+     * @param id
      */
     public List<Departamento> buscarUbicacionesxIdDivision(Integer id);
-    
-    
+
+    /**
+     * Metodo que se encarga de buscar las asignaciones de ubicacion por el id
+     * de la division de la ubicacion y el departamento
+     *
+     * @param idDivision
+     * @param idDepartamento
+     */
+    public DivisionesUbicacion buscarUbicacionesxIdDivisionYIdDepartamento(Integer idDivision, Integer idDepartamento);
 }

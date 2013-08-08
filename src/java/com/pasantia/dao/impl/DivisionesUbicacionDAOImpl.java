@@ -103,7 +103,7 @@ public class DivisionesUbicacionDAOImpl implements DivisionesUbicacionDAO{
     @Override
     public DivisionesUbicacion buscarubicacionesxid(Integer id) {
         Session session = ConexionHibernate.getSessionFactory().openSession();
-        DivisionesUbicacion divisionUbicacion=null;;
+        DivisionesUbicacion divisionUbicacion=null;
         try{
             Query q=session.createQuery("from DivisionesUbicacion as d where d.idDivisionesUbicacion=:id");
             q.setInteger("id", id);
@@ -152,6 +152,38 @@ public class DivisionesUbicacionDAOImpl implements DivisionesUbicacionDAO{
         }       
       
         return departamentos;
+    }
+
+    @Override
+    public DivisionesUbicacion buscarUbicacionesxIdDivisionYIdDepartamento(Integer idDivision, Integer idDepartamento) {
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        DivisionesUbicacion divisionUbicacion = null;
+        String jpql = "";
+        try {
+            jpql = " SELECT "
+                    + " d "
+                    + " FROM "
+                    + " DivisionesUbicacion d "
+                    + " WHERE "
+                    + " d.departamento.idDepartamento=:idDepartamento "
+                    + " AND "
+                    + " d.divisiones.idDivisiones=:idDivision ";            
+            Query q = session.createQuery(jpql);
+            q.setInteger("idDepartamento", idDepartamento);
+            q.setInteger("idDivision", idDivision);
+            divisionUbicacion = (DivisionesUbicacion) q.uniqueResult();
+
+        } catch (Exception e) {
+            System.out.println("Error en buscar x id Ubicacion " + e.getMessage());
+            session.beginTransaction().rollback();
+            divisionUbicacion = null;
+        } finally {
+            System.out.println("cerrando la sesion en buscarubicacionesxiddivisionyidDepartamento");
+            session.flush();
+            session.close();
+        }
+
+        return divisionUbicacion;
     }
     
 }
