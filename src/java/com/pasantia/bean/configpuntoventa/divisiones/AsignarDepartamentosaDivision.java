@@ -42,7 +42,7 @@ public class AsignarDepartamentosaDivision {
     //http://www.primefaces.org/showcase/ui/stack.jsf    
     
     private Dialog dlgasignar;
-    private List<Departamento> departamentos,departamentosSeleccionados,departamentostemp;
+    private List<Departamento> departamentos,departamentosSeleccionados;
     private DepartamentoDAO departamentoDAO;
     private List<DivisionesUbicacion> divisionesUbicacion,divisionesUbicacionlistcomprobar,divisionesUbicacionValidar,divisionesUbicacionCargar;
     private DivisionesUbicacionDAO divisionesUbicacionDAO;
@@ -136,42 +136,50 @@ public class AsignarDepartamentosaDivision {
     }
     
     public void editarAsignaciones() {
-        Boolean encontrado=false;
-        DivisionesUbicacion divUbicacion = new DivisionesUbicacion();        
         
         
-        for (int i = 0; i < departamentostemp.size(); i++) {
-            Departamento p = departamentostemp.get(i);        
-            for (Departamento de : departamentosSeleccionados) {
-                if(p.getIdDepartamento()==de.getIdDepartamento()){                    
-                    encontrado=true;
-                    break;
-                }else{
-                    encontrado=false;                    
-                }              
-            }
-            if(encontrado){
-                System.out.println("********************ELEMENTO ENCONTRADO: "+p.getNombreDepartamento());
-            } else {
-                System.out.println("********************ELEMENTO NOOOOO ENCONTRADO: " + p.getNombreDepartamento());                
-                divUbicacion = divisionesUbicacionDAO.buscarUbicacionesxIdDivisionYIdDepartamento(division.getIdDivisiones(),p.getIdDepartamento());
-                if (divUbicacion != null) {
-                    
-                    if(divisionesUbicacionDAO.eliminarDivisionesUbicacion(divUbicacion)){
-                        System.out.println("divisionUbicacion eliminada correctamente");
-                    }else{
-                        System.err.println("divisionUbicacion no eliminada");
-                    }
-                } else {
-                    System.err.println("no encontro la divisionUbicacion");
-                }
-
-
-            }
-            
-
-
+        if(divisionesUbicacionDAO.eliminarDivisionesUbicacion(division.getIdDivisiones())){
+            System.out.println("Datos eliminados correctamente");
+        }else{
+            System.err.println("Datos NO eliminados correctamente");
         }
+        
+//        Boolean encontrado=false;
+//        DivisionesUbicacion divUbicacion = new DivisionesUbicacion();        
+//        
+//        
+//        for (int i = 0; i < departamentostemp.size(); i++) {
+//            Departamento p = departamentostemp.get(i);        
+//            for (Departamento de : departamentosSeleccionados) {
+//                if(p.getIdDepartamento()==de.getIdDepartamento()){                    
+//                    encontrado=true;
+//                    break;
+//                }else{
+//                    encontrado=false;                    
+//                }              
+//            }
+//            if(encontrado){
+//                System.out.println("********************ELEMENTO ENCONTRADO: "+p.getNombreDepartamento());
+//            } else {
+//                System.out.println("********************ELEMENTO NOOOOO ENCONTRADO: " + p.getNombreDepartamento());                
+//                divUbicacion = divisionesUbicacionDAO.buscarUbicacionesxIdDivisionYIdDepartamento(division.getIdDivisiones(),p.getIdDepartamento());
+//                if (divUbicacion != null) {
+//                    
+//                    if(divisionesUbicacionDAO.eliminarDivisionesUbicacion(divUbicacion)){
+//                        System.out.println("divisionUbicacion eliminada correctamente");
+//                    }else{
+//                        System.err.println("divisionUbicacion no eliminada");
+//                    }
+//                } else {
+//                    System.err.println("no encontro la divisionUbicacion");
+//                }
+//
+//
+//            }
+//            
+//
+//
+//        }
 
     }
      
@@ -195,8 +203,7 @@ public class AsignarDepartamentosaDivision {
          btnguardarAsig.setStyle("display:block");         
          if (division.getIdDivisiones() != 0 && division.getIdDivisiones() != 0) {
              //divisionesUbicacionCargar = divisionesUbicacionDAO.buscarubicacionesxiddivision(division.getIdDivisiones());
-             departamentosSeleccionados = divisionesUbicacionDAO.buscarUbicacionesxIdDivision(division.getIdDivisiones()); 
-             departamentostemp=departamentosSeleccionados;
+             departamentosSeleccionados = divisionesUbicacionDAO.buscarUbicacionesxIdDivision(division.getIdDivisiones());              
              
          } else {
              Utilidad.mensajeFatal("Carga de Departamentos.", "...ERROR...Al cargar los departamentos seleccionados para la división escojida.");
@@ -210,12 +217,7 @@ public class AsignarDepartamentosaDivision {
     public void guardarNuevaAsignacion() {
         List<Boolean> results = new ArrayList<Boolean>();
         if (division != null && !departamentosSeleccionados.isEmpty()) {
-            for (Departamento departamento : departamentosSeleccionados) {
-                if(departamentostemp.contains(departamento)){
-                    System.out.println("SI ESTA******");
-                }else{
-                    System.out.println("NO ESTA******");
-                }
+            for (Departamento departamento : departamentosSeleccionados) {                
                 divisionubicacion.setDivisiones(division);
                 divisionubicacion.setDepartamento(departamento);
                 if (divisionesUbicacionDAO.insertarDivisionesUbicacion(divisionubicacion)) {
@@ -239,10 +241,11 @@ public class AsignarDepartamentosaDivision {
 
         if (cont == tam) {
             Utilidad.mensajeInfo("Guardar Asignaciones.", "Asignaciones a la división " + division.getNombreDivision() + ". Guardadas Correctamente.");
-            cargarDepartamentosxPais();
+//            cargarDepartamentosxPais();
         } else {
             Utilidad.mensajeFatal("Guardar Asignaciones.", "Ocurrio un error al ejecutar la operación no se pudo asignar ubicaciones a: " + divisionubicacion.getDivisiones().getNombreDivision());
         }
+        tblDepartamentos.setStyle("display:block");   
     }
       
     public AsignarDepartamentosaDivision() {
@@ -432,14 +435,7 @@ public class AsignarDepartamentosaDivision {
     public void setEstaEditando(Boolean estaEditando) {
         this.estaEditando = estaEditando;
     }
-
-    public List<Departamento> getDepartamentostemp() {
-        return departamentostemp;
-    }
-
-    public void setDepartamentostemp(List<Departamento> departamentostemp) {
-        this.departamentostemp = departamentostemp;
-    }
+   
     
     
     

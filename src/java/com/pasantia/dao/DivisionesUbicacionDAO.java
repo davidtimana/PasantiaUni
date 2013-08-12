@@ -79,4 +79,15 @@ public interface DivisionesUbicacionDAO {
      * @param idDepartamento
      */
     public DivisionesUbicacion buscarUbicacionesxIdDivisionYIdDepartamento(Integer idDivision, Integer idDepartamento);
+    
+    /**
+     * Metodo que se encarga de eliminar las asignaciones de ubicacion por el id
+     * de la division de la ubicacion
+     *
+     * @param idDivision
+     
+     */
+    public boolean eliminarDivisionesUbicacionxIdDivision(Integer idDivision);
+
+    public boolean eliminarDivisionesUbicacion(Integer idDivisiones);
 }

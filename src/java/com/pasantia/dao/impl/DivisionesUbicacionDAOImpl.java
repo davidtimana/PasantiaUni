@@ -185,5 +185,68 @@ public class DivisionesUbicacionDAOImpl implements DivisionesUbicacionDAO{
 
         return divisionUbicacion;
     }
+
+    @Override
+    public boolean eliminarDivisionesUbicacionxIdDivision(Integer idDivision) {
+
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        boolean result = false;
+        String jpql = "";
+        try {
+            jpql = " DELETE "
+                    + " d "
+                    + " FROM "
+                    + " DivisionesUbicacion d "
+                    + " WHERE "
+                    + " d.divisiones.idDivisiones=:idDivision ";
+            Query q = session.createQuery(jpql);
+            q.setInteger("idDivision", idDivision);
+            session.beginTransaction().commit();
+            result = true;
+
+        } catch (Exception e) {
+            System.out.println("Error en eliminarDivisionesUbicacionxIdDivision x id Division " + e.getMessage());
+            session.beginTransaction().rollback();
+            result = false;
+        } finally {
+            System.out.println("cerrando la sesion en eliminarDivisionesUbicacionxIdDivision");
+            session.flush();
+            session.close();
+        }
+
+        return result;
+
+
+
+    }
+
+    @Override
+    public boolean eliminarDivisionesUbicacion(Integer idDivisiones) {
+        
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        boolean result = false;
+        String jpql = "";
+        try {
+            jpql = " DELETE "                    
+                    + " DivisionesUbicacion d "
+                    + " WHERE "
+                    + " d.divisiones.idDivisiones=:idDivision ";
+            Query q = session.createQuery(jpql);
+            q.setInteger("idDivision", idDivisiones);
+            session.beginTransaction().commit();
+            result = true;
+
+        } catch (Exception e) {
+            System.out.println("Error en eliminarDivisionesUbicacionxIdDivision x id Division " + e.getMessage());
+            session.beginTransaction().rollback();
+            result = false;
+        } finally {
+            System.out.println("cerrando la sesion en eliminarDivisionesUbicacionxIdDivision");
+            session.flush();
+            session.close();
+        }
+
+        return result;
+    }
     
 }

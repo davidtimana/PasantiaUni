@@ -70,11 +70,11 @@ and open the template in the editor.
                     <p:commandButton id="cancelasig" value="Cancelar" title="Cancelar" 
                                      actionListener="#{asignarDepartamentosaDivision.cancelarAsignacion()}"                                                 
                                      image="icon-cancel"
-                                     update=":asignarDepartamentosaDivision:tbldepartamentos,asignarDepartamentosaDivision:dlgasignar"/>  
+                                     update=":asignarDepartamentosaDivision:tbldepartamentos,asignarDepartamentosaDivision:dlgasignar,:frmdivision:datatable:tblexpandible"/>  
                     <p:commandButton id="guardarasig" value="Guardar Asignación" title="Guardar Asignación" 
                                      actionListener="#{asignarDepartamentosaDivision.guardarAsignacion()}"                                                 
                                      image="icon-add"
-                                     update=":asignarDepartamentosaDivision:tbldepartamentos"
+                                     update=":asignarDepartamentosaDivision:tbldepartamentos,:frmdivision:datatable:tblexpandible"
                                      binding="#{asignarDepartamentosaDivision.btnguardarAsig}"/>                               
 
 
