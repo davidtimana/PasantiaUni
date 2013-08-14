@@ -7,6 +7,7 @@ package com.pasantia.dao.impl;
 import com.pasantia.conexion.ConexionHibernate;
 import com.pasantia.dao.DivisionesUbicacionDAO;
 import com.pasantia.entidades.Departamento;
+import com.pasantia.entidades.Divisiones;
 import com.pasantia.entidades.DivisionesUbicacion;
 import com.sun.xml.ws.api.tx.at.Transactional;
 import java.util.ArrayList;
@@ -247,6 +248,36 @@ public class DivisionesUbicacionDAOImpl implements DivisionesUbicacionDAO{
         }
 
         return result;
+    }
+
+    @Override
+    public List<Divisiones> buscarDivisionesAsociadas() {
+        Session session = ConexionHibernate.getSessionFactory().openSession();
+        List<Divisiones> divisiones = null;
+        String jpql = "";
+        try {
+            jpql = " SELECT "
+                    + " DISTINCT d "
+                    + " FROM "
+                    + " DivisionesUbicacion du "
+                    + " JOIN "
+                    + " du.divisiones d "
+                    + " WHERE "
+                    + " d.idDivisiones=du.divisiones.idDivisiones ";                    
+            Query q = session.createQuery(jpql);            
+            divisiones = (List<Divisiones>)q.list();
+
+        } catch (Exception e) {
+            System.out.println("Error en buscar buscarDivisionesAsociadas " + e.getMessage());
+            session.beginTransaction().rollback();
+            divisiones = null;
+        } finally {
+            System.out.println("cerrando la sesion en buscarDivisionesAsociadas");
+            session.flush();
+            session.close();
+        }
+
+        return divisiones;
     }
     
 }

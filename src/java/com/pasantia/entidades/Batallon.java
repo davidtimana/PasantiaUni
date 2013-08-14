@@ -1,5 +1,5 @@
 package com.pasantia.entidades;
-// Generated 17/07/2013 04:01:51 PM by Hibernate Tools 3.2.1.GA
+// Generated 14/08/2013 07:56:36 AM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.HashSet;
@@ -12,6 +12,7 @@ public class Batallon  implements java.io.Serializable {
 
 
      private Integer idBatallon;
+     private Ciudad ciudad;
      private Divisiones divisiones;
      private Persona persona;
      private String nombreBatallon;
@@ -25,15 +26,16 @@ public class Batallon  implements java.io.Serializable {
     }
 
 	
-    public Batallon(Divisiones divisiones, Persona persona, String nombreBatallon, String telefono1, String direccion, String barrio) {
+    public Batallon(Ciudad ciudad, Divisiones divisiones, String nombreBatallon, String telefono1, String direccion, String barrio) {
+        this.ciudad = ciudad;
         this.divisiones = divisiones;
-        this.persona = persona;
         this.nombreBatallon = nombreBatallon;
         this.telefono1 = telefono1;
         this.direccion = direccion;
         this.barrio = barrio;
     }
-    public Batallon(Divisiones divisiones, Persona persona, String nombreBatallon, String telefono1, String telefono2, String direccion, String barrio, Set casinos) {
+    public Batallon(Ciudad ciudad, Divisiones divisiones, Persona persona, String nombreBatallon, String telefono1, String telefono2, String direccion, String barrio, Set casinos) {
+       this.ciudad = ciudad;
        this.divisiones = divisiones;
        this.persona = persona;
        this.nombreBatallon = nombreBatallon;
@@ -50,6 +52,13 @@ public class Batallon  implements java.io.Serializable {
     
     public void setIdBatallon(Integer idBatallon) {
         this.idBatallon = idBatallon;
+    }
+    public Ciudad getCiudad() {
+        return this.ciudad;
+    }
+    
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
     }
     public Divisiones getDivisiones() {
         return this.divisiones;

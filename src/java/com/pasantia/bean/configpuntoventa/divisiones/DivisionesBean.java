@@ -13,6 +13,7 @@ import com.pasantia.utilidades.Utilidad;
 import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import org.primefaces.event.ToggleEvent;
 
 
@@ -21,7 +22,7 @@ import org.primefaces.event.ToggleEvent;
  * @author David Timana
  */
 @Named(value = "divisionesBean")
-@RequestScoped
+@ViewScoped
 public class DivisionesBean {
                          //******************************Inicio divisionBean*********************************************   
     private DivisionesDAO divisionesDAO;

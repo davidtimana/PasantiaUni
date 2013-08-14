@@ -70,12 +70,12 @@ public class CiudadDAOImpl implements CiudadDAO{
     @Override
     public List<Ciudad> buscarxidDpto(Integer id) {
         Session session = ConexionHibernate.getSessionFactory().openSession();  
-        List list=new ArrayList();
+        List<Ciudad> list=new ArrayList<Ciudad>();
         try{
             
         Query q=session.createQuery("select distinct c from Ciudad as c where c.departamento.idDepartamento= :id");
         q.setInteger("id", id);
-        list=q.list();
+        list=(List<Ciudad>)q.list();
         
         
         }catch(Exception e){
@@ -84,7 +84,7 @@ public class CiudadDAOImpl implements CiudadDAO{
             session.beginTransaction().rollback();
         }
         finally{
-            System.out.println("cerrando la sesion");
+            System.out.println("cerrando la sesion en buscarxidDpto");
             session.close();
         }
         

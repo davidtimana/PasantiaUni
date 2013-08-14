@@ -5,6 +5,7 @@
 package com.pasantia.dao;
 
 import com.pasantia.entidades.Departamento;
+import com.pasantia.entidades.Divisiones;
 import com.pasantia.entidades.DivisionesUbicacion;
 import java.util.List;
 
@@ -90,4 +91,13 @@ public interface DivisionesUbicacionDAO {
     public boolean eliminarDivisionesUbicacionxIdDivision(Integer idDivision);
 
     public boolean eliminarDivisionesUbicacion(Integer idDivisiones);
+    
+    /**
+     * Metodo que se encarga de listar
+     * las divisiones que estan asociadas
+     *     
+     */
+    public List<Divisiones> buscarDivisionesAsociadas();
+    
+    
 }

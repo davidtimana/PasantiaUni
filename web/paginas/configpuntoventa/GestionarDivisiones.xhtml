@@ -41,7 +41,7 @@
         <h:form id="frmdivision">        
             <p:dataTable id="datatable" var="divisiones" value="#{divisionesBean.divisioneslista}" sortMode="multiple"  emptyMessage="No hay Divisiones disponibles"
                          paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
-                         {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+                         {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  >
 
                 <f:facet name="header">  
                     Lista de Divisiones 
@@ -50,7 +50,8 @@
                 <p:column style="width:2%">  
                     <p:rowToggler />  
                 </p:column>  
-                <p:column headerText="ID" style="4%; text-align: center" sortBy="#{divisiones.idDivisiones}" filterBy="#{divisiones.idDivisiones}">
+                <p:column headerText="ID" style="4%; text-align: center" sortBy="#{divisiones.idDivisiones}" filterBy="#{divisiones.idDivisiones}"  
+                >
                     <f:facet name="header">  
                         Codigo Division 
                     </f:facet>  
