@@ -21,10 +21,21 @@ public class BatallonesBean {
 
     private List<Batallon> batallones;
     private BatallonDAO batallonDAO;
+    private ModeloBatallon modeloBatallon;
+    private Batallon batallonSeleccionado;
+    private Boolean visualizarFila;
+    
+    public void cargarFilaSelecionada(){
+        visualizarFila=true;
+        System.out.println("la fila seleccionada es la siguiente---> "+batallonSeleccionado.getNombreBatallon()+batallonSeleccionado.getDireccion());
+    }
     
     public BatallonesBean() {
-        batallonDAO = new BatallonDAOImpl();
+        batallonDAO = new BatallonDAOImpl(); 
+        batallonSeleccionado = new Batallon();
         cargarBatallones();
+        modeloBatallon = new ModeloBatallon(batallones);
+        visualizarFila=false;
     }
     
     public Integer totalBatallones(){
@@ -42,6 +53,36 @@ public class BatallonesBean {
     public void setBatallones(List<Batallon> batallones) {
         this.batallones = batallones;
     }
+
+    public ModeloBatallon getModeloBatallon() {
+        return modeloBatallon;
+    }
+
+    public void setModeloBatallon(ModeloBatallon modeloBatallon) {
+        this.modeloBatallon = modeloBatallon;
+    }
+
+    public Batallon getBatallonSeleccionado() {
+        return batallonSeleccionado;
+    }
+
+    public void setBatallonSeleccionado(Batallon batallonSeleccionado) {
+        this.batallonSeleccionado = batallonSeleccionado;
+    }
+
+    public Boolean getVisualizarFila() {
+        return visualizarFila;
+    }
+
+    public void setVisualizarFila(Boolean visualizarFila) {
+        this.visualizarFila = visualizarFila;
+    }
+    
+    
+    
+    
+    
+    
     
     
     

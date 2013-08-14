@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+    <ui:composition>
+        
+        
+        <p:dialog header="Batallon: #{batallonesBean.batallonSeleccionado.nombreBatallon}" widgetVar="dlgVisualizar" resizable="false" 
+                  id="dlgVisualizar" showEffect="fade" hideEffect="explode"  modal="false"  width="500" height="230" 
+                  minimizable="true"  visible="#{batallonesBean.visualizarFila}">
+
+            <h:panelGrid columns="2" cellpadding="4" style="margin:0 auto;" >
+                <p:outputLabel value="Nombre Batallón: " />
+                <p:outputLabel value=" #{batallonesBean.batallonSeleccionado.nombreBatallon}" />
+                
+                <p:outputLabel value="Ubicacion: " />
+                <p:outputLabel value=" #{batallonesBean.batallonSeleccionado.ciudad.nombreCiudad}" />
+                
+                <p:outputLabel value="Dirección. " />
+                <p:outputLabel value=" #{batallonesBean.batallonSeleccionado.direccion}" />
+                
+                <p:outputLabel value="Barrio: " />
+                <p:outputLabel value=" #{batallonesBean.batallonSeleccionado.barrio}" />
+                
+                <p:outputLabel value="Telefono 1: " />
+                <p:outputLabel value=" #{batallonesBean.batallonSeleccionado.telefono1}" />
+                
+                <p:outputLabel value="Telefono 2: " />
+                <p:outputLabel value=" #{batallonesBean.batallonSeleccionado.telefono2}" />
+                
+                <p:outputLabel value="Division Perteneciente: " />
+                <p:outputLabel value=" #{batallonesBean.batallonSeleccionado.divisiones.nombreDivision}" />
+                
+                <p:outputLabel value="Coronel a Cargo : " />
+                <p:outputLabel value=" #{batallonesBean.batallonSeleccionado.persona.pnombre} #{batallonesBean.batallonSeleccionado.persona.papellido}"/>
+                
+                
+                
+                
+            </h:panelGrid>
+            
+        </p:dialog>
+
+        
+        
+    </ui:composition>
+</html>

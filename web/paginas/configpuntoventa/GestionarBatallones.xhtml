@@ -3,7 +3,8 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./../../plantillas/plantillaprincipal.xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui">>
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core">>
 
     <ui:define name="titulo">
         Gestion De Batallones - SICOVI
@@ -27,16 +28,62 @@
                 <h:panelGrid columns="2" cellpadding="6">  
                     <p:commandButton value="&nbsp;Nuevo Batallon" title="Crear un nuevo batallon" image="icon-add" update=":frmagregarbatallon:dlgNuevo"
                                      actionListener="#{agregarBatallonesBean.cargarGuardadoBatallon()}" 
-                                     />                                                       
-                                                                         
+                                     />                                                                         
                 </h:panelGrid>  
             </p:fieldset>  
         </h:form>
-        
+
+
+        <!--Form: Tabla De Batallones -->                           
+        <h:form id="frmbatallon">        
+            <p:dataTable id="datatable" var="batallon" value="#{batallonesBean.modeloBatallon}" sortMode="multiple"  emptyMessage="No hay Batallones disponibles"
+                         paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport} {FirstPageLink} 
+                         {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                         selection="#{batallonesBean.batallonSeleccionado}" selectionMode="single">
+                
+                <p:ajax event="rowSelect" listener="#{batallonesBean.cargarFilaSelecionada()}" update=":frmvisualizarfila:dlgVisualizar" /> 
+
+                <f:facet name="header">  
+                    Lista de Batallones 
+                </f:facet>
+
+                <p:column style="width:2%">                
+                    <p:rowToggler />  
+                </p:column>
+                
+                <p:column headerText="Nombre" style="14%; text-align: center" sortBy="#{batallon.nombreBatallon}" filterBy="#{batallon.nombreBatallon}">  
+                    <h:outputText value="#{batallon.nombreBatallon}"  />  
+                </p:column>
+                <p:column headerText="Dirección" style="14%; text-align: center" sortBy="#{batallon.direccion}" filterBy="#{batallon.direccion}">  
+                    <h:outputText value="#{batallon.direccion}"  />  
+                </p:column>
+                <p:column headerText="Barrio" style="14%; text-align: center" sortBy="#{batallon.barrio}" filterBy="#{batallon.barrio}">  
+                    <h:outputText value="#{batallon.barrio}"  />  
+                </p:column>
+                <p:column headerText="Telefono" style="14%; text-align: center" sortBy="#{batallon.telefono1}" filterBy="#{batallon.telefono1}">  
+                    <h:outputText value="#{batallon.telefono1}"  />  
+                </p:column>
+                <p:column headerText="Acciones" style="14%; text-align: center" >  
+                    
+                </p:column>
+
+                <p:rowExpansion> 
+                    <p:outputLabel value="#{batallon.divisiones.nombreDivision}"/> 
+                </p:rowExpansion> 
+                <f:facet name="footer">  
+                    En total hay #{batallonesBean.totalBatallones()} batallones.  
+                </f:facet>
+            </p:dataTable>      
+        </h:form>
+
         <h:form id="frmagregarbatallon">            
             <ui:include src="frmagregarbatallon.xhtml" />        
         </h:form>
         
+        <h:form id="frmvisualizarfila">            
+            <ui:include src="VisualizarBatallon.xhtml" />        
+        </h:form>
+
     </ui:define>
 
 </ui:composition>
